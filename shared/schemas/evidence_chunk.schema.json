@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fireline.nasa-space-app.org/schemas/evidence_chunk.schema.json",
+  "title": "EvidenceChunk",
+  "description": "Canonical schema for Retrieval-Augmented Generation (RAG) document evidence chunks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "source_id",
+    "investigation_id",
+    "text",
+    "page_number",
+    "section_title",
+    "chunk_index",
+    "embedding_reference",
+    "is_mock"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^CHK-[A-Z0-9-]+$"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9-]+$"
+    },
+    "investigation_id": {
+      "type": "string",
+      "pattern": "^INV-[A-Z0-9-]+$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 20
+    },
+    "page_number": {
+      "type": ["integer", "null"]
+    },
+    "section_title": {
+      "type": "string",
+      "minLength": 2
+    },
+    "chunk_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "embedding_reference": {
+      "type": ["string", "null"]
+    },
+    "is_mock": {
+      "type": "boolean"
+    }
+  }
+}

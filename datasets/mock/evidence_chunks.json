@@ -1,0 +1,134 @@
+[
+  {
+    "id": "CHK-0001",
+    "source_id": "SRC-PSI-25",
+    "investigation_id": "INV-BASS-II",
+    "text": "BASS-II investigated the burning and extinction characteristics of solid fuels in microgravity aboard the ISS MSG. Test configurations included flat fuel strips and thick cylindrical rods exposed to opposed and concurrent low-speed convective flows.",
+    "page_number": 1,
+    "section_title": "Executive Summary and Investigation Scope",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0002",
+    "source_id": "SRC-PSI-25",
+    "investigation_id": "INV-BASS-II",
+    "text": "A critical observation in microgravity solid fuel combustion is the presence of low-velocity extinction limits. As forced oxidizer velocity drops toward zero, convective cooling diminishes but oxidizer mass transport falls below the threshold needed to offset radiative heat loss.",
+    "page_number": 3,
+    "section_title": "Radiative Extinction and Convective Regimes",
+    "chunk_index": 1,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0003",
+    "source_id": "SRC-PSI-98",
+    "investigation_id": "INV-SAFFIRE-I",
+    "text": "The Saffire-I experiment represented the first large-scale combustion test conducted in low Earth orbit inside an expendable Cygnus cargo vehicle. A 0.4 m by 1.0 m Sibal cotton-fiberglass fabric sample was ignited under a 20 cm/s concurrent forced flow.",
+    "page_number": 2,
+    "section_title": "Flight Demonstration Configuration",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0004",
+    "source_id": "SRC-PSI-98",
+    "investigation_id": "INV-SAFFIRE-I",
+    "text": "Video and thermocouple telemetry recorded sustained flame front advancement across the full 1.0 m sample length. Measured flame spread velocities reached 4.2 mm/s, demonstrating that large-scale microgravity fires sustain intense thermal feedback.",
+    "page_number": 6,
+    "section_title": "Flame Spread and Heat Release Metrics",
+    "chunk_index": 1,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0005",
+    "source_id": "SRC-PSI-99",
+    "investigation_id": "INV-SAFFIRE-II",
+    "text": "Saffire-II expanded the fuel screening matrix by testing an array of nine structured material samples. Nomex fabrics and silicone elastomer formulations were evaluated to explore flammability limits and sample thickness thresholds.",
+    "page_number": 1,
+    "section_title": "Material Matrix and Objectives",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0006",
+    "source_id": "SRC-PSI-100",
+    "investigation_id": "INV-SAFFIRE-III",
+    "text": "Saffire-III evaluated high convective flow velocity (25 cm/s) and chamber depressurization dynamics. Elevated forced flow enhanced oxygen mass flux to the fuel surface, resulting in increased flame spread rate and greater CO/CO2 production rates.",
+    "page_number": 4,
+    "section_title": "High Velocity Aerodynamic Effects",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0007",
+    "source_id": "SRC-PSI-69",
+    "investigation_id": "INV-FLEX",
+    "text": "FLEX conducted isolated droplet combustion tests aboard the ISS CIR facility. Isolated n-heptane droplets burning in microgravity formed spherically symmetric flames that underwent radiative warm flame extinction followed by quasi-steady cool flame combustion.",
+    "page_number": 2,
+    "section_title": "Droplet Combustion Physics",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0008",
+    "source_id": "SRC-PSI-101",
+    "investigation_id": "INV-SAME-R",
+    "text": "SAME-R quantified the particle size distribution and optical properties of smoke aerosols generated from overheated spacecraft materials. Smoldering cellulose and pyrolyzing Teflon wire insulation generated distinct aerosol morphology distributions in microgravity.",
+    "page_number": 1,
+    "section_title": "Smoke Particle Instrumentation",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0009",
+    "source_id": "SRC-PSI-101",
+    "investigation_id": "INV-SAME-R",
+    "text": "Coagulation in microgravity without buoyant settling produces particle size distributions with larger geometric mean diameters than in 1-g. For cellulose smoke, particle diameters aged from 280 nm at 30 s to over 420 nm at 120 s residence time.",
+    "page_number": 8,
+    "section_title": "Aerosol Coagulation and Aging",
+    "chunk_index": 1,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0010",
+    "source_id": "SRC-PSI-102",
+    "investigation_id": "INV-SAME",
+    "text": "The original SAME mission proved that spacecraft smoke detector response is strongly dependent on particle agglomeration. Ionization detectors responded rapidly to ultrafine wire pyrolysis aerosols, whereas photoelectric detectors favored coagulated smoldering smoke.",
+    "page_number": 5,
+    "section_title": "Detector Response Comparative Analysis",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0011",
+    "source_id": "SRC-PSI-107",
+    "investigation_id": "INV-SPICE",
+    "text": "SPICE studied laminar coaxial diffusion flames in microgravity to understand soot formation pathways and extinction limits without buoyancy. Soot volume fractions peaked along the flame centerline at levels exceeding terrestrial values.",
+    "page_number": 2,
+    "section_title": "Diffusion Flame Dynamics and Soot Fields",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  },
+  {
+    "id": "CHK-0012",
+    "source_id": "SRC-NTRS-MICROGRAVITY-SMOKE",
+    "investigation_id": "INV-SAME-R",
+    "text": "NASA Glenn Technical Monograph on microgravity smoke aerosol sizing establishes design requirements for exploration spacecraft early warning fire detection systems, emphasizing multi-sensor fusion combining optical scattering and ionization chambers.",
+    "page_number": 12,
+    "section_title": "Engineering Implications for Spacecraft Fire Detection",
+    "chunk_index": 0,
+    "embedding_reference": null,
+    "is_mock": true
+  }
+]

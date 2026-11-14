@@ -1,0 +1,22 @@
+{
+  "dataset_version": "1.0.0-synthetic-preview",
+  "generated_at": "2026-11-14T21:31:37.791Z",
+  "data_mode": "synthetic_mock",
+  "disclaimer": "PROMINENT PROJECT-WIDE NOTICE: All experimental test runs, measurement numerical values, findings, comparisons, and analytical reports contained in this dataset are SYNTHETIC AND ILLUSTRATIVE DEMONSTRATIONS created for frontend interface development, filtering, visualization, and scientific schema validation. Official NASA investigation titles, PSI IDs, and public repository URLs are verified public metadata, but numerical measurements MUST NOT be interpreted as actual NASA flight or ground observations.",
+  "record_counts": {
+    "investigations": 8,
+    "test_runs": 18,
+    "measurements": 162,
+    "findings": 22,
+    "sources": 12,
+    "evidence_chunks": 12,
+    "comparisons": 9,
+    "research_reports": 3
+  },
+  "supported_modules": [
+    "FIRELINE",
+    "TESTMATCH",
+    "SMOKEWISE"
+  ],
+  "canonical_schema_version": "1.0.0"
+}

@@ -1,0 +1,176 @@
+[
+  {
+    "id": "RPT-0001",
+    "title": "Integrated Synthesis on Scale and Convection Effects in Microgravity Solid Combustion",
+    "research_question": "How do small-scale laboratory glovebox flammability tests compare against unconstrained large-scale spacecraft fire propagation?",
+    "executive_summary": "This synthetic demonstration report synthesizes experimental evidence across BASS-II and the Saffire-I/-II/-III flight series. Results indicate that low-speed forced convection (2–25 cm/s) governs microgravity solid flame propagation. Small-scale MSG tests offer valuable chemical kinetics data but systematically underestimate flame spread rates and total heat release rates observed in full-scale Cygnus cargo vehicle cabin burns.",
+    "investigation_ids": [
+      "INV-BASS-II",
+      "INV-SAFFIRE-I",
+      "INV-SAFFIRE-II",
+      "INV-SAFFIRE-III"
+    ],
+    "finding_ids": [
+      "FND-BASS-01",
+      "FND-SAF1-01",
+      "FND-SAF3-01",
+      "FND-INTEG-01"
+    ],
+    "comparison_ids": [
+      "CMP-0001",
+      "CMP-0002"
+    ],
+    "analytical_results": [
+      {
+        "module": "FIRELINE",
+        "heading": "Flame Spread and Heat Release Scaling",
+        "key_metrics_summary": "Flame spread rate increases from 2.1 mm/s at 2 cm/s flow (BASS-II) to 4.2 mm/s at 20 cm/s flow (Saffire-I), with heat release rates scaling from 450 W to 3200 W.",
+        "implications": [
+          "Ground screening tests using small swatches must apply positive margin factors for large fabric blankets.",
+          "Cabin ventilation shutdown remains the primary immediate tactical mitigation to deny convective oxygen replenishment."
+        ]
+      },
+      {
+        "module": "TESTMATCH",
+        "heading": "Condition Matching and Cross-Scale Uncertainty",
+        "key_metrics_summary": "Condition similarity score between BASS-II and Saffire-I is 0.82, with primary variance driven by test duct hydraulic diameter and forced flow velocity.",
+        "implications": [
+          "High confidence in chemical flammability thresholds; moderate confidence when extrapolating small-scale spread velocity to large geometries."
+        ]
+      },
+      {
+        "module": "SMOKEWISE",
+        "heading": "Smoke Production and Ventilation Coupling",
+        "key_metrics_summary": "Large-scale burns in enclosed Cygnus modules produced dense carbon monoxide (145 ppm) and soot volume fractions (0.42 ppm), rapidly saturating optical transmission paths.",
+        "implications": [
+          "Smoke obscuration occurs well before cabin temperature reaches structural limits.",
+          "Early smoke extraction and scrubber filtration must withstand high particulate loadings."
+        ]
+      }
+    ],
+    "limitations": [
+      "All measurement and finding records in this report are synthetic illustrative demonstrations.",
+      "Actual NASA engineering assessments require raw calibrated PSI sensor files."
+    ],
+    "source_ids": [
+      "SRC-PSI-25",
+      "SRC-PSI-98",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "generated_at": "2026-11-15T00:00:00Z",
+    "is_mock": true
+  },
+  {
+    "id": "RPT-0002",
+    "title": "Aerosol Morphology and Detector Response in Microgravity Smoldering Incidents",
+    "research_question": "What are the critical particle size and concentration parameters governing early smoke detection in crewed spacecraft cabins?",
+    "executive_summary": "This synthetic demonstration report couples smoke aerosol findings from the SAME and SAME-R investigations with Saffire smoke data. Microgravity eliminates buoyant particulate settling, allowing submicron smoke particles to undergo extended brownian coagulation that shifts count median diameters from ~280 nm to over 420 nm within two minutes of generation.",
+    "investigation_ids": [
+      "INV-SAME",
+      "INV-SAME-R",
+      "INV-SAFFIRE-I"
+    ],
+    "finding_ids": [
+      "FND-SAMER-01",
+      "FND-SAMER-02",
+      "FND-SAME-01",
+      "FND-SAME-02"
+    ],
+    "comparison_ids": [
+      "CMP-0004",
+      "CMP-0005"
+    ],
+    "analytical_results": [
+      {
+        "module": "SMOKEWISE",
+        "heading": "Particle Size Evolution and Instrument Divergence",
+        "key_metrics_summary": "Coagulation kinetics shift particle median diameters from 280 nm to 420 nm at number concentrations of 1.8e6 #/cm³, optimizing photoelectric detection over time.",
+        "implications": [
+          "Dual-stage detection (ionization for ultrafine wire pyrolysis + photoelectric for coagulated smoldering) prevents blind spots.",
+          "Earth-gravity detector calibrations underestimate particle size in zero-g."
+        ]
+      },
+      {
+        "module": "TESTMATCH",
+        "heading": "Reflight Reproducibility Across SAME Missions",
+        "key_metrics_summary": "Wire overheating aerosol sizing demonstrates 0.89 condition and outcome consistency between original SAME and SAME-R reflight records.",
+        "implications": [
+          "Demonstrates high physical repeatability for electrical overload aerosol signatures in microgravity."
+        ]
+      },
+      {
+        "module": "FIRELINE",
+        "heading": "Pre-Flame Smoldering and Ignition Delay",
+        "key_metrics_summary": "Overheated wire insulation smolders for 60 to 180 seconds before potential flaming ignition, offering a vital early detection suppression window.",
+        "implications": [
+          "Immediate power circuit tripping upon early smoke detection prevents transition to open flame."
+        ]
+      }
+    ],
+    "limitations": [
+      "Illustrative synthetic demonstration dataset for UI development."
+    ],
+    "source_ids": [
+      "SRC-PSI-101",
+      "SRC-PSI-102",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "generated_at": "2026-11-15T00:00:00Z",
+    "is_mock": true
+  },
+  {
+    "id": "RPT-0003",
+    "title": "Droplet Combustion Extinction and Inert Gas Suppression Benchmarks",
+    "research_question": "How do inert gaseous diluents compare in suppressing microgravity diffusion flames and droplet combustion?",
+    "executive_summary": "This synthetic report analyzes spherical droplet combustion from FLEX alongside coaxial jet flame quenching from SPICE. In microgravity, the absence of buoyancy reveals spherical flame symmetry and enables the observation of low-temperature cool flames. Carbon dioxide proves significantly more effective than nitrogen in inducing radiative flame extinction due to elevated molar heat capacity.",
+    "investigation_ids": [
+      "INV-FLEX",
+      "INV-SPICE"
+    ],
+    "finding_ids": [
+      "FND-FLEX-01",
+      "FND-FLEX-02",
+      "FND-SPICE-01",
+      "FND-SPICE-02"
+    ],
+    "comparison_ids": [
+      "CMP-0006",
+      "CMP-0007"
+    ],
+    "analytical_results": [
+      {
+        "module": "FIRELINE",
+        "heading": "Radiative Extinction Limits and Cool Flame Discovery",
+        "key_metrics_summary": "n-Heptane droplets (3.5 mm) exhibit warm flame extinction at ~12.4 s, transitioning to low-temperature quasi-steady cool flames.",
+        "implications": [
+          "Extinction of visible flame luminosity does not guarantee complete cessation of fuel vapor oxidation."
+        ]
+      },
+      {
+        "module": "TESTMATCH",
+        "heading": "Suppression Diluent Efficiency Comparison",
+        "key_metrics_summary": "Methanol droplet extinction occurs at 16% O2 with CO2 diluent compared to 14.5% O2 with N2 diluent.",
+        "implications": [
+          "Confirms CO2 as a superior gaseous total-flooding extinguishing agent for pressurized spacecraft volumes."
+        ]
+      },
+      {
+        "module": "SMOKEWISE",
+        "heading": "Soot Shell Trapping and Precursor Kinetics",
+        "key_metrics_summary": "Droplet flames trap soot in a concentric spherical shell (0.18 ppm), whereas coaxial ethylene jet flames emit high centerline soot volume fractions (1.15 ppm).",
+        "implications": [
+          "Liquid fuels present lower particulate smoke detector challenges than heavy gaseous hydrocarbon plumes."
+        ]
+      }
+    ],
+    "limitations": [
+      "Illustrative synthetic dataset records."
+    ],
+    "source_ids": [
+      "SRC-PSI-69",
+      "SRC-PSI-107"
+    ],
+    "generated_at": "2026-11-15T00:00:00Z",
+    "is_mock": true
+  }
+]

@@ -1,0 +1,969 @@
+[
+  {
+    "id": "TR-BASS-01",
+    "investigation_id": "INV-BASS-II",
+    "test_label": "BASS-II PMMA Flat Sheet Opposed Flow Burn (Synthetic Demonstration)",
+    "test_sequence": 1,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Polymethyl Methacrylate (PMMA Sheet)",
+    "fuel_family": "Acrylic Thermoplastic",
+    "geometry": "flat_sheet",
+    "sample_dimensions": {
+      "length": {
+        "value": 10,
+        "unit": "cm",
+        "normalized_m": 0.1
+      },
+      "width": {
+        "value": 2,
+        "unit": "cm",
+        "normalized_m": 0.02
+      },
+      "thickness": {
+        "value": 2,
+        "unit": "mm",
+        "normalized_m": 0.002
+      },
+      "notes": "Cast acrylic flat sample mounted inside MSG flow duct"
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 4.5,
+      "ambient_temp_k": 295.15,
+      "flow_direction": "opposed",
+      "ignition_method": "Hot Kanthal wire igniter across leading fuel edge"
+    },
+    "outcome_categories": [
+      "Steady Flame Spread",
+      "Soot Production",
+      "Thermal Pyrolysis"
+    ],
+    "measurement_ids": [
+      "MEAS-0001",
+      "MEAS-0002",
+      "MEAS-0003",
+      "MEAS-0004",
+      "MEAS-0005",
+      "MEAS-0006",
+      "MEAS-0007",
+      "MEAS-0008",
+      "MEAS-0009"
+    ],
+    "source_ids": [
+      "SRC-PSI-25"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-BASS-02",
+    "investigation_id": "INV-BASS-II",
+    "test_label": "BASS-II Cotton-Fiberglass Fabric Concurrent Spread (Synthetic Demonstration)",
+    "test_sequence": 2,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Cotton/Fiberglass Sibal Blend",
+    "fuel_family": "Cellulosic/Inorganic Composite Fabric",
+    "geometry": "thin_fabric",
+    "sample_dimensions": {
+      "length": {
+        "value": 10,
+        "unit": "cm",
+        "normalized_m": 0.1
+      },
+      "width": {
+        "value": 2.2,
+        "unit": "cm",
+        "normalized_m": 0.022
+      },
+      "thickness": {
+        "value": 0.35,
+        "unit": "mm",
+        "normalized_m": 0.00035
+      },
+      "notes": "Thermally thin blended fabric swatch"
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 2,
+      "ambient_temp_k": 294,
+      "flow_direction": "concurrent",
+      "ignition_method": "Low-energy electrical spark igniter"
+    },
+    "outcome_categories": [
+      "Concurrent Flame Spread",
+      "Smoldering Transition",
+      "Post-Extinction Char"
+    ],
+    "measurement_ids": [
+      "MEAS-0010",
+      "MEAS-0011",
+      "MEAS-0012",
+      "MEAS-0013",
+      "MEAS-0014",
+      "MEAS-0015",
+      "MEAS-0016",
+      "MEAS-0017",
+      "MEAS-0018"
+    ],
+    "source_ids": [
+      "SRC-PSI-25"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-BASS-03",
+    "investigation_id": "INV-BASS-II",
+    "test_label": "BASS-II Thick PMMA Rod Low-Velocity Extinction Limit (Synthetic Demonstration)",
+    "test_sequence": 3,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Polymethyl Methacrylate Rod",
+    "fuel_family": "Acrylic Thermoplastic",
+    "geometry": "cylindrical_rod",
+    "sample_dimensions": {
+      "length": {
+        "value": 8,
+        "unit": "cm",
+        "normalized_m": 0.08
+      },
+      "diameter": {
+        "value": 6.35,
+        "unit": "mm",
+        "normalized_m": 0.00635
+      },
+      "notes": "Cylindrical fuel rod oriented axially with flow"
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 18,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 1,
+      "ambient_temp_k": 295,
+      "flow_direction": "opposed",
+      "ignition_method": "Nichrome wire wrap igniter"
+    },
+    "outcome_categories": [
+      "Low-Speed Radiative Quenching",
+      "Flame Instability",
+      "Extinction Boundary"
+    ],
+    "measurement_ids": [
+      "MEAS-0019",
+      "MEAS-0020",
+      "MEAS-0021",
+      "MEAS-0022",
+      "MEAS-0023",
+      "MEAS-0024",
+      "MEAS-0025",
+      "MEAS-0026",
+      "MEAS-0027"
+    ],
+    "source_ids": [
+      "SRC-PSI-25"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAF1-01",
+    "investigation_id": "INV-SAFFIRE-I",
+    "test_label": "Saffire-I Baseline Large-Scale Fabric Burn (Synthetic Demonstration)",
+    "test_sequence": 1,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Sibal Fabric (75% Cotton / 25% Fiberglass)",
+    "fuel_family": "Cellulosic Blend",
+    "geometry": "flat_sheet",
+    "sample_dimensions": {
+      "length": {
+        "value": 100,
+        "unit": "cm",
+        "normalized_m": 1
+      },
+      "width": {
+        "value": 40,
+        "unit": "cm",
+        "normalized_m": 0.4
+      },
+      "thickness": {
+        "value": 0.4,
+        "unit": "mm",
+        "normalized_m": 0.0004
+      },
+      "notes": "Large-scale swatch mounted along Cygnus test wind tunnel centerline"
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 20,
+      "ambient_temp_k": 293.15,
+      "flow_direction": "concurrent",
+      "ignition_method": "Resistive wire igniter strip across width"
+    },
+    "outcome_categories": [
+      "Large-Scale Concurrent Propagation",
+      "High Heat Release",
+      "Cabin Smoke Filling"
+    ],
+    "measurement_ids": [
+      "MEAS-0028",
+      "MEAS-0029",
+      "MEAS-0030",
+      "MEAS-0031",
+      "MEAS-0032",
+      "MEAS-0033",
+      "MEAS-0034",
+      "MEAS-0035",
+      "MEAS-0036",
+      "MEAS-0037"
+    ],
+    "source_ids": [
+      "SRC-PSI-98",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAF1-02",
+    "investigation_id": "INV-SAFFIRE-I",
+    "test_label": "Saffire-I Reduced Airflow Flammability Verification (Synthetic Demonstration)",
+    "test_sequence": 2,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Sibal Fabric (75% Cotton / 25% Fiberglass)",
+    "fuel_family": "Cellulosic Blend",
+    "geometry": "flat_sheet",
+    "sample_dimensions": {
+      "length": {
+        "value": 100,
+        "unit": "cm",
+        "normalized_m": 1
+      },
+      "width": {
+        "value": 40,
+        "unit": "cm",
+        "normalized_m": 0.4
+      },
+      "thickness": {
+        "value": 0.4,
+        "unit": "mm",
+        "normalized_m": 0.0004
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 10,
+      "ambient_temp_k": 294,
+      "flow_direction": "concurrent",
+      "ignition_method": "Resistive wire igniter strip"
+    },
+    "outcome_categories": [
+      "Flame Spread Deceleration",
+      "Soot Clumping",
+      "Thermal Radiation Decoupling"
+    ],
+    "measurement_ids": [
+      "MEAS-0038",
+      "MEAS-0039",
+      "MEAS-0040",
+      "MEAS-0041",
+      "MEAS-0042",
+      "MEAS-0043",
+      "MEAS-0044",
+      "MEAS-0045",
+      "MEAS-0046",
+      "MEAS-0047"
+    ],
+    "source_ids": [
+      "SRC-PSI-98",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAF2-01",
+    "investigation_id": "INV-SAFFIRE-II",
+    "test_label": "Saffire-II Multi-Sample Nomex Fabric LOC Test (Synthetic Demonstration)",
+    "test_sequence": 1,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Nomex Fabric (Aramid)",
+    "fuel_family": "Aromatic Polyamide",
+    "geometry": "thin_fabric",
+    "sample_dimensions": {
+      "length": {
+        "value": 30,
+        "unit": "cm",
+        "normalized_m": 0.3
+      },
+      "width": {
+        "value": 5,
+        "unit": "cm",
+        "normalized_m": 0.05
+      },
+      "thickness": {
+        "value": 0.28,
+        "unit": "mm",
+        "normalized_m": 0.00028
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 19.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 15,
+      "ambient_temp_k": 295,
+      "flow_direction": "concurrent",
+      "ignition_method": "Hot wire line igniter"
+    },
+    "outcome_categories": [
+      "Near-LOC Flame Retardance",
+      "Localized Pyrolysis Char",
+      "Self-Extinction"
+    ],
+    "measurement_ids": [
+      "MEAS-0048",
+      "MEAS-0049",
+      "MEAS-0050",
+      "MEAS-0051",
+      "MEAS-0052",
+      "MEAS-0053",
+      "MEAS-0054",
+      "MEAS-0055",
+      "MEAS-0056",
+      "MEAS-0057"
+    ],
+    "source_ids": [
+      "SRC-PSI-99",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAF2-02",
+    "investigation_id": "INV-SAFFIRE-II",
+    "test_label": "Saffire-II Thick PMMA Flammability Threshold Test (Synthetic Demonstration)",
+    "test_sequence": 2,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Polymethyl Methacrylate (PMMA Solid Plate)",
+    "fuel_family": "Acrylic Thermoplastic",
+    "geometry": "flat_sheet",
+    "sample_dimensions": {
+      "length": {
+        "value": 30,
+        "unit": "cm",
+        "normalized_m": 0.3
+      },
+      "width": {
+        "value": 5,
+        "unit": "cm",
+        "normalized_m": 0.05
+      },
+      "thickness": {
+        "value": 10,
+        "unit": "mm",
+        "normalized_m": 0.01
+      },
+      "notes": "Thick plastic plate sample"
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 15,
+      "ambient_temp_k": 294.5,
+      "flow_direction": "concurrent",
+      "ignition_method": "Direct gas flame torch simulator igniter"
+    },
+    "outcome_categories": [
+      "Thermal In-Depth Penetration",
+      "Surface Melting",
+      "Slow Flame Creep"
+    ],
+    "measurement_ids": [
+      "MEAS-0058",
+      "MEAS-0059",
+      "MEAS-0060",
+      "MEAS-0061",
+      "MEAS-0062",
+      "MEAS-0063",
+      "MEAS-0064",
+      "MEAS-0065",
+      "MEAS-0066",
+      "MEAS-0067"
+    ],
+    "source_ids": [
+      "SRC-PSI-99",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAF3-01",
+    "investigation_id": "INV-SAFFIRE-III",
+    "test_label": "Saffire-III High-Velocity Large-Scale Fabric Burn (Synthetic Demonstration)",
+    "test_sequence": 1,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Sibal Fabric (75% Cotton / 25% Fiberglass)",
+    "fuel_family": "Cellulosic Blend",
+    "geometry": "flat_sheet",
+    "sample_dimensions": {
+      "length": {
+        "value": 100,
+        "unit": "cm",
+        "normalized_m": 1
+      },
+      "width": {
+        "value": 40,
+        "unit": "cm",
+        "normalized_m": 0.4
+      },
+      "thickness": {
+        "value": 0.4,
+        "unit": "mm",
+        "normalized_m": 0.0004
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 25,
+      "ambient_temp_k": 293,
+      "flow_direction": "concurrent",
+      "ignition_method": "Resistive wire igniter strip across sample base"
+    },
+    "outcome_categories": [
+      "Rapid Flame Spread",
+      "Elevated Smoke Yield",
+      "Vehicle Depressurization Tracking"
+    ],
+    "measurement_ids": [
+      "MEAS-0068",
+      "MEAS-0069",
+      "MEAS-0070",
+      "MEAS-0071",
+      "MEAS-0072",
+      "MEAS-0073",
+      "MEAS-0074",
+      "MEAS-0075",
+      "MEAS-0076",
+      "MEAS-0077"
+    ],
+    "source_ids": [
+      "SRC-PSI-100",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAF3-02",
+    "investigation_id": "INV-SAFFIRE-III",
+    "test_label": "Saffire-III Cabin Depressurization & Smoke Transport Test (Synthetic Demonstration)",
+    "test_sequence": 2,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Sibal Fabric (75% Cotton / 25% Fiberglass)",
+    "fuel_family": "Cellulosic Blend",
+    "geometry": "flat_sheet",
+    "sample_dimensions": {
+      "length": {
+        "value": 100,
+        "unit": "cm",
+        "normalized_m": 1
+      },
+      "width": {
+        "value": 40,
+        "unit": "cm",
+        "normalized_m": 0.4
+      },
+      "thickness": {
+        "value": 0.4,
+        "unit": "mm",
+        "normalized_m": 0.0004
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 70.3,
+      "airflow_cm_s": 20,
+      "ambient_temp_k": 295,
+      "flow_direction": "concurrent",
+      "ignition_method": "Resistive wire igniter strip"
+    },
+    "outcome_categories": [
+      "Hypobaric Flame Spread",
+      "Soot Aggregation",
+      "Optical Density Rise"
+    ],
+    "measurement_ids": [
+      "MEAS-0078",
+      "MEAS-0079",
+      "MEAS-0080",
+      "MEAS-0081",
+      "MEAS-0082",
+      "MEAS-0083",
+      "MEAS-0084",
+      "MEAS-0085",
+      "MEAS-0086",
+      "MEAS-0087"
+    ],
+    "source_ids": [
+      "SRC-PSI-100",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-FLEX-01",
+    "investigation_id": "INV-FLEX",
+    "test_label": "FLEX Standard Heptane Droplet Warm & Cool Flame Burn (Synthetic Demonstration)",
+    "test_sequence": 1,
+    "gravity_regime": "microgravity",
+    "fuel_name": "n-Heptane Droplet",
+    "fuel_family": "Alkane Hydrocarbon",
+    "geometry": "spherical_droplet",
+    "sample_dimensions": {
+      "diameter": {
+        "value": 3.5,
+        "unit": "mm",
+        "normalized_m": 0.0035
+      },
+      "notes": "Free droplet tethered on silicon carbide cross fibers"
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 0,
+      "ambient_temp_k": 298.15,
+      "flow_direction": "quiescent",
+      "ignition_method": "Symmetrical dual spark discharge needles"
+    },
+    "outcome_categories": [
+      "Spherical Warm Flame",
+      "Radiative Extinction",
+      "Second-Stage Cool Flame"
+    ],
+    "measurement_ids": [
+      "MEAS-0088",
+      "MEAS-0089",
+      "MEAS-0090",
+      "MEAS-0091",
+      "MEAS-0092",
+      "MEAS-0093",
+      "MEAS-0094"
+    ],
+    "source_ids": [
+      "SRC-PSI-69"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-FLEX-02",
+    "investigation_id": "INV-FLEX",
+    "test_label": "FLEX Methanol Droplet with CO2 Diluent Suppression (Synthetic Demonstration)",
+    "test_sequence": 2,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Methanol Droplet",
+    "fuel_family": "Alcohol",
+    "geometry": "spherical_droplet",
+    "sample_dimensions": {
+      "diameter": {
+        "value": 2.8,
+        "unit": "mm",
+        "normalized_m": 0.0028
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 16,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 0,
+      "ambient_temp_k": 298,
+      "flow_direction": "quiescent",
+      "ignition_method": "Dual spark discharge"
+    },
+    "outcome_categories": [
+      "Premature Radiative Quenching",
+      "Non-Sooting Extinction",
+      "Suppression Limit"
+    ],
+    "measurement_ids": [
+      "MEAS-0095",
+      "MEAS-0096",
+      "MEAS-0097",
+      "MEAS-0098",
+      "MEAS-0099",
+      "MEAS-0100",
+      "MEAS-0101"
+    ],
+    "source_ids": [
+      "SRC-PSI-69"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAMER-01",
+    "investigation_id": "INV-SAME-R",
+    "test_label": "SAME-R Overheated Teflon Wire Smoldering Smoke Test (Synthetic Demonstration)",
+    "test_sequence": 1,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Teflon (PTFE) Insulated Copper Wire",
+    "fuel_family": "Fluoropolymer Insulation",
+    "geometry": "wire_insulation",
+    "sample_dimensions": {
+      "length": {
+        "value": 15,
+        "unit": "cm",
+        "normalized_m": 0.15
+      },
+      "diameter": {
+        "value": 1.8,
+        "unit": "mm",
+        "normalized_m": 0.0018
+      },
+      "notes": "AWG 20 aerospace wire heated by resistive electrical overload"
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 5,
+      "ambient_temp_k": 296,
+      "flow_direction": "concurrent",
+      "ignition_method": "Electrical resistive overload core heating"
+    },
+    "outcome_categories": [
+      "Fluoropolymer Pyrolysis",
+      "Submicron Aerosol Nucleation",
+      "Detector Activation"
+    ],
+    "measurement_ids": [
+      "MEAS-0102",
+      "MEAS-0103",
+      "MEAS-0104",
+      "MEAS-0105",
+      "MEAS-0106",
+      "MEAS-0107",
+      "MEAS-0108",
+      "MEAS-0109",
+      "MEAS-0110"
+    ],
+    "source_ids": [
+      "SRC-PSI-101",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAMER-02",
+    "investigation_id": "INV-SAME-R",
+    "test_label": "SAME-R Cellulose Smoldering Smoke Agglomeration Test (Synthetic Demonstration)",
+    "test_sequence": 2,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Cellulose Ashless Filter Paper",
+    "fuel_family": "Cellulosic Porous Matrix",
+    "geometry": "thin_fabric",
+    "sample_dimensions": {
+      "length": {
+        "value": 5,
+        "unit": "cm",
+        "normalized_m": 0.05
+      },
+      "width": {
+        "value": 5,
+        "unit": "cm",
+        "normalized_m": 0.05
+      },
+      "thickness": {
+        "value": 0.2,
+        "unit": "mm",
+        "normalized_m": 0.0002
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 3,
+      "ambient_temp_k": 295,
+      "flow_direction": "concurrent",
+      "ignition_method": "Ceramic cartridge surface hot plate heater"
+    },
+    "outcome_categories": [
+      "Dense Particulate Coagulation",
+      "CO Gas Evolution",
+      "Aerosol Aging Growth"
+    ],
+    "measurement_ids": [
+      "MEAS-0111",
+      "MEAS-0112",
+      "MEAS-0113",
+      "MEAS-0114",
+      "MEAS-0115",
+      "MEAS-0116",
+      "MEAS-0117",
+      "MEAS-0118",
+      "MEAS-0119"
+    ],
+    "source_ids": [
+      "SRC-PSI-101",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAMER-03",
+    "investigation_id": "INV-SAME-R",
+    "test_label": "SAME-R Silicone Rubber Pyrolysis Smoke Test (Synthetic Demonstration)",
+    "test_sequence": 3,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Silicone Elastomer O-Ring",
+    "fuel_family": "Polysiloxane Elastomer",
+    "geometry": "cylindrical_rod",
+    "sample_dimensions": {
+      "length": {
+        "value": 4,
+        "unit": "cm",
+        "normalized_m": 0.04
+      },
+      "diameter": {
+        "value": 3.5,
+        "unit": "mm",
+        "normalized_m": 0.0035
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 5,
+      "ambient_temp_k": 297,
+      "flow_direction": "concurrent",
+      "ignition_method": "Surrounding resistive coil heater"
+    },
+    "outcome_categories": [
+      "Silica White Smoke Generation",
+      "High Number Concentration",
+      "Ionization Detector Screening"
+    ],
+    "measurement_ids": [
+      "MEAS-0120",
+      "MEAS-0121",
+      "MEAS-0122",
+      "MEAS-0123",
+      "MEAS-0124",
+      "MEAS-0125",
+      "MEAS-0126",
+      "MEAS-0127",
+      "MEAS-0128"
+    ],
+    "source_ids": [
+      "SRC-PSI-101",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAME-01",
+    "investigation_id": "INV-SAME",
+    "test_label": "SAME Kapton Wire Thermal Overheating Smoke Test (Synthetic Demonstration)",
+    "test_sequence": 1,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Kapton Polyimide Insulated Wire",
+    "fuel_family": "Polyimide Film Insulation",
+    "geometry": "wire_insulation",
+    "sample_dimensions": {
+      "length": {
+        "value": 12,
+        "unit": "cm",
+        "normalized_m": 0.12
+      },
+      "diameter": {
+        "value": 1.5,
+        "unit": "mm",
+        "normalized_m": 0.0015
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 4,
+      "ambient_temp_k": 295.5,
+      "flow_direction": "concurrent",
+      "ignition_method": "Internal wire Joule heating overload"
+    },
+    "outcome_categories": [
+      "Carbonaceous Aerosol Emission",
+      "Large Microgravity Agglomerates",
+      "Obscuration Gradient"
+    ],
+    "measurement_ids": [
+      "MEAS-0129",
+      "MEAS-0130",
+      "MEAS-0131",
+      "MEAS-0132",
+      "MEAS-0133",
+      "MEAS-0134",
+      "MEAS-0135",
+      "MEAS-0136",
+      "MEAS-0137"
+    ],
+    "source_ids": [
+      "SRC-PSI-102",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SAME-02",
+    "investigation_id": "INV-SAME",
+    "test_label": "SAME Cellulose Quiescent Aging Comparison (Synthetic Demonstration)",
+    "test_sequence": 2,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Cellulose Smoldering Paper",
+    "fuel_family": "Cellulosic Porous Matrix",
+    "geometry": "thin_fabric",
+    "sample_dimensions": {
+      "length": {
+        "value": 5,
+        "unit": "cm",
+        "normalized_m": 0.05
+      },
+      "width": {
+        "value": 5,
+        "unit": "cm",
+        "normalized_m": 0.05
+      },
+      "thickness": {
+        "value": 0.2,
+        "unit": "mm",
+        "normalized_m": 0.0002
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 0,
+      "ambient_temp_k": 296,
+      "flow_direction": "quiescent",
+      "ignition_method": "Surface thermal cartridge"
+    },
+    "outcome_categories": [
+      "Zero-G Coagulation Dynamics",
+      "Particle Size Enlargement",
+      "Delayed Chamber Diffusion"
+    ],
+    "measurement_ids": [
+      "MEAS-0138",
+      "MEAS-0139",
+      "MEAS-0140",
+      "MEAS-0141",
+      "MEAS-0142",
+      "MEAS-0143",
+      "MEAS-0144",
+      "MEAS-0145",
+      "MEAS-0146"
+    ],
+    "source_ids": [
+      "SRC-PSI-102",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SPICE-01",
+    "investigation_id": "INV-SPICE",
+    "test_label": "SPICE Ethylene Coaxial Diffusion Flame Soot Test (Synthetic Demonstration)",
+    "test_sequence": 1,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Ethylene Gas (C2H4)",
+    "fuel_family": "Alkene Gas",
+    "geometry": "structured_array",
+    "sample_dimensions": {
+      "diameter": {
+        "value": 1.6,
+        "unit": "mm",
+        "normalized_m": 0.0016
+      },
+      "notes": "Coaxial laminar fuel nozzle exit diameter"
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 21,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 12,
+      "ambient_temp_k": 298,
+      "flow_direction": "coaxial_jet",
+      "ignition_method": "Retractable pilot spark electrode"
+    },
+    "outcome_categories": [
+      "Heavy Sooting Tip",
+      "Soot Shell Growth",
+      "Extended Flame Standoff"
+    ],
+    "measurement_ids": [
+      "MEAS-0147",
+      "MEAS-0148",
+      "MEAS-0149",
+      "MEAS-0150",
+      "MEAS-0151",
+      "MEAS-0152",
+      "MEAS-0153",
+      "MEAS-0154"
+    ],
+    "source_ids": [
+      "SRC-PSI-107"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "TR-SPICE-02",
+    "investigation_id": "INV-SPICE",
+    "test_label": "SPICE Nitrogen Dilution Flame Quenching Test (Synthetic Demonstration)",
+    "test_sequence": 2,
+    "gravity_regime": "microgravity",
+    "fuel_name": "Ethylene Gas (C2H4)",
+    "fuel_family": "Alkene Gas",
+    "geometry": "structured_array",
+    "sample_dimensions": {
+      "diameter": {
+        "value": 1.6,
+        "unit": "mm",
+        "normalized_m": 0.0016
+      }
+    },
+    "experimental_conditions": {
+      "oxygen_pct_vol": 15.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": 18,
+      "ambient_temp_k": 298,
+      "flow_direction": "coaxial_jet",
+      "ignition_method": "Spark electrode"
+    },
+    "outcome_categories": [
+      "Inert Gas Flame Blow-off",
+      "Soot Emission Drop",
+      "Thermal Extinction"
+    ],
+    "measurement_ids": [
+      "MEAS-0155",
+      "MEAS-0156",
+      "MEAS-0157",
+      "MEAS-0158",
+      "MEAS-0159",
+      "MEAS-0160",
+      "MEAS-0161",
+      "MEAS-0162"
+    ],
+    "source_ids": [
+      "SRC-PSI-107"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  }
+]

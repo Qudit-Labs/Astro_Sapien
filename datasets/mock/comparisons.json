@@ -1,0 +1,356 @@
+[
+  {
+    "id": "CMP-0001",
+    "test_run_a_id": "TR-SAF1-01",
+    "test_run_b_id": "TR-BASS-02",
+    "comparison_parameters": [
+      "oxygen_concentration",
+      "pressure",
+      "airflow_velocity",
+      "flame_spread_rate",
+      "heat_release_rate"
+    ],
+    "matching_parameters": [
+      "oxygen_concentration",
+      "pressure"
+    ],
+    "differing_parameters": [
+      "airflow_velocity",
+      "flame_spread_rate",
+      "heat_release_rate"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.82,
+    "data_coverage": 1,
+    "methodology": "Normalized Euclidean distance comparison across atmospheric conditions and convective flow velocities for identical Sibal cellulosic fuel blends.",
+    "limitations": [
+      "Scale disparity: Saffire-I sample is 100 cm x 40 cm; BASS-II sample is 10 cm x 2.2 cm.",
+      "Saffire-I airflow is 20 cm/s; BASS-II airflow is 2.0 cm/s."
+    ],
+    "parameter_deltas": [
+      {
+        "parameter_code": "oxygen_concentration",
+        "value_a": 21,
+        "value_b": 21,
+        "unit": "% vol",
+        "relative_difference_pct": 0,
+        "status": "match"
+      },
+      {
+        "parameter_code": "pressure",
+        "value_a": 101.3,
+        "value_b": 101.3,
+        "unit": "kPa",
+        "relative_difference_pct": 0,
+        "status": "match"
+      },
+      {
+        "parameter_code": "airflow_velocity",
+        "value_a": 20,
+        "value_b": 2,
+        "unit": "cm/s",
+        "relative_difference_pct": 90,
+        "status": "differ"
+      },
+      {
+        "parameter_code": "flame_spread_rate",
+        "value_a": 4.2,
+        "value_b": 2.1,
+        "unit": "mm/s",
+        "relative_difference_pct": 50,
+        "status": "differ"
+      },
+      {
+        "parameter_code": "heat_release_rate",
+        "value_a": 3200,
+        "value_b": 450,
+        "unit": "W",
+        "relative_difference_pct": 85.9,
+        "status": "differ"
+      }
+    ],
+    "is_mock": true
+  },
+  {
+    "id": "CMP-0002",
+    "test_run_a_id": "TR-SAF1-01",
+    "test_run_b_id": "TR-SAF3-01",
+    "comparison_parameters": [
+      "oxygen_concentration",
+      "pressure",
+      "airflow_velocity",
+      "flame_spread_rate",
+      "heat_release_rate"
+    ],
+    "matching_parameters": [
+      "oxygen_concentration",
+      "pressure"
+    ],
+    "differing_parameters": [
+      "airflow_velocity",
+      "flame_spread_rate"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.94,
+    "data_coverage": 1,
+    "methodology": "Same-facility velocity scaling analysis within Cygnus flow tunnel comparing 20 cm/s versus 25 cm/s concurrent flow.",
+    "limitations": [
+      "Minor ambient air temperature fluctuation between flight missions (293.15 K vs 293.0 K)."
+    ],
+    "parameter_deltas": [
+      {
+        "parameter_code": "oxygen_concentration",
+        "value_a": 21,
+        "value_b": 21,
+        "unit": "% vol",
+        "relative_difference_pct": 0,
+        "status": "match"
+      },
+      {
+        "parameter_code": "pressure",
+        "value_a": 101.3,
+        "value_b": 101.3,
+        "unit": "kPa",
+        "relative_difference_pct": 0,
+        "status": "match"
+      },
+      {
+        "parameter_code": "airflow_velocity",
+        "value_a": 20,
+        "value_b": 25,
+        "unit": "cm/s",
+        "relative_difference_pct": 25,
+        "status": "differ"
+      },
+      {
+        "parameter_code": "flame_spread_rate",
+        "value_a": 4.2,
+        "value_b": 4.2,
+        "unit": "mm/s",
+        "relative_difference_pct": 0,
+        "status": "match"
+      }
+    ],
+    "is_mock": true
+  },
+  {
+    "id": "CMP-0003",
+    "test_run_a_id": "TR-BASS-01",
+    "test_run_b_id": "TR-SAF2-02",
+    "comparison_parameters": [
+      "oxygen_concentration",
+      "pressure",
+      "fuel_thickness",
+      "airflow_velocity",
+      "flame_spread_rate"
+    ],
+    "matching_parameters": [
+      "oxygen_concentration",
+      "pressure"
+    ],
+    "differing_parameters": [
+      "fuel_thickness",
+      "airflow_velocity",
+      "flame_spread_rate"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.78,
+    "data_coverage": 1,
+    "methodology": "Material thickness effect comparison for Polymethyl Methacrylate (PMMA) between 2.0 mm thin sheet and 10.0 mm solid plate.",
+    "limitations": [
+      "Flow configuration difference: Opposed flow (BASS-II) vs Concurrent flow (Saffire-II)."
+    ],
+    "parameter_deltas": [
+      {
+        "parameter_code": "oxygen_concentration",
+        "value_a": 21,
+        "value_b": 21,
+        "unit": "% vol",
+        "relative_difference_pct": 0,
+        "status": "match"
+      },
+      {
+        "parameter_code": "fuel_thickness",
+        "value_a": 2,
+        "value_b": 10,
+        "unit": "mm",
+        "relative_difference_pct": 80,
+        "status": "differ"
+      },
+      {
+        "parameter_code": "airflow_velocity",
+        "value_a": 4.5,
+        "value_b": 15,
+        "unit": "cm/s",
+        "relative_difference_pct": 70,
+        "status": "differ"
+      }
+    ],
+    "is_mock": true
+  },
+  {
+    "id": "CMP-0004",
+    "test_run_a_id": "TR-SAMER-01",
+    "test_run_b_id": "TR-SAME-01",
+    "comparison_parameters": [
+      "oxygen_concentration",
+      "pressure",
+      "airflow_velocity",
+      "particle_diameter",
+      "particle_number_concentration"
+    ],
+    "matching_parameters": [
+      "oxygen_concentration",
+      "pressure"
+    ],
+    "differing_parameters": [
+      "airflow_velocity",
+      "particle_diameter"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.89,
+    "data_coverage": 1,
+    "methodology": "Wire insulation pyrolysis smoke aerosol cross-reflight comparison (Teflon PTFE vs Kapton Polyimide).",
+    "limitations": [
+      "Different fluoropolymer vs polyimide insulation chemistry."
+    ],
+    "is_mock": true
+  },
+  {
+    "id": "CMP-0005",
+    "test_run_a_id": "TR-SAMER-02",
+    "test_run_b_id": "TR-SAME-02",
+    "comparison_parameters": [
+      "oxygen_concentration",
+      "pressure",
+      "particle_diameter",
+      "smoke_aging_time"
+    ],
+    "matching_parameters": [
+      "oxygen_concentration",
+      "pressure"
+    ],
+    "differing_parameters": [
+      "particle_diameter",
+      "smoke_aging_time"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.85,
+    "data_coverage": 1,
+    "methodology": "Cellulose smoldering smoke aerosol residence time aging comparison (30 s vs 120 s).",
+    "limitations": [
+      "Convective flow velocity differs (3 cm/s vs quiescent 0 cm/s)."
+    ],
+    "is_mock": true
+  },
+  {
+    "id": "CMP-0006",
+    "test_run_a_id": "TR-FLEX-01",
+    "test_run_b_id": "TR-FLEX-02",
+    "comparison_parameters": [
+      "pressure",
+      "fuel_diameter",
+      "oxygen_concentration",
+      "burning_duration"
+    ],
+    "matching_parameters": [
+      "pressure"
+    ],
+    "differing_parameters": [
+      "oxygen_concentration",
+      "fuel_diameter",
+      "burning_duration"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.81,
+    "data_coverage": 1,
+    "methodology": "Alkane versus alcohol microgravity droplet combustion and CO2 dilution suppression response.",
+    "limitations": [
+      "Fuel chemistry disparity: n-Heptane vs Methanol."
+    ],
+    "is_mock": true
+  },
+  {
+    "id": "CMP-0007",
+    "test_run_a_id": "TR-SPICE-01",
+    "test_run_b_id": "TR-SPICE-02",
+    "comparison_parameters": [
+      "pressure",
+      "fuel_diameter",
+      "oxygen_concentration",
+      "airflow_velocity",
+      "soot_volume_fraction"
+    ],
+    "matching_parameters": [
+      "pressure",
+      "fuel_diameter"
+    ],
+    "differing_parameters": [
+      "oxygen_concentration",
+      "airflow_velocity",
+      "soot_volume_fraction"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.92,
+    "data_coverage": 1,
+    "methodology": "Inert nitrogen dilution and aerodynamic jet velocity sensitivity on soot volume fraction.",
+    "limitations": [
+      "Single burner nozzle geometry."
+    ],
+    "is_mock": true
+  },
+  {
+    "id": "CMP-0008",
+    "test_run_a_id": "TR-SAF1-02",
+    "test_run_b_id": "TR-SAF3-02",
+    "comparison_parameters": [
+      "oxygen_concentration",
+      "airflow_velocity",
+      "pressure",
+      "flame_spread_rate"
+    ],
+    "matching_parameters": [
+      "oxygen_concentration"
+    ],
+    "differing_parameters": [
+      "pressure",
+      "airflow_velocity",
+      "flame_spread_rate"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.83,
+    "data_coverage": 1,
+    "methodology": "Pressure effect comparison for large fabric flame propagation between standard cabin (101.3 kPa) and exploration cabin (70.3 kPa).",
+    "limitations": [
+      "Airflow velocities varied between test points (10 cm/s vs 20 cm/s)."
+    ],
+    "is_mock": true
+  },
+  {
+    "id": "CMP-0009",
+    "test_run_a_id": "TR-BASS-01",
+    "test_run_b_id": "TR-BASS-03",
+    "comparison_parameters": [
+      "pressure",
+      "oxygen_concentration",
+      "airflow_velocity",
+      "flame_spread_rate"
+    ],
+    "matching_parameters": [
+      "pressure"
+    ],
+    "differing_parameters": [
+      "oxygen_concentration",
+      "airflow_velocity",
+      "flame_spread_rate"
+    ],
+    "unavailable_parameters": [],
+    "weighted_score": 0.87,
+    "data_coverage": 1,
+    "methodology": "Geometry transition comparison in MSG glovebox: Flat 2 mm PMMA sheet vs 6.35 mm PMMA cylindrical rod near extinction limit.",
+    "limitations": [
+      "Sample aspect ratio and thermal boundary layer geometry differ."
+    ],
+    "is_mock": true
+  }
+]

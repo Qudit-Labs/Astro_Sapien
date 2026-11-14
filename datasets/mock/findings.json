@@ -1,0 +1,581 @@
+[
+  {
+    "id": "FND-BASS-01",
+    "investigation_id": "INV-BASS-II",
+    "related_test_run_ids": [
+      "TR-BASS-01",
+      "TR-BASS-02"
+    ],
+    "title": "Illustrative Low-Speed Forced Convection Flame Spread Limit (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: This finding is an illustrative synthetic demonstration for frontend development and does not represent an actual verified NASA observation. In microgravity without buoyant convection, low forced air velocities (2–5 cm/s) supply sufficient oxidizer to sustain opposed and concurrent flame spread along thin solid fuels while minimizing convective thermal cooling at the leading flame base.",
+    "summary": "Illustrative placeholder finding demonstrating how low-speed ventilation stabilizes microgravity flames.",
+    "research_category": "Flame Spread Dynamics",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "interpretation",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic demonstration dataset record for UI validation.",
+      "Derived from conceptual microgravity combustion literature models rather than raw NASA flight sensor logs."
+    ],
+    "source_references": [
+      "SRC-PSI-25"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-BASS-02",
+    "investigation_id": "INV-BASS-II",
+    "related_test_run_ids": [
+      "TR-BASS-03"
+    ],
+    "title": "Illustrative Radiative Quenching Boundary on Thick Cylindrical Rods (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Thick PMMA cylindrical fuel rods exhibit radiative extinction when forced convective flow drops below 1.0 cm/s in reduced oxygen concentrations (18% O2), as radiation loss from the broad flame envelope exceeds chemical heat generation.",
+    "summary": "Illustrative synthetic placeholder for low-velocity radiative extinction on thick fuel rods.",
+    "research_category": "Extinction Limits",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "calculated",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-25"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAF1-01",
+    "investigation_id": "INV-SAFFIRE-I",
+    "related_test_run_ids": [
+      "TR-SAF1-01",
+      "TR-SAF1-02"
+    ],
+    "title": "Illustrative Large-Scale Microgravity Fabric Fire Growth Rate (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. In large-scale Cygnus flight tests, unconstrained fabric swatches demonstrate continuous forward flame propagation at 20 cm/s flow velocity, demonstrating that enclosure boundary heat feedback can accelerate flame spread compared to small glovebox samples.",
+    "summary": "Illustrative synthetic placeholder demonstrating large-scale fabric fire propagation dynamics.",
+    "research_category": "Large-Scale Spacecraft Combustion",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH",
+      "SMOKEWISE"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-98",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAF2-01",
+    "investigation_id": "INV-SAFFIRE-II",
+    "related_test_run_ids": [
+      "TR-SAF2-01"
+    ],
+    "title": "Illustrative Nomex LOC Behavior in Microgravity Flow Duct (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Nomex fabric samples exhibited localized thermal charring and self-extinction when oxygen concentration fell below 19.5% vol at 15 cm/s forced flow, illustrating how a Limiting Oxygen Concentration envelope shifts under microgravity convection.",
+    "summary": "Illustrative synthetic placeholder for aramid fabric limiting oxygen concentration behavior.",
+    "research_category": "Limiting Oxygen Concentration",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-99",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAF2-02",
+    "investigation_id": "INV-SAFFIRE-II",
+    "related_test_run_ids": [
+      "TR-SAF2-02"
+    ],
+    "title": "Illustrative Solid Polymer Sample Thickness Resistance (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Thick solid PMMA plates (10 mm) require sustained ignition exposure and demonstrate significant thermal in-depth resistance before achieving steady forward flame creep in zero-g.",
+    "summary": "Illustrative synthetic placeholder for solid plastic thickness flammability delay.",
+    "research_category": "Thickness Effect",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-99"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAF3-01",
+    "investigation_id": "INV-SAFFIRE-III",
+    "related_test_run_ids": [
+      "TR-SAF3-01"
+    ],
+    "title": "Illustrative Elevated Airflow Flame Spread Enhancement (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Increasing oxidizer flow velocity from 20 to 25 cm/s increased fabric flame spread velocity and peak thermal heat release rates by approximately 22% in an uncrewed Cygnus cabin.",
+    "summary": "Illustrative synthetic placeholder for ventilation airflow sensitivity on spacecraft fires.",
+    "research_category": "Forced Airflow Effects",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH",
+      "SMOKEWISE"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-100",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAF3-02",
+    "investigation_id": "INV-SAFFIRE-III",
+    "related_test_run_ids": [
+      "TR-SAF3-02"
+    ],
+    "title": "Illustrative Hypobaric Spacecraft Atmosphere Flame Response (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. At reduced cabin pressures (70.3 kPa), flame spread rates across thin cellulosic fabrics decrease modestly due to reduced volumetric oxygen density, while smoke particle aggregation kinetics accelerate.",
+    "summary": "Illustrative synthetic placeholder for hypobaric exploration cabin atmosphere combustion.",
+    "research_category": "Ventilation Interaction",
+    "module_tags": [
+      "FIRELINE",
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "calculated",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-100"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-FLEX-01",
+    "investigation_id": "INV-FLEX",
+    "related_test_run_ids": [
+      "TR-FLEX-01"
+    ],
+    "title": "Illustrative Droplet Radiative Extinction and Cool Flame Transition (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Isolated n-heptane droplets burning in microgravity exhibit warm visible flame radiative extinction followed by sustained low-temperature quasi-steady cool flame combustion governed by low-temperature alkane chemistry.",
+    "summary": "Illustrative synthetic placeholder for cool flame phenomena following droplet extinction.",
+    "research_category": "Cool Flame Phenomena",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-69"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-FLEX-02",
+    "investigation_id": "INV-FLEX",
+    "related_test_run_ids": [
+      "TR-FLEX-02"
+    ],
+    "title": "Illustrative Carbon Dioxide Dilution Suppression of Alcohol Droplets (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Addition of CO2 diluent suppresses spherical methanol droplet flames at significantly lower mass fractions than nitrogen, driven by higher molar heat capacity and enhanced radiative re-absorption.",
+    "summary": "Illustrative synthetic placeholder for inert gas fire suppression efficiency comparison.",
+    "research_category": "Inert Gas Suppression",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "interpretation",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-69"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAMER-01",
+    "investigation_id": "INV-SAME-R",
+    "related_test_run_ids": [
+      "TR-SAMER-01"
+    ],
+    "title": "Illustrative Teflon Overheating Submicron Aerosol Generation (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Electrically overloaded PTFE wire insulation produces high number concentrations of ultrafine submicron aerosol particulates, triggering early ionization detector signals prior to optical obscuration detection.",
+    "summary": "Illustrative synthetic placeholder for overheated wire insulation early fire detection.",
+    "research_category": "Early Fire Detection",
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-101",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAMER-02",
+    "investigation_id": "INV-SAME-R",
+    "related_test_run_ids": [
+      "TR-SAMER-02"
+    ],
+    "title": "Illustrative Cellulosic Smoke Coagulation Sizing Dynamics (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. In microgravity, smoldering cellulose smoke aerosol particles coagulate without gravitational settling, shifting the count median diameter toward 420 nm over a 120-second residence aging duration.",
+    "summary": "Illustrative synthetic placeholder for microgravity smoke particle growth through coagulation.",
+    "research_category": "Smoke Aerosol Morphology",
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "calculated",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-101",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAMER-03",
+    "investigation_id": "INV-SAME-R",
+    "related_test_run_ids": [
+      "TR-SAMER-03"
+    ],
+    "title": "Illustrative Silicone Pyrolysis Aerosol Sizing and Morphology (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Pyrolyzing silicone elastomeric seals produce spherical silica aerosol particles that remain suspended in microgravity ducts, showing distinct optical scattering properties compared to carbonaceous soot.",
+    "summary": "Illustrative synthetic placeholder for silicone seal pyrolysis aerosol detection.",
+    "research_category": "Smoke Aerosol Morphology",
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-101",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAME-01",
+    "investigation_id": "INV-SAME",
+    "related_test_run_ids": [
+      "TR-SAME-01"
+    ],
+    "title": "Illustrative Microgravity Smoke Particulate Size Disparity vs 1-G (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. The absence of buoyancy allows smoke particles to dwell longer near heated surfaces, causing microgravity smoke particles to be substantially larger than equivalent Earth-gravity particles.",
+    "summary": "Illustrative synthetic placeholder for 1-g versus zero-g smoke particle size divergence.",
+    "research_category": "Aerosol Size Disparity",
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "research_implication",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-102",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SAME-02",
+    "investigation_id": "INV-SAME",
+    "related_test_run_ids": [
+      "TR-SAME-02"
+    ],
+    "title": "Illustrative Sensor Calibration Biases for Spacecraft Detectors (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Conventional Earth-calibrated photoelectric smoke detectors may experience delayed triggering in microgravity if optical calibration curves assume small 1-g particle distributions.",
+    "summary": "Illustrative synthetic placeholder for spacecraft detector sensitivity calibration requirements.",
+    "research_category": "Detector Instrument Calibration",
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "research_implication",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-102",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SPICE-01",
+    "investigation_id": "INV-SPICE",
+    "related_test_run_ids": [
+      "TR-SPICE-01"
+    ],
+    "title": "Illustrative Soot Aggregation in Laminar Microgravity Jet Flames (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Coaxial ethylene gas diffusion flames in microgravity develop thickened soot precursor zones with peak soot volume fractions exceeding 1.1 ppm due to elongated gas residence times in the absence of buoyant acceleration.",
+    "summary": "Illustrative synthetic placeholder for heightened soot formation in zero-g jet flames.",
+    "research_category": "Soot Volume Fraction",
+    "module_tags": [
+      "FIRELINE",
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-107"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-SPICE-02",
+    "investigation_id": "INV-SPICE",
+    "related_test_run_ids": [
+      "TR-SPICE-02"
+    ],
+    "title": "Illustrative Coaxial Inert Extinction Limit on Sooting Plumes (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Aerodynamic co-flow dilution with nitrogen induces abrupt flame blow-off and extinguishment when co-flow velocity exceeds 18 cm/s under reduced ambient oxygen (15.5% vol).",
+    "summary": "Illustrative synthetic placeholder for inert gas aerodynamic jet fire suppression.",
+    "research_category": "Coaxial Jet Extinction",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "observed",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-107"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-INTEG-01",
+    "investigation_id": "INV-SAFFIRE-I",
+    "related_test_run_ids": [
+      "TR-SAF1-01",
+      "TR-BASS-01"
+    ],
+    "title": "Illustrative Scale Effect Comparison: BASS-II vs Saffire-I (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Direct cross-investigation comparison indicates that small-scale MSG tests (BASS-II) underestimate large-scale flame spread rates (Saffire-I) by up to 40% due to sample edge boundary losses in small combustion ducts.",
+    "summary": "Illustrative synthetic placeholder for laboratory vs large-scale fire scaling effects.",
+    "research_category": "Large-Scale Spacecraft Combustion",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "research_implication",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-98",
+      "SRC-PSI-25"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-INTEG-02",
+    "investigation_id": "INV-SAME-R",
+    "related_test_run_ids": [
+      "TR-SAMER-01",
+      "TR-SAME-01"
+    ],
+    "title": "Illustrative Cross-Mission Consistency in Wire Overheating Aerosols (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Overheated wire insulation across SAME and SAME-R exhibits reproducible bimodal aerosol sizing distributions, affirming that early wire pyrolysis produces distinctive smoke signatures.",
+    "summary": "Illustrative synthetic placeholder for reproducible wire insulation smoke signatures.",
+    "research_category": "Early Fire Detection",
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "interpretation",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-101",
+      "SRC-PSI-102"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-INTEG-03",
+    "investigation_id": "INV-BASS-II",
+    "related_test_run_ids": [
+      "TR-BASS-01",
+      "TR-SAF2-02"
+    ],
+    "title": "Illustrative PMMA Geometry Contrast: Thin Sheet vs Thick Plate (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Planar acrylic sheets (2 mm) transition to steady flame spread within 30 seconds of ignition, whereas thick plates (10 mm) require continuous conductive heat flux into the polymer matrix before sustained propagation occurs.",
+    "summary": "Illustrative synthetic placeholder for thermal thin versus thermally thick PMMA combustion.",
+    "research_category": "Thickness Effect",
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "interpretation",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-25",
+      "SRC-PSI-99"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-INTEG-04",
+    "investigation_id": "INV-SAME-R",
+    "related_test_run_ids": [
+      "TR-SAMER-02",
+      "TR-SAF3-02"
+    ],
+    "title": "Illustrative Smoke Obscuration Linkage to Enclosure Ventilation (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Coupling SAME-R particle growth measurements with Saffire-III cabin ventilation curves indicates that particulate aggregation outpaces air exchange in quiescent spacecraft alcoves.",
+    "summary": "Illustrative synthetic placeholder connecting smoke coagulation with spacecraft air exchange.",
+    "research_category": "Smoke Aerosol Morphology",
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "research_implication",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-101",
+      "SRC-PSI-100"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-INTEG-05",
+    "investigation_id": "INV-FLEX",
+    "related_test_run_ids": [
+      "TR-FLEX-01",
+      "TR-SPICE-01"
+    ],
+    "title": "Illustrative Soot Formation Contrast: Liquid Droplet vs Gas Jet (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Spherical droplet combustion creates an isolated concentric soot shell that limits oxygen transport, whereas coaxial gas jet flames develop an open soot trumpet with enhanced convective exhaust.",
+    "summary": "Illustrative synthetic placeholder contrasting soot morphology across droplet and jet flames.",
+    "research_category": "Soot Volume Fraction",
+    "module_tags": [
+      "FIRELINE",
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "interpretation",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-69",
+      "SRC-PSI-107"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  },
+  {
+    "id": "FND-INTEG-06",
+    "investigation_id": "INV-SAFFIRE-I",
+    "related_test_run_ids": [
+      "TR-SAF1-01",
+      "TR-SAMER-02"
+    ],
+    "title": "Illustrative Fire Safety Detection Strategy for Exploration Habitats (Synthetic Demo)",
+    "finding_text": "DISCLAIMER: Illustrative synthetic placeholder. Integrated synthesis across Saffire-I fire spread and SAME-R aerosol aging emphasizes that early detection must target submicron aerosols before large-scale thermal flame spread develops.",
+    "summary": "Illustrative synthetic placeholder highlighting early detection importance in habitat safety.",
+    "research_category": "Early Fire Detection",
+    "module_tags": [
+      "FIRELINE",
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "evidence_type": "research_implication",
+    "confidence_label": "illustrative_synthetic",
+    "limitations": [
+      "Synthetic placeholder for UI testing."
+    ],
+    "source_references": [
+      "SRC-PSI-98",
+      "SRC-PSI-101"
+    ],
+    "data_status": "synthetic_demo",
+    "is_mock": true
+  }
+]

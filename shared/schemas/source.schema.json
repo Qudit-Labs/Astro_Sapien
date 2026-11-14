@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fireline.nasa-space-app.org/schemas/source.schema.json",
+  "title": "Source",
+  "description": "Canonical schema for NASA PSI investigation links, NTRS reports, and reference sources.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "source_type",
+    "title",
+    "organization",
+    "investigation_id",
+    "url",
+    "doi",
+    "document_filename",
+    "version",
+    "publication_year",
+    "page_start",
+    "page_end",
+    "source_role",
+    "verification_status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9-]+$"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "psi_investigation",
+        "ntrs_report",
+        "scientific_publication",
+        "nasa_guide",
+        "historical_case"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "organization": {
+      "type": "string",
+      "minLength": 2
+    },
+    "investigation_id": {
+      "type": ["string", "null"],
+      "pattern": "^INV-[A-Z0-9-]+$"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "doi": {
+      "type": ["string", "null"]
+    },
+    "document_filename": {
+      "type": ["string", "null"]
+    },
+    "version": {
+      "type": ["string", "null"]
+    },
+    "publication_year": {
+      "type": ["integer", "null"]
+    },
+    "page_start": {
+      "type": ["integer", "null"]
+    },
+    "page_end": {
+      "type": ["integer", "null"]
+    },
+    "source_role": {
+      "type": "string",
+      "minLength": 2
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "verified_public_url",
+        "metadata_verified",
+        "pending_ingestion",
+        "illustrative_reference"
+      ]
+    }
+  }
+}

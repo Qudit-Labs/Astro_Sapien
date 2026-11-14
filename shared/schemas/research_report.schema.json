@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fireline.nasa-space-app.org/schemas/research_report.schema.json",
+  "title": "ResearchReport",
+  "description": "Canonical schema for integrated multi-module scientific research reports.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "research_question",
+    "executive_summary",
+    "investigation_ids",
+    "finding_ids",
+    "comparison_ids",
+    "analytical_results",
+    "limitations",
+    "source_ids",
+    "generated_at",
+    "is_mock"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^RPT-[A-Z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5
+    },
+    "research_question": {
+      "type": "string",
+      "minLength": 10
+    },
+    "executive_summary": {
+      "type": "string",
+      "minLength": 20
+    },
+    "investigation_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^INV-[A-Z0-9-]+$"
+      }
+    },
+    "finding_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^FND-[A-Z0-9-]+$"
+      }
+    },
+    "comparison_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^CMP-[A-Z0-9-]+$"
+      }
+    },
+    "analytical_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["module", "heading", "key_metrics_summary", "implications"],
+        "properties": {
+          "module": {
+            "type": "string",
+            "enum": ["FIRELINE", "TESTMATCH", "SMOKEWISE"]
+          },
+          "heading": { "type": "string" },
+          "key_metrics_summary": { "type": "string" },
+          "implications": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "source_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^SRC-[A-Z0-9-]+$"
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "is_mock": {
+      "type": "boolean"
+    }
+  }
+}

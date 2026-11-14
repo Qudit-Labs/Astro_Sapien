@@ -1,0 +1,319 @@
+[
+  {
+    "id": "INV-BASS-II",
+    "name": "Burning and Suppression of Solids - II",
+    "short_name": "BASS-II",
+    "psi_id": "PSI-25",
+    "doi": null,
+    "description": "Investigation of the burning and extinction characteristics of a wide variety of solid fuel samples in microgravity inside the ISS Microgravity Science Glovebox (MSG). Examines concurrent and opposed flame spread along thin planar sheets and thick cylindrical rods to evaluate spacecraft fire suppression effectiveness and materials screening methodologies.",
+    "research_objectives": [
+      "Characterize solid material burning rates and flame stabilization in low-speed forced microgravity convective flows.",
+      "Determine the critical air or inert gas velocities required to induce flame blow-off or radiative extinction.",
+      "Compare microgravity combustion behavior against NASA-STD-6001 Upward Flame Propagation Test results."
+    ],
+    "research_categories": [
+      "Solid Fuel Flammability",
+      "Flame Spread Dynamics",
+      "Extinction Limits",
+      "Forced Convection"
+    ],
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "fire_safety_pillar": "suppression",
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "fuel_types": [
+      "Polymethyl Methacrylate (PMMA)",
+      "Cotton/Fiberglass Fabric Blend",
+      "Nomex",
+      "Polyethylene"
+    ],
+    "source_ids": [
+      "SRC-PSI-25",
+      "SRC-NASA-STD-6001"
+    ],
+    "official_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "data_availability": "public_metadata_only",
+    "is_mock_metadata": true
+  },
+  {
+    "id": "INV-SAFFIRE-I",
+    "name": "Spacecraft Fire Safety Demonstration - I",
+    "short_name": "Saffire-I",
+    "psi_id": "PSI-98",
+    "doi": null,
+    "description": "The first large-scale intentional fire safety experiment conducted inside an automated, uncrewed Cygnus resupply vehicle after departure from the International Space Station. Burned large cotton-fiberglass blend fabric swatches (0.4 m wide by 1.0 m long) in low-speed forced flow to observe realistic flame growth and propagation unconstrained by laboratory glovebox dimensions.",
+    "research_objectives": [
+      "Quantify large-scale flame propagation velocity on realistic spacecraft fabric samples in microgravity.",
+      "Assess heat release rate and plume thermal radiation during realistic vehicle cabin fire scenarios.",
+      "Verify whether microgravity fires spread faster or slower than predicted by small-scale 1-g screening tests."
+    ],
+    "research_categories": [
+      "Large-Scale Spacecraft Combustion",
+      "Fabric Flame Spread",
+      "Enclosure Fire Dynamics",
+      "Thermal Radiation"
+    ],
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH",
+      "SMOKEWISE"
+    ],
+    "fire_safety_pillar": "prevention",
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "fuel_types": [
+      "Sibal Fabric (75% Cotton / 25% Fiberglass)",
+      "Nomex HT90-40"
+    ],
+    "source_ids": [
+      "SRC-PSI-98",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "official_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+    "data_availability": "public_metadata_only",
+    "is_mock_metadata": true
+  },
+  {
+    "id": "INV-SAFFIRE-II",
+    "name": "Spacecraft Fire Safety Demonstration - II",
+    "short_name": "Saffire-II",
+    "psi_id": "PSI-99",
+    "doi": null,
+    "description": "Second flight of the Saffire experiment series on Cygnus PCM. Evaluated flammability limits and sample thickness effects using an array of nine mixed solid fuel samples, including PMMA plates, Nomex fabrics, and silicone composites under controlled low-speed airflow.",
+    "research_objectives": [
+      "Evaluate microgravity Limiting Oxygen Concentration (LOC) and maximum allowable sample thickness.",
+      "Investigate flame spread and pyrolysis rates across heterogeneous structured materials.",
+      "Characterize combustion product gaseous yields and aerosol soot precursors."
+    ],
+    "research_categories": [
+      "Limiting Oxygen Concentration",
+      "Thickness Effect",
+      "Material Screening",
+      "Pyrolysis Dynamics"
+    ],
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH",
+      "SMOKEWISE"
+    ],
+    "fire_safety_pillar": "prevention",
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "fuel_types": [
+      "PMMA (Clear Acrylic)",
+      "Silicone Elastomer",
+      "Cotton Fabric",
+      "Nomex"
+    ],
+    "source_ids": [
+      "SRC-PSI-99",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "official_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+    "data_availability": "public_metadata_only",
+    "is_mock_metadata": true
+  },
+  {
+    "id": "INV-SAFFIRE-III",
+    "name": "Spacecraft Fire Safety Demonstration - III",
+    "short_name": "Saffire-III",
+    "psi_id": "PSI-100",
+    "doi": null,
+    "description": "Third flight of the Saffire series on an expendable Cygnus vehicle. Replicated Saffire-I geometry under an elevated forced convective velocity (0.20 m/s) to isolate the impact of cabin ventilation air exchange rates on flame growth, soot volume fractions, and post-combustion chamber depressurization.",
+    "research_objectives": [
+      "Investigate the influence of elevated convective velocity on flame spread rates and flame standoff distance.",
+      "Measure aerosol smoke transport, optical obscuration, and CO/CO2 production curves in an enclosed cabin volume.",
+      "Provide empirical ground-truth validation data for high-fidelity 3D spacecraft fire CFD models."
+    ],
+    "research_categories": [
+      "Forced Airflow Effects",
+      "Combustion Products Yield",
+      "Ventilation Interaction",
+      "Optical Obscuration"
+    ],
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH",
+      "SMOKEWISE"
+    ],
+    "fire_safety_pillar": "suppression",
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "fuel_types": [
+      "Sibal Fabric (75% Cotton / 25% Fiberglass)",
+      "PMMA Sheets"
+    ],
+    "source_ids": [
+      "SRC-PSI-100",
+      "SRC-NTRS-SAFFIRE-OVERVIEW"
+    ],
+    "official_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-100",
+    "data_availability": "public_metadata_only",
+    "is_mock_metadata": true
+  },
+  {
+    "id": "INV-FLEX",
+    "name": "Flame Extinction Experiment",
+    "short_name": "FLEX",
+    "psi_id": "PSI-69",
+    "doi": null,
+    "description": "Landmark microgravity droplet combustion experiment conducted in the Combustion Integrated Rack (CIR) on the ISS. Investigated isolated spherical liquid hydrocarbon fuel droplets to observe spherical symmetry flame dynamics, radiative extinction limits, and the discovery of low-temperature quasi-steady cool flame combustion.",
+    "research_objectives": [
+      "Measure droplet burning rates, soot shell formation, and extinction diameters without buoyant convection.",
+      "Characterize low-temperature quasi-steady cool flame phenomena following warm flame extinction.",
+      "Benchmark suppression effectiveness of inert gas diluents (nitrogen, carbon dioxide, helium)."
+    ],
+    "research_categories": [
+      "Droplet Combustion",
+      "Cool Flame Phenomena",
+      "Radiative Extinction",
+      "Inert Gas Suppression"
+    ],
+    "module_tags": [
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "fire_safety_pillar": "suppression",
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "fuel_types": [
+      "n-Heptane",
+      "n-Octane",
+      "Methanol",
+      "Ethanol"
+    ],
+    "source_ids": [
+      "SRC-PSI-69"
+    ],
+    "official_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+    "data_availability": "public_metadata_only",
+    "is_mock_metadata": true
+  },
+  {
+    "id": "INV-SAME-R",
+    "name": "Smoke Aerosol Measurement Experiment - Reflight",
+    "short_name": "SAME-R",
+    "psi_id": "PSI-101",
+    "doi": null,
+    "description": "Reflight investigation on the International Space Station to measure the particle size distribution, number concentration, and morphology of smoke particulates generated from typical spacecraft overheating and smoldering materials in microgravity without buoyant settling or convective dilution.",
+    "research_objectives": [
+      "Determine particle size distribution and geometric mean diameter for spacecraft overheating smoke sources.",
+      "Quantify the coagulation rates and aging dynamics of smoke aerosols in microgravity.",
+      "Provide calibration standards for future spacecraft early warning ionization and photoelectric smoke detectors."
+    ],
+    "research_categories": [
+      "Smoke Aerosol Morphology",
+      "Particle Size Distribution",
+      "Early Fire Detection",
+      "Smoldering & Pyrolysis"
+    ],
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "fire_safety_pillar": "detection",
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "fuel_types": [
+      "Cellulose Filter Paper",
+      "Kapton Wire Insulation",
+      "Tefzel Wire Insulation",
+      "Silicone Rubber"
+    ],
+    "source_ids": [
+      "SRC-PSI-101",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "official_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+    "data_availability": "public_metadata_only",
+    "is_mock_metadata": true
+  },
+  {
+    "id": "INV-SAME",
+    "name": "Smoke Aerosol Measurement Experiment",
+    "short_name": "Original SAME",
+    "psi_id": "PSI-102",
+    "doi": null,
+    "description": "Pioneering microgravity smoke aerosol investigation aboard the ISS. Measured particle size distributions generated from electrical wire insulation, pyrolysis heaters, and smoldering fuels to prove that microgravity smoke particles coagulate into significantly larger aggregate agglomerates than on Earth.",
+    "research_objectives": [
+      "Compare microgravity smoke particulate diameters against 1-g terrestrial baselines.",
+      "Establish sensor response curves for photoelectric and ionization detector chambers in zero-g.",
+      "Characterize aerosol generation rates under quiescent and low-flow cabin ventilation conditions."
+    ],
+    "research_categories": [
+      "Smoke Particle Coagulation",
+      "Aerosol Size Disparity",
+      "Detector Instrument Calibration",
+      "Wire Overheating Pyrolysis"
+    ],
+    "module_tags": [
+      "SMOKEWISE",
+      "TESTMATCH"
+    ],
+    "fire_safety_pillar": "detection",
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "fuel_types": [
+      "Teflon (PTFE) Insulated Wire",
+      "Kapton Polyimide Wire",
+      "Silicone Tubing",
+      "Paper Pyrolysis"
+    ],
+    "source_ids": [
+      "SRC-PSI-102",
+      "SRC-NTRS-MICROGRAVITY-SMOKE"
+    ],
+    "official_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
+    "data_availability": "public_metadata_only",
+    "is_mock_metadata": true
+  },
+  {
+    "id": "INV-SPICE",
+    "name": "Smoke and Particle Investigation of Coaxial Extinction",
+    "short_name": "SPICE",
+    "psi_id": "PSI-107",
+    "doi": null,
+    "description": "Microgravity combustion investigation focused on laminar coaxial gaseous and soot-laden diffusion flames and their extinction boundaries under variable diluent concentrations. Analyzed soot particle formation, soot volume fractions, and aerodynamic quenching in the absence of buoyancy.",
+    "research_objectives": [
+      "Analyze soot precursor pathways and soot volume fraction fields in microgravity laminar jet flames.",
+      "Examine coaxial inert flow extinction mechanisms for gaseous and particulate fire plumes.",
+      "Correlate soot aggregate sizing with infrared radiative emissions and flame color temperature."
+    ],
+    "research_categories": [
+      "Soot Volume Fraction",
+      "Coaxial Jet Extinction",
+      "Diffusion Flame Dynamics",
+      "Smoke Precursor Kinetics"
+    ],
+    "module_tags": [
+      "SMOKEWISE",
+      "FIRELINE",
+      "TESTMATCH"
+    ],
+    "fire_safety_pillar": "suppression",
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "fuel_types": [
+      "Ethylene Gas",
+      "Propane Gas",
+      "Methane/Air Mixtures"
+    ],
+    "source_ids": [
+      "SRC-PSI-107"
+    ],
+    "official_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",
+    "data_availability": "public_metadata_only",
+    "is_mock_metadata": true
+  }
+]

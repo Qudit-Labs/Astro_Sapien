@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fireline.nasa-space-app.org/schemas/measurement.schema.json",
+  "title": "Measurement",
+  "description": "Long/tidy format measurement record: one parameter measured or reported under one experimental condition.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "test_run_id",
+    "investigation_id",
+    "parameter_code",
+    "parameter_label",
+    "parameter_category",
+    "measurement_role",
+    "raw_value",
+    "raw_unit",
+    "normalized_value",
+    "normalized_unit",
+    "display_unit",
+    "minimum_value",
+    "maximum_value",
+    "time_s",
+    "sensor",
+    "measurement_method",
+    "uncertainty",
+    "data_status",
+    "source_id",
+    "source_page",
+    "is_mock"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^MEAS-[A-Z0-9-]+$"
+    },
+    "test_run_id": {
+      "type": "string",
+      "pattern": "^TR-[A-Z0-9-]+$"
+    },
+    "investigation_id": {
+      "type": "string",
+      "pattern": "^INV-[A-Z0-9-]+$"
+    },
+    "parameter_code": {
+      "type": "string",
+      "enum": [
+        "oxygen_concentration",
+        "airflow_velocity",
+        "pressure",
+        "temperature",
+        "fuel_diameter",
+        "fuel_thickness",
+        "flame_spread_rate",
+        "burning_duration",
+        "heat_release_rate",
+        "carbon_monoxide_concentration",
+        "carbon_dioxide_concentration",
+        "particle_diameter",
+        "particle_number_concentration",
+        "particle_mass_concentration",
+        "soot_volume_fraction",
+        "smoke_aging_time",
+        "detector_response"
+      ]
+    },
+    "parameter_label": {
+      "type": "string",
+      "minLength": 2
+    },
+    "parameter_category": {
+      "type": "string",
+      "enum": [
+        "atmospheric_condition",
+        "flow_condition",
+        "fuel_geometry",
+        "flame_dynamics",
+        "thermal_output",
+        "gas_emissions",
+        "smoke_aerosol",
+        "soot_properties",
+        "detection_response"
+      ]
+    },
+    "measurement_role": {
+      "type": "string",
+      "enum": ["condition", "outcome"]
+    },
+    "raw_value": {
+      "type": ["number", "null"]
+    },
+    "raw_unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalized_value": {
+      "type": ["number", "null"]
+    },
+    "normalized_unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "minimum_value": {
+      "type": ["number", "null"]
+    },
+    "maximum_value": {
+      "type": ["number", "null"]
+    },
+    "time_s": {
+      "type": ["number", "null"]
+    },
+    "sensor": {
+      "type": ["string", "null"]
+    },
+    "measurement_method": {
+      "type": ["string", "null"]
+    },
+    "uncertainty": {
+      "type": ["string", "null"]
+    },
+    "data_status": {
+      "type": "string",
+      "enum": [
+        "reported",
+        "approximate",
+        "range",
+        "not_reported",
+        "not_applicable",
+        "synthetic_demo",
+        "needs_review",
+        "unparsed"
+      ]
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9-]+$"
+    },
+    "source_page": {
+      "type": ["integer", "null"]
+    },
+    "is_mock": {
+      "type": "boolean"
+    }
+  }
+}

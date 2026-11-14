@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fireline.nasa-space-app.org/schemas/comparison.schema.json",
+  "title": "Comparison",
+  "description": "Canonical schema for TESTMATCH experimental condition and outcome comparisons.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "test_run_a_id",
+    "test_run_b_id",
+    "comparison_parameters",
+    "matching_parameters",
+    "differing_parameters",
+    "unavailable_parameters",
+    "weighted_score",
+    "data_coverage",
+    "methodology",
+    "limitations",
+    "is_mock"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^CMP-[A-Z0-9-]+$"
+    },
+    "test_run_a_id": {
+      "type": "string",
+      "pattern": "^TR-[A-Z0-9-]+$"
+    },
+    "test_run_b_id": {
+      "type": "string",
+      "pattern": "^TR-[A-Z0-9-]+$"
+    },
+    "comparison_parameters": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "matching_parameters": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "differing_parameters": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unavailable_parameters": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "weighted_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "data_coverage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "methodology": {
+      "type": "string",
+      "minLength": 10
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "parameter_deltas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "parameter_code",
+          "value_a",
+          "value_b",
+          "unit",
+          "relative_difference_pct",
+          "status"
+        ],
+        "properties": {
+          "parameter_code": { "type": "string" },
+          "value_a": { "type": ["number", "null"] },
+          "value_b": { "type": ["number", "null"] },
+          "unit": { "type": "string" },
+          "relative_difference_pct": { "type": ["number", "null"] },
+          "status": {
+            "type": "string",
+            "enum": ["match", "differ", "unavailable"]
+          }
+        }
+      }
+    },
+    "is_mock": {
+      "type": "boolean"
+    }
+  }
+}
