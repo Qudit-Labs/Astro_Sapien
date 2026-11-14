@@ -2,14 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
+@layer base {
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html:not(.dark) {
+    color-scheme: light;
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: #060913;
-  color: #f1f5f9;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+/* Subtle orbital / starfield background pattern for hero & mission control panels */
+.orbital-grid-bg {
+  background-image:
+    radial-gradient(circle at 18% 25%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 82% 70%, rgba(11, 61, 145, 0.16) 0%, transparent 50%),
+    linear-gradient(to right, rgba(159, 177, 199, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(159, 177, 199, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+}
+
+.dark .starfield-dots {
+  background-image: radial-gradient(rgba(244, 247, 252, 0.14) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Custom subtle scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(159, 177, 199, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(159, 177, 199, 0.45);
 }
