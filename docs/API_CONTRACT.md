@@ -96,3 +96,58 @@ All endpoints return JSON responses conforming to the canonical schemas in `shar
   - **Returns**: `ResearchReport[]`
 - **`GET /api/v1/reports/{id}`**
   - **Returns**: `ResearchReport` or 404
+
+---
+
+## 3. Analytics & AI POST Endpoints (Future FastAPI Sprint)
+
+> **IMPORTANT:** These endpoints are **not yet implemented**. They are documented here as the contract for the future FastAPI backend sprint. Full TypeScript request/response interfaces are in `src/services/apiContracts.ts`. In mock mode, equivalent functionality is provided locally by `src/services/testMatchEngine.ts` and `src/services/aiAssistantService.ts`.
+
+### FIRELINE Module Analysis
+- **`POST /api/v1/fireline/analyze`**
+  - **Request body**: `FirelineAnalysisRequest` — `test_run_ids[]`, optional `parameter_codes[]`, optional `gravity_regime`
+  - **Returns**: `FirelineAnalysisResult` — per-parameter summaries (min/max/mean/stddev), generated findings, `data_status`
+
+### TESTMATCH Comparison
+- **`POST /api/v1/testmatch/compare`**
+  - **Request body**: `TestMatchCompareRequest` — `test_run_a_id`, `test_run_b_id`, optional `dimension_codes[]`
+  - **Returns**: `TestMatchCompareResult` — `overall_score` (0-1), per-dimension comparison rows, similarities, differences, limitations
+
+### SMOKewise Aerosol Analysis
+- **`POST /api/v1/smokewise/analyze`**
+  - **Request body**: `SmokewiseAnalysisRequest` — `test_run_ids[]`, optional fuel/gravity/diameter filters
+  - **Returns**: `SmokewiseAnalysisResult` — per-fuel aerosol summaries, `scientific_caveats` (particle diameter != detector sensitivity)
+
+### AI Research Assistant
+- **`POST /api/v1/assistant/query`**
+  - **Request body**: `AssistantQueryRequest` — `question` (1000 chars max), optional `investigation_ids[]`, optional `max_evidence_chunks`
+  - **Returns**: `AssistantQueryResult` — `answer`, `citations[]`, `llm_generated` flag, `model_id`, `synthetic_disclaimer`
+
+### Research Report Generator
+- **`POST /api/v1/reports/generate`**
+  - **Request body**: `ReportGenerateRequest` — `investigation_ids[]`, optional `sections[]`, `format` (json|markdown|pdf), optional `title`
+  - **Returns**: `ReportGenerateResult` — `content` (string), `confidence_score`, `data_status`, `synthetic_disclaimer`
+
+### Evidence Search (Semantic / Keyword)
+- **`GET /api/v1/evidence/search`**
+  - **Query Parameters**: `q` (search query), optional `investigation_id`, optional `source_id`, optional `limit` (default 10, max 50)
+  - **Returns**: `EvidenceSearchResult` — `results[]` with `chunk_id`, `relevance_score`, `excerpt`
+
+### Health Check
+- **`GET /api/v1/health`**
+  - **Returns**: `HealthCheckResult` — `status` (ok|degraded|down), `version`, connectivity booleans, `uptime_seconds`
+
+---
+
+## 4. Frontend -> Backend Integration Checklist
+
+When the FastAPI backend is ready, follow these steps to connect the FIRELINE frontend:
+
+1. Set environment variables in `.env` (never commit this file):
+   - `VITE_DATA_MODE=api`
+   - `VITE_API_BASE_URL=http://localhost:8000/api/v1`
+2. Restart the Vite dev server (`npm run dev`) or rebuild (`npm run build`). The factory in `src/data/index.ts` auto-selects `ApiResearchDataProvider` - no component changes needed.
+3. Verify with `GET /api/v1/health` -> expect `status: "ok"`.
+4. Run data integrity check: `npm run validate:data`.
+5. Enable analytics POST endpoints by calling `provider.analyzeFireline(...)` etc. from module pages once the backend sprint is complete.
+6. Ingest real NASA data via `POST /api/v1/ingestion/trigger` with `sources: ["nasa_psi", "ntrs"]`.

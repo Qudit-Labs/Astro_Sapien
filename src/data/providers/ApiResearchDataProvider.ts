@@ -21,6 +21,20 @@ import {
   FindingFilters,
   TestRunFilters,
 } from '@shared/types/index';
+import type {
+  FirelineAnalysisRequest,
+  FirelineAnalysisResult,
+  TestMatchCompareRequest,
+  TestMatchCompareResult,
+  SmokewiseAnalysisRequest,
+  SmokewiseAnalysisResult,
+  AssistantQueryRequest,
+  AssistantQueryResult,
+  ReportGenerateRequest,
+  ReportGenerateResult,
+  EvidenceSearchFilters,
+  EvidenceSearchResult,
+} from '@/services/apiContracts';
 
 export class ApiResearchDataProvider implements ResearchDataProvider {
   readonly mode = 'api' as const;
@@ -179,5 +193,76 @@ export class ApiResearchDataProvider implements ResearchDataProvider {
     } catch (e) {
       return null;
     }
+  }
+
+  // -------------------------------------------------------------------------
+  // Analytics Extensions (POST-based module endpoints — future FastAPI sprint)
+  // See src/services/apiContracts.ts for full request/response type docs.
+  // -------------------------------------------------------------------------
+
+  private async postJson<T>(endpoint: string, body: unknown): Promise<T> {
+    const url = `${this.baseUrl}${endpoint}`;
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) {
+        throw new Error(
+          `[ApiResearchDataProvider] HTTP ${response.status} ${response.statusText} from POST ${endpoint}`
+        );
+      }
+      return (await response.json()) as T;
+    } catch (error: any) {
+      console.error(`[ApiResearchDataProvider] POST ${url} failed:`, error);
+      throw new Error(
+        `FastAPI analytics error at ${endpoint}: ${error.message || 'Network request failed'}`
+      );
+    }
+  }
+
+  /** POST /api/v1/fireline/analyze */
+  async analyzeFireline(params: FirelineAnalysisRequest): Promise<FirelineAnalysisResult> {
+    return this.postJson<FirelineAnalysisResult>('/fireline/analyze', params);
+  }
+
+  /** POST /api/v1/testmatch/compare */
+  async compareTestMatch(params: TestMatchCompareRequest): Promise<TestMatchCompareResult> {
+    return this.postJson<TestMatchCompareResult>('/testmatch/compare', params);
+  }
+
+  /** POST /api/v1/smokewise/analyze */
+  async analyzeSmokewise(params: SmokewiseAnalysisRequest): Promise<SmokewiseAnalysisResult> {
+    return this.postJson<SmokewiseAnalysisResult>('/smokewise/analyze', params);
+  }
+
+  /** POST /api/v1/assistant/query */
+  async queryAssistant(params: AssistantQueryRequest): Promise<AssistantQueryResult> {
+    return this.postJson<AssistantQueryResult>('/assistant/query', params);
+  }
+
+  /** POST /api/v1/reports/generate */
+  async generateReport(params: ReportGenerateRequest): Promise<ReportGenerateResult> {
+    return this.postJson<ReportGenerateResult>('/reports/generate', params);
+  }
+
+  /**
+   * GET /api/v1/evidence/search
+   * Performs a semantic/keyword search over indexed evidence chunks.
+   */
+  async searchEvidence(
+    query: string,
+    filters?: EvidenceSearchFilters
+  ): Promise<EvidenceSearchResult> {
+    return this.fetchJson<EvidenceSearchResult>('/evidence/search', {
+      q: query,
+      investigation_id: filters?.investigation_id,
+      source_id: filters?.source_id,
+      limit: filters?.limit ?? 10,
+    });
   }
 }

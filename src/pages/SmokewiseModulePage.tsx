@@ -376,7 +376,7 @@ export const SmokewiseModulePage: React.FC = () => {
           <ChartCard
             title="Smoke Particle Diameter Distribution"
             subtitle="Mean/median aerosol diameter across runs with particle_diameter"
-            unitNote="Y-axis: nm (SI canonical: m). Distinct from soot volume fraction."
+            unitNote="⚠ Y-axis: nm (SI canonical: m). Particle Diameter (nm) ≠ Detector Sensitivity — a larger aerosol particle does not imply greater detector response without sensor-specific calibration data. Distinct from soot volume fraction."
           >
             {particleSizeData.length > 0 ? (
               <ResponsiveContainer width="100%" height={240}>

@@ -20,6 +20,20 @@ import {
   FindingFilters,
   TestRunFilters,
 } from '@shared/types/index';
+import type {
+  FirelineAnalysisRequest,
+  FirelineAnalysisResult,
+  TestMatchCompareRequest,
+  TestMatchCompareResult,
+  SmokewiseAnalysisRequest,
+  SmokewiseAnalysisResult,
+  AssistantQueryRequest,
+  AssistantQueryResult,
+  ReportGenerateRequest,
+  ReportGenerateResult,
+  EvidenceSearchFilters,
+  EvidenceSearchResult,
+} from '@/services/apiContracts';
 
 export interface ResearchDataProvider {
   readonly mode: 'mock' | 'api';
@@ -60,4 +74,28 @@ export interface ResearchDataProvider {
   // Research Reports
   getResearchReports(): Promise<ResearchReport[]>;
   getResearchReportById(id: string): Promise<ResearchReport | null>;
+}
+
+/**
+ * Optional analytics extension for POST-based module analysis endpoints.
+ * Implemented only by `ApiResearchDataProvider` when connecting to the
+ * future FastAPI backend.  The mock provider does NOT implement this —
+ * use `src/services/aiAssistantService.ts` and
+ * `src/services/testMatchEngine.ts` for local analysis in mock mode.
+ *
+ * All endpoints are documented in `src/services/apiContracts.ts`.
+ */
+export interface ResearchAnalyticsProvider {
+  /** POST /api/v1/fireline/analyze */
+  analyzeFireline(params: FirelineAnalysisRequest): Promise<FirelineAnalysisResult>;
+  /** POST /api/v1/testmatch/compare */
+  compareTestMatch(params: TestMatchCompareRequest): Promise<TestMatchCompareResult>;
+  /** POST /api/v1/smokewise/analyze */
+  analyzeSmokewise(params: SmokewiseAnalysisRequest): Promise<SmokewiseAnalysisResult>;
+  /** POST /api/v1/assistant/query */
+  queryAssistant(params: AssistantQueryRequest): Promise<AssistantQueryResult>;
+  /** POST /api/v1/reports/generate */
+  generateReport(params: ReportGenerateRequest): Promise<ReportGenerateResult>;
+  /** GET  /api/v1/evidence/search?q=…&limit=… */
+  searchEvidence(query: string, filters?: EvidenceSearchFilters): Promise<EvidenceSearchResult>;
 }

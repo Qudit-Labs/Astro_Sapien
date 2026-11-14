@@ -78,3 +78,55 @@ VITE_DATA_MODE=api
 VITE_API_BASE_URL=http://localhost:8000/api/v1
 ```
 Automatically switches to `ApiResearchDataProvider`, fetching live NASA PSI / NTRS records from FastAPI endpoints documented in [`docs/API_CONTRACT.md`](./docs/API_CONTRACT.md).
+
+---
+
+## Phase 3 QA Results
+
+Completed as part of the FIRELINE QA, Visual Polish and Backend Integration Readiness phase.
+
+| Check | Result |
+|---|---|
+| `npm run typecheck` | PASSED - 0 TypeScript errors |
+| `npm run validate:data` | PASSED - 0 errors, 6/6 checks |
+| `npm test` | PASSED - 18/18 tests (3 test files) |
+| `npm run build` | PASSED - production bundle with code splitting |
+| Architecture audit | PASSED - single shared schemas, provider pattern, zero direct mock imports in UI |
+| Mock data integrity | PASSED - all 246 unique IDs, cross-refs valid, SI units correct |
+| Scientific integrity | PASSED - all mock entities tagged is_mock: true + synthetic_demo, synthetic disclaimers on all charts and AI responses |
+
+### Code Splitting Applied (vite.config.ts)
+The 919 KB monolithic bundle has been split into vendor chunks:
+- `vendor-react` - react, react-dom, react-router-dom
+- `vendor-charts` - recharts
+- `vendor-lucide` - lucide-react
+
+### Scientific Integrity Improvements
+- Smoke Particle Diameter chart now displays explicit warning: `Particle Diameter (nm) != Detector Sensitivity`
+- All ChartCard components show DataStatusBadge when isMock=true (default)
+- ComparisonScoreCard clearly labels the score as a `Prototype Condition Comparability Indicator`
+- AI Assistant responses always include synthetic disclaimer
+
+### Backend Integration Readiness
+New files added:
+- `src/services/apiContracts.ts` - TypeScript interfaces for all 8 FastAPI endpoint contracts (request/response shapes)
+- `ApiResearchDataProvider` extended with 6 new analytics methods: `analyzeFireline`, `compareTestMatch`, `analyzeSmokewise`, `queryAssistant`, `generateReport`, `searchEvidence`
+- `ResearchAnalyticsProvider` interface added to `ResearchDataProvider.ts`
+- `docs/API_CONTRACT.md` updated with Section 3 (POST analytics endpoints) and Section 4 (integration checklist)
+
+---
+
+## Connecting Real NASA Data
+
+To connect the FIRELINE frontend to a real FastAPI backend ingesting NASA PSI / NTRS data:
+
+1. **Set environment variables** in `.env` (do NOT commit this file):
+   `VITE_DATA_MODE=api`
+   `VITE_API_BASE_URL=http://localhost:8000/api/v1`
+2. **Restart** dev server: `npm run dev` - the provider factory auto-selects ApiResearchDataProvider; no component changes needed.
+3. **Verify** backend is healthy: `GET /api/v1/health` should return `status: "ok"`.
+4. **Ingest NASA data** via: `POST /api/v1/ingestion/trigger` with `sources: ["nasa_psi", "ntrs"]`.
+5. **Validate** data quality: `npm run validate:data` (update script to fetch from API).
+6. **Enable** POST analytics by calling the new provider analytics methods from module pages.
+
+Full API contract details: `docs/API_CONTRACT.md`
