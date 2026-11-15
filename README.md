@@ -1,132 +1,234 @@
 # FIRELINE — Spacecraft Fire-Safety Intelligence Engine
 
-**Astro_Sapien • NASA Space App Challenge**
+**Astro_Sapien • NASA Space Apps / HackAthlone 2026**
 
-FIRELINE is an AI-powered Spacecraft Fire-Safety Intelligence Engine that transforms NASA microgravity combustion research (NASA Physical Sciences Informatics – PSI, and NASA Technical Reports Server – NTRS) into searchable, comparable, and explainable scientific evidence.
+FIRELINE is an AI-powered Spacecraft Fire-Safety Intelligence Engine that unifies real NASA microgravity combustion, detection, and suppression research from the **NASA Physical Sciences Informatics (PSI)** repository and the **NASA Technical Reports Server (NTRS)** into searchable, comparable, and explainable scientific evidence.
 
-The platform integrates three analytical modules under one unified data model:
-1. **FIRELINE**: Combustion, flame behaviour, material flammability, heat release, and fire-suppression evidence.
-2. **TESTMATCH**: Interactive pairwise experiment comparison, condition similarity analysis, data coverage tracking, and limitation reporting.
-3. **SMOKewise**: Smoke aerosol particle sizing, coagulation aging, transport, and soot analysis with implications for spacecraft fire detection.
+The platform bridges small-scale laboratory experiments with full-scale spacecraft vehicle fire safety through three deterministic analytical engines and grounded Gemini 2.5 Flash RAG:
+1. **FIRELINE**: Solid and liquid fuel combustion, flame spread, heat release, material flammability, and gaseous suppression ($\text{CO}_2$, $\text{He}$, $\text{SF}_6$).
+2. **TESTMATCH**: Pairwise experiment comparability scoring ($S$, $C$), experimental scale divergence alerts, cross-investigation complementary domain tagging, and sensor quality monitoring.
+3. **SMOKewise**: Microgravity smoke aerosol particle sizing, coagulation aging trajectories, and detector technology implications (near-IR light scattering vs. ionization vs. two-moment MPASS prototypes).
 
 ---
 
-## Project Structure
+## Live Ingested NASA Datasets (Batch A & Batch B)
+
+The engine ingests **5 complete NASA investigations** across **18 primary sources**, **1,077 test runs**, **6,287 normalized measurements**, **8 curated findings**, and **662 indexed evidence chunks**:
+
+| Investigation | PSI ID | Phenomenon / Facility | Scale & Materials | Ingested Metrics |
+| :--- | :--- | :--- | :--- | :--- |
+| **BASS-II** | `PSI-25` | Solid-fuel flame spread in ISS Microgravity Science Glovebox (MSG) | Small-scale ($1\text{--}2\text{ cm}$ ducts): PMMA, SIBAL fabric, Nomex, Cotton | 176 test runs, 1,300 measurements, 258 evidence chunks (`NASA/TM-20210011385`, Fan Calibration data, FAQ) |
+| **SAME-R** | `PSI-101` | Smoke aerosol generation, particle sizing & aging in microgravity | Pyrolysis of Kapton, Silicone, Teflon, Pyrell, Lampwick ($11\text{--}1800\text{ s}$ aging) | 140 test runs, 761 measurements, 215 evidence chunks (`SAMER Final Report`, `AIAA 2012-3536`) |
+| **SAFFIRE-I / II** | `PSI-98` / `PSI-99` | Large-scale practical spacecraft fire tests in Cygnus resupply vehicles | Full-scale vehicle ($0.4\text{ m} \times 0.94\text{ m}$): SIBAL, PMMA, Silicone, Nomex | 19 test runs, 53 measurements, 25 evidence chunks (`NTRS 20170000230`) |
+| **FLEX / FLEX-2** | `PSI-69` | Isolated microgravity liquid droplet combustion & gaseous suppression | Liquid droplet combustion: Methanol, Heptane, Decane, gaseous suppressants ($\text{CO}_2$, $\text{He}$, $\text{SF}_6$) | 273 test runs, 2,346 measurements, 164 evidence chunks (`NASA/TP-2015-216046`) |
+| **SPICE** | `PSI-107` | Microgravity laminar co-flow smoke point & soot emissions | Gaseous fuels: Ethylene, Propane, Methane in quiescent/co-flow microgravity | 469 test runs, 1,827 measurements (kept strictly segregated from pyrolysis smoke) |
+
+---
+
+## System Architecture
 
 ```text
-├── datasets/mock/            # Synthetic JSON datasets (8 investigations, 18 runs, 162 measurements, 22 findings)
-├── docs/                     # DATA_CONTRACT.md, UNIT_STANDARDS.md, MOCK_DATA_GUIDE.md, API_CONTRACT.md
-├── scripts/                  # Mock dataset generator & Ajv/Zod integrity validator
-├── shared/                   # Canonical JSON Schemas, TypeScript contracts, SI parameter dictionary & Zod schemas
-└── src/
-    ├── components/
-    │   ├── common/           # Reusable aerospace UI library (KPIStatCard, ChartCard, MeasurementTable, DetailDrawer, etc.)
-    │   └── layout/           # AppShell, collapsible Sidebar, Header with global search & theme toggle
-    ├── context/              # ThemeContext (dark/light) & ResearchDataContext
-    ├── data/                 # ResearchDataProvider interface, MockResearchDataProvider, ApiResearchDataProvider
-    ├── pages/                # Overview, Research Explorer, FIRELINE, TESTMATCH, SMOKewise, AI Assistant, Reports, Sources
-    └── services/             # TESTMATCH dynamic comparison engine & Mock AI Research Assistant service
+Astro_Sapien/
+│
+├── fireline-backend/              # FastAPI + Supabase PostgreSQL / SQLite FTS5 backend
+│   ├── app/
+│   │   ├── ai/gemini_rag.py       # Grounded Gemini 2.5 Flash RAG with scientific guardrails
+│   │   ├── core/config.py         # Database and Gemini environment settings
+│   │   ├── database/              # Supabase PostgreSQL schema, indexes & dual-mode connection
+│   │   ├── engines/               # Three deterministic analytical engines
+│   │   │   ├── fireline_engine.py # Combustion & suppression evidence analysis + FTS
+│   │   │   ├── testmatch_engine.py# Deterministic comparability formula & scale divergence rules
+│   │   │   └── smokewise_engine.py# Smoke aerosol particle aging & detector implications
+│   │   ├── ingestion/             # Multi-investigation parsers (BASS-II, SAME-R, SAFFIRE, FLEX, SPICE, PDFs)
+│   │   └── main.py                # FastAPI REST API surface with CORS
+│   ├── data/
+│   │   ├── raw/                   # Raw NASA CSV, XLSX, PDF, DOCX, and PPTX reports
+│   │   ├── processed/             # normalized_test_runs.json (1,077 records)
+│   │   └── manifests/             # source_manifest.json (18 sources)
+│   ├── tests/test_backend.py      # Automated 10-test suite (100% pass rate)
+│   ├── pytest.ini                 # Pytest configuration
+│   └── requirements.txt           # Lightweight dependencies (no heavy ML/vector DBs)
+│
+├── openapi.json                   # Exported OpenAPI 3.1 specification for frontend contract
+│
+├── src/                           # React 18 + TypeScript + Vite frontend
+│   ├── components/                # Reusable aerospace UI library (ChartCard, KPIStatCard, AppShell)
+│   ├── context/                   # ResearchDataContext (switching between Mock & API modes)
+│   ├── data/                      # ResearchDataProvider, MockResearchDataProvider, ApiResearchDataProvider
+│   ├── pages/                     # Overview, FIRELINE, TESTMATCH, SMOKewise, AI Assistant, Reports, Sources
+│   └── services/                  # apiContracts.ts & analytical engine client integrations
+│
+├── shared/schemas/                # Canonical JSON Schemas (experiment, finding, report)
+└── docs/                          # API_CONTRACT.md, DATA_CONTRACT.md, UNIT_STANDARDS.md
 ```
 
 ---
 
-## Installation & Running the Frontend
+## Deterministic Scientific Engines
 
-### 1. Install Dependencies
-```bash
-npm install
-```
+### 1. FIRELINE Combustion & Suppression Engine
+- Multi-investigation filtering across `BASS-II`, `SAFFIRE`, and `FLEX` by material, flow regime, geometry, and initial $\text{O}_2$ range.
+- Full-Text Search ranked with `ts_rank` / `websearch_to_tsquery` across 662 indexed document chunks.
+- **Mandatory Partial-Gravity Notice**: Explicitly surfaces the constraint that NASA PSI datasets cover microgravity and normal gravity, strictly lacking validated Lunar ($1/6g$) or Martian ($3/8g$) flammability data.
 
-### 2. Run Data Integrity Validation
-Validates all mock datasets against JSON Schema (`shared/schemas/*.schema.json`) and Zod runtime schemas, plus referential integrity and SI unit consistency:
-```bash
-npm run validate:data
-```
+### 2. TESTMATCH Comparability Engine
+- Evaluates pairwise experiment comparability using deterministic weighted similarity:
+  $$S = 100 \times \frac{\sum w_i m_i s_i}{\sum w_i m_i}$$
+  and data parameter coverage:
+  $$C = 100 \times \frac{\sum w_i m_i}{\sum w_i}$$
+  across 9 criteria: gravity regime, material, geometry, flow regime, experimental scale, $\text{O}_2\%$, airflow ($\text{cm/s}$), pressure ($\text{kPa}$), and characteristic dimension ($\text{mm}$).
+- **Enforced Scientific Warnings**:
+  - **Scale Divergence (`BASS-II` vs. `SAFFIRE`)**: Alerts that BASS-II ($1\text{--}2\text{ cm}$ MSG duct) vs. SAFFIRE ($0.4\text{ m} \times 0.94\text{ m}$ Cygnus panel) exhibit up to an order-of-magnitude difference in radiative preheating and concurrent flame spread rates.
+  - **Cross-Domain Complementary**: Distinguishes non-interchangeable domains (solid flame spread vs. droplet extinction vs. smoke aerosol pyrolysis).
+  - **Sensor Quality Flags**: Automatically flags `suspect` or `over_range` readings (e.g., negative CO sensor drift or saturated over-range CO values).
 
-### 3. Run Unit Tests
-Executes Vitest unit tests for SI normalization, `MockResearchDataProvider`, and `TESTMATCH` comparison logic:
-```bash
-npm test
-```
-
-### 4. Start the Development Server
-```bash
-npm run dev
-```
-
-### 5. Typecheck & Production Build
-```bash
-npm run typecheck
-npm run build
-```
+### 3. SMOKEWISE Aerosol & Detection Engine
+- Aggregates microgravity smoke particle growth across 5 spacecraft materials: Kapton, Teflon, Silicone, Lampwick, and Pyrell.
+- Computes mass-mean diameter ($d_{mm}$) and geometric mean diameter ($d_g$) trajectories across aging states ($11\text{--}1800\text{ s}$) and airflow regimes (quiescent $0\text{ cm/s}$ vs. low-flow $1\text{--}8\text{ cm/s}$).
+- Evaluates detector implications:
+  - **ISS Near-IR Scattering ($>1000\text{ nm}$)**: Fresh Kapton/Teflon pyrolysis produces sub-$100\text{ nm}$ particles that remain undetected until significant coagulation aging ($>700\text{ s}$) occurs.
+  - **Shuttle Ionization**: Sensitive to high particle counts and sub-micron smoke, but vulnerable to cabin dust and humidity variance.
+  - **Two-Moment Prototype (MPASS)**: Combines number concentration (0th/1st moment) and mass (2nd/3rd moment), cutting response variance by $>2\times$ and discriminating smoke from background dust.
+- Strictly keeps flaming soot point data (`SPICE`) segregated from pyrolysis smoke data (`SAME-R`).
 
 ---
 
-## Mock-Data Mode vs. Future API Mode
+## Grounded Gemini 2.5 Flash RAG (`app/ai/gemini_rag.py`)
 
-Configure data mode via `.env` (see `.env.example`):
-
-### Mock-Data Mode (Default)
-```env
-VITE_DATA_MODE=mock
-```
-Reads local synthetic JSON datasets from `datasets/mock/` via `MockResearchDataProvider`. All synthetic records are explicitly tagged with `is_mock: true` and `data_status: "synthetic_demo"`, and a global **DEMO MODE – SYNTHETIC NASA-INSPIRED DATA** indicator is displayed.
-
-### Future FastAPI Backend Mode
-```env
-VITE_DATA_MODE=api
-VITE_API_BASE_URL=http://localhost:8000/api/v1
-```
-Automatically switches to `ApiResearchDataProvider`, fetching live NASA PSI / NTRS records from FastAPI endpoints documented in [`docs/API_CONTRACT.md`](./docs/API_CONTRACT.md).
+- **Synthesizer**: Uses `gemini-2.5-flash` via `google-genai` with temperature set to $0.2$.
+- **Strict Evidence Labeling**: Every claim must be explicitly tagged with:
+  - `[NASA observation]`
+  - `[Calculated result]`
+  - `[AI interpretation]`
+  - `[Research implication]`
+  - `[Unknown]`
+- **Inline Provenance Citations**: Every finding includes exact inline citations (e.g., `[PSI-25 / NASA-TM-20210011385, p. 75]`).
+- **Partial-Gravity Guardrail**: Prohibits extrapolating microgravity flame behavior to Lunar or Martian partial gravity without explicit research qualification.
+- **Deterministic Fallback**: Automatically activates if `GEMINI_API_KEY` is not set, generating evidence-backed responses from retrieved passages without hallucinations.
 
 ---
 
-## Phase 3 QA Results
+## Getting Started
 
-Completed as part of the FIRELINE QA, Visual Polish and Backend Integration Readiness phase.
-
-| Check | Result |
-|---|---|
-| `npm run typecheck` | PASSED - 0 TypeScript errors |
-| `npm run validate:data` | PASSED - 0 errors, 6/6 checks |
-| `npm test` | PASSED - 18/18 tests (3 test files) |
-| `npm run build` | PASSED - production bundle with code splitting |
-| Architecture audit | PASSED - single shared schemas, provider pattern, zero direct mock imports in UI |
-| Mock data integrity | PASSED - all 246 unique IDs, cross-refs valid, SI units correct |
-| Scientific integrity | PASSED - all mock entities tagged is_mock: true + synthetic_demo, synthetic disclaimers on all charts and AI responses |
-
-### Code Splitting Applied (vite.config.ts)
-The 919 KB monolithic bundle has been split into vendor chunks:
-- `vendor-react` - react, react-dom, react-router-dom
-- `vendor-charts` - recharts
-- `vendor-lucide` - lucide-react
-
-### Scientific Integrity Improvements
-- Smoke Particle Diameter chart now displays explicit warning: `Particle Diameter (nm) != Detector Sensitivity`
-- All ChartCard components show DataStatusBadge when isMock=true (default)
-- ComparisonScoreCard clearly labels the score as a `Prototype Condition Comparability Indicator`
-- AI Assistant responses always include synthetic disclaimer
-
-### Backend Integration Readiness
-New files added:
-- `src/services/apiContracts.ts` - TypeScript interfaces for all 8 FastAPI endpoint contracts (request/response shapes)
-- `ApiResearchDataProvider` extended with 6 new analytics methods: `analyzeFireline`, `compareTestMatch`, `analyzeSmokewise`, `queryAssistant`, `generateReport`, `searchEvidence`
-- `ResearchAnalyticsProvider` interface added to `ResearchDataProvider.ts`
-- `docs/API_CONTRACT.md` updated with Section 3 (POST analytics endpoints) and Section 4 (integration checklist)
+### Prerequisites
+- Node.js 18+ and npm
+- Python 3.10+ (tested with Python 3.14)
 
 ---
 
-## Connecting Real NASA Data
+### Backend Setup & Execution
 
-To connect the FIRELINE frontend to a real FastAPI backend ingesting NASA PSI / NTRS data:
+1. Navigate to the backend directory:
+   ```bash
+   cd fireline-backend
+   ```
 
-1. **Set environment variables** in `.env` (do NOT commit this file):
-   `VITE_DATA_MODE=api`
-   `VITE_API_BASE_URL=http://localhost:8000/api/v1`
-2. **Restart** dev server: `npm run dev` - the provider factory auto-selects ApiResearchDataProvider; no component changes needed.
-3. **Verify** backend is healthy: `GET /api/v1/health` should return `status: "ok"`.
-4. **Ingest NASA data** via: `POST /api/v1/ingestion/trigger` with `sources: ["nasa_psi", "ntrs"]`.
-5. **Validate** data quality: `npm run validate:data` (update script to fetch from API).
-6. **Enable** POST analytics by calling the new provider analytics methods from module pages.
+2. Create and activate a Python virtual environment:
+   ```bash
+   python -m venv venv
+   # Windows PowerShell:
+   .\venv\Scripts\activate
+   # Linux / macOS:
+   source venv/bin/activate
+   ```
 
-Full API contract details: `docs/API_CONTRACT.md`
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Configure environment variables in `fireline-backend/.env`:
+   ```env
+   DATABASE_URL=postgresql://postgres:[PASSWORD]@db.udjxwuzyyefkyqsnxslx.supabase.co:5432/postgres
+   GEMINI_API_KEY=your_gemini_api_key_here
+   GEMINI_MODEL=gemini-2.5-flash
+   ```
+   *(Note: The database layer connects to Supabase PostgreSQL when available, or transparently uses `fireline.db` with the built-in PostgreSQL compatibility wrapper).*
+
+5. Run the automated test suite:
+   ```bash
+   pytest -v
+   ```
+   *(Expected result: 10/10 passed).*
+
+6. Start the FastAPI backend server:
+   ```bash
+   python -m uvicorn app.main:app --reload --port 8000
+   ```
+   - API Base URL: `http://127.0.0.1:8000`
+   - Interactive Swagger Docs: `http://127.0.0.1:8000/docs`
+   - Health Endpoint: `http://127.0.0.1:8000/health`
+
+---
+
+### Frontend Setup & Execution
+
+1. In the repository root, install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Choose your data mode in `.env`:
+   - **Live API Mode (Connected to FastAPI backend)**:
+     ```env
+     VITE_DATA_MODE=api
+     VITE_API_BASE_URL=http://localhost:8000/api/v1
+     ```
+   - **Mock Data Mode (Offline demonstration)**:
+     ```env
+     VITE_DATA_MODE=mock
+     ```
+
+3. Run data validation and frontend tests:
+   ```bash
+   npm run validate:data
+   npm test
+   ```
+
+4. Start the frontend development server:
+   ```bash
+   npm run dev
+   ```
+   - Accessible at `http://localhost:5173`
+
+5. Production build:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## FastAPI REST API Endpoints
+
+The complete OpenAPI 3.1 specification is available in [`openapi.json`](./openapi.json):
+
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Live database health and table counts |
+| `GET` | `/api/v1/investigations` | List all 5 investigations with run counts |
+| `GET` | `/api/v1/investigations/{id}` | Detailed investigation metadata, sources & findings |
+| `GET` | `/api/v1/tests` | Query runs filtered by investigation, material, geometry, flow |
+| `GET` | `/api/v1/tests/{test_id}` | Test run details with measurements and provenance |
+| `GET` | `/api/v1/sources/{source_id}` | Source metadata, report citation, and document details |
+| `GET` | `/api/v1/evidence/search` | Ranked full-text search across indexed evidence chunks |
+| `POST` | `/api/v1/fireline/analyze` | Combustion evidence analysis, extinction modes, and O2 limits |
+| `POST` | `/api/v1/testmatch/compare` | Deterministic pairwise comparability ($S$, $C$) & warnings |
+| `POST` | `/api/v1/smokewise/analyze` | Smoke aerosol size distribution and detector implications |
+| `POST` | `/api/v1/assistant/query` | Grounded Gemini RAG research query synthesizer |
+| `POST` | `/api/v1/reports/generate` | Multi-pillar integrated research report generator |
+
+---
+
+## Quality Assurance & Verification
+
+- **Automated Backend Tests (`pytest -v`)**: 10/10 passed across all 5 investigations, FTS search, TESTMATCH comparisons, SMOKewise aggregations, and Gemini RAG grounding.
+- **Frontend Type Safety**: `npm run typecheck` passed (0 TypeScript errors).
+- **Frontend Unit Tests**: `npm test` passed (18/18 tests).
+- **Data Integrity**: `npm run validate:data` passed across all canonical JSON schemas.
+- **Scientific Integrity**: All AI responses tagged with categorical certainty, inline citations, and partial-gravity boundary warnings.
+
+---
+
+## License & Attribution
+
+Developed by **Team Astro_Sapien** for NASA Space Apps / HackAthlone 2026. Microgravity combustion, detection, and suppression data sourced from the **NASA Physical Sciences Informatics (PSI)** system and the **NASA Technical Reports Server (NTRS)**.
