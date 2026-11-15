@@ -44,9 +44,9 @@ export const OverviewPage: React.FC = () => {
   // Chart 1: Experiments by investigation
   const experimentsByInvData = useMemo(() => {
     return investigations.map((inv) => ({
-      name: inv.short_name,
+      name: inv.short_name || inv.id || 'Investigation',
       runs: (testRunsByInvestigationId[inv.id] || []).length,
-      pillar: inv.fire_safety_pillar,
+      pillar: inv.fire_safety_pillar || 'prevention',
     }));
   }, [investigations, testRunsByInvestigationId]);
 
@@ -54,7 +54,8 @@ export const OverviewPage: React.FC = () => {
   const categoryDistData = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const inv of investigations) {
-      for (const cat of inv.research_categories) {
+      const cats = inv.research_categories || [inv.fire_safety_pillar || 'combustion'];
+      for (const cat of cats) {
         counts[cat] = (counts[cat] || 0) + 1;
       }
     }

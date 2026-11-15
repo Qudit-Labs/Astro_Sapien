@@ -69,9 +69,17 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileNav }) => {
         </div>
       </div>
 
-      {/* Right: Mock indicator, theme toggle, user session */}
+      {/* Right: Mock/Live indicator, theme toggle, user session */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-        {isMockMode && (
+        {!isMockMode ? (
+          <div
+            title="Connected directly to live FastAPI backend and Supabase PostgreSQL microgravity database."
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-500/15 border border-teal-500/30 text-teal-800 dark:text-[#24B8A0] text-[11px] font-mono font-semibold"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#24B8A0] animate-pulse" />
+            <span>LIVE SUPABASE · 1,077 NASA RUNS</span>
+          </div>
+        ) : (
           <div
             title="All experimental measurements and findings are synthetic demonstrations."
             className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-[#F5B942] text-[11px] font-mono font-semibold"

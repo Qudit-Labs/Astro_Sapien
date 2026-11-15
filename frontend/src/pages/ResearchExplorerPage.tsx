@@ -105,14 +105,14 @@ export const ResearchExplorerPage: React.FC = () => {
         const invRuns = testRunsByInvestigationId[inv.id] || [];
         const invFnds = findingsByInvestigationId[inv.id] || [];
         const searchable = [
-          inv.short_name,
+          inv.short_name || inv.id,
           inv.name,
           inv.psi_id,
           inv.description,
-          ...inv.fuel_types,
-          ...inv.research_categories,
+          ...(inv.fuel_types || []),
+          ...(inv.research_categories || []),
           ...invRuns.map((r) => `${r.test_label} ${r.fuel_name}`),
-          ...invFnds.map((f) => `${f.title} ${f.summary}`),
+          ...invFnds.map((f) => `${f.finding_text || f.summary || ''}`),
         ]
           .join(' ')
           .toLowerCase();
@@ -132,7 +132,9 @@ export const ResearchExplorerPage: React.FC = () => {
           (findingsByInvestigationId[b.id]?.length || 0);
         return countB - countA;
       }
-      return a.short_name.localeCompare(b.short_name);
+      const nameA = a.short_name || a.id || '';
+      const nameB = b.short_name || b.id || '';
+      return nameA.localeCompare(nameB);
     });
   }, [
     investigations,

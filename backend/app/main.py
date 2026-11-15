@@ -326,7 +326,7 @@ def list_comparisons():
         "count": 2,
         "items": [
             compare_test_runs("PSI-25:B1", "PSI-98:S1"),
-            compare_test_runs("PSI-25:B1", "PSI-101:M1"),
+            compare_test_runs("PSI-25:B1", "PSI-101:TBL1-KAPTON-U"),
         ],
     }
 
