@@ -76,7 +76,11 @@ export class ApiResearchDataProvider implements ResearchDataProvider {
         );
       }
 
-      return (await response.json()) as T;
+      const json = await response.json();
+      if (json && typeof json === 'object' && Array.isArray((json as any).items)) {
+        return (json as any).items as T;
+      }
+      return json as T;
     } catch (error: any) {
       console.error(`[ApiResearchDataProvider] Failed to fetch from ${url.toString()}:`, error);
       throw new Error(

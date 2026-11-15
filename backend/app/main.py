@@ -299,6 +299,49 @@ def list_sources(
             return {"count": len(rows), "items": [dict(r) for r in rows]}
 
 
+@app.get("/api/v1/evidence-chunks")
+def list_evidence_chunks(
+    investigation_id: str | None = Query(None),
+    limit: int = Query(50, ge=1, le=500),
+):
+    sql = "SELECT id, source_id, investigation_id, page_number, section_title, content_text FROM evidence_chunks WHERE 1=1"
+    params: list = []
+    if investigation_id:
+        sql += " AND (investigation_id = %s OR LOWER(investigation_id) = LOWER(%s))"
+        params.extend([investigation_id, investigation_id])
+    sql += " LIMIT %s;"
+    params.append(limit)
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, params)
+            rows = cur.fetchall()
+            return {"count": len(rows), "items": [dict(r) for r in rows]}
+
+
+@app.get("/api/v1/comparisons")
+def list_comparisons():
+    return {
+        "count": 2,
+        "items": [
+            compare_test_runs("PSI-25:B1", "PSI-98:S1"),
+            compare_test_runs("PSI-25:B1", "PSI-101:M1"),
+        ],
+    }
+
+
+@app.get("/api/v1/reports")
+def list_reports():
+    return {
+        "count": 1,
+        "items": [
+            generate_integrated_report(
+                ReportRequest(topic="Comprehensive Fire Safety across BASS-II, SAFFIRE, and SAME-R")
+            )
+        ],
+    }
+
+
 class FirelineAnalyzeRequest(BaseModel):
     investigation_id: str | None = None
     material: str | None = None
