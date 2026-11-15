@@ -23,6 +23,7 @@ import { EvidenceBadge } from '@/components/common/EvidenceBadge';
 import { SourceCitation } from '@/components/common/SourceCitation';
 import { DataStatusBadge } from '@/components/common/DataStatusBadge';
 import { EmptyState } from '@/components/common/EmptyState';
+import { MicrogravityFlameVisualizer } from '@/components/common/MicrogravityFlameVisualizer';
 
 export const FirelineModulePage: React.FC = () => {
   const {
@@ -347,7 +348,15 @@ export const FirelineModulePage: React.FC = () => {
                         fontSize: '12px',
                       }}
                     />
-                    <Bar dataKey="spreadRateMmS" name="Flame Spread (mm/s)" fill="#FC3D21" radius={[4, 4, 0, 0]} />
+                    <Bar
+                      dataKey="spreadRateMmS"
+                      name="Flame Spread (mm/s)"
+                      fill="#FC3D21"
+                      radius={[4, 4, 0, 0]}
+                      isAnimationActive={true}
+                      animationDuration={800}
+                      animationEasing="ease-out"
+                    />
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
@@ -376,7 +385,15 @@ export const FirelineModulePage: React.FC = () => {
                         fontSize: '12px',
                       }}
                     />
-                    <Bar dataKey="durationS" name="Burning Duration (s)" fill="#F5B942" radius={[4, 4, 0, 0]} />
+                    <Bar
+                      dataKey="durationS"
+                      name="Burning Duration (s)"
+                      fill="#F5B942"
+                      radius={[4, 4, 0, 0]}
+                      isAnimationActive={true}
+                      animationDuration={800}
+                      animationEasing="ease-out"
+                    />
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
@@ -419,7 +436,14 @@ export const FirelineModulePage: React.FC = () => {
                       fontSize: '12px',
                     }}
                   />
-                  <Scatter name="Test Runs" data={suppressionEnvelopeData} fill="#38BDF8" />
+                  <Scatter
+                    name="Test Runs"
+                    data={suppressionEnvelopeData}
+                    fill="#38BDF8"
+                    isAnimationActive={true}
+                    animationDuration={800}
+                    animationEasing="ease-out"
+                  />
                 </ScatterChart>
               </ResponsiveContainer>
             </ChartCard>
@@ -508,11 +532,15 @@ export const FirelineModulePage: React.FC = () => {
 
         {/* E. Explainability Panel */}
         <div className="lg:col-span-4">
-          <div className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5 space-y-3 sticky top-24">
+          <div className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5 space-y-4 sticky top-24 shadow-md">
             <div className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-[#F4F7FC]">
               <Info className="w-4 h-4 text-[#38BDF8]" />
               <span>Scientific Explainability</span>
             </div>
+
+            {/* Dynamic Microgravity Flame Visualizer */}
+            <MicrogravityFlameVisualizer />
+
             <p className="text-xs text-slate-600 dark:text-[#9FB1C7] leading-relaxed">
               In microgravity, the absence of buoyancy eliminates natural upward convective drafts. Flames rely on{' '}
               <strong>low-speed forced ventilation</strong> (e.g., spacecraft cabin airflow 2–25 cm/s) for oxidizer transport.

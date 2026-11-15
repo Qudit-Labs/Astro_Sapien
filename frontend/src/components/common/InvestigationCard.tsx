@@ -26,7 +26,8 @@ export const InvestigationCard: React.FC<InvestigationCardProps> = ({
 }) => {
   return (
     <div
-      className="group rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 hover:border-[#0B3D91] dark:hover:border-[#38BDF8]/60 p-5 flex flex-col justify-between transition-all shadow-sm"
+      onClick={onSelect ? () => onSelect(investigation) : undefined}
+      className="group rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 hover:border-[#38BDF8] dark:hover:border-[#38BDF8] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#38BDF8]/10 dark:hover:shadow-[#38BDF8]/15 transition-all duration-300 p-5 flex flex-col justify-between shadow-sm cursor-pointer"
     >
       <div>
         <div className="flex items-start justify-between gap-2">

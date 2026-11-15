@@ -21,6 +21,7 @@ import { EvidenceBadge } from '@/components/common/EvidenceBadge';
 import { DataStatusBadge } from '@/components/common/DataStatusBadge';
 import { SourceCitation } from '@/components/common/SourceCitation';
 import { EmptyState } from '@/components/common/EmptyState';
+import { SmokeAerosolVisualizer } from '@/components/common/SmokeAerosolVisualizer';
 
 export const SmokewiseModulePage: React.FC = () => {
   const {
@@ -392,7 +393,15 @@ export const SmokewiseModulePage: React.FC = () => {
                       fontSize: '12px',
                     }}
                   />
-                  <Bar dataKey="diameterNm" name="Particle Diameter (nm)" fill="#24B8A0" radius={[4, 4, 0, 0]} />
+                  <Bar
+                    dataKey="diameterNm"
+                    name="Particle Diameter (nm)"
+                    fill="#24B8A0"
+                    radius={[4, 4, 0, 0]}
+                    isAnimationActive={true}
+                    animationDuration={800}
+                    animationEasing="ease-out"
+                  />
                 </BarChart>
               </ResponsiveContainer>
             ) : (
@@ -422,7 +431,14 @@ export const SmokewiseModulePage: React.FC = () => {
                       fontSize: '12px',
                     }}
                   />
-                  <Scatter name="Aerosol Aging" data={diameterVsAgingData} fill="#38BDF8" />
+                  <Scatter
+                    name="Aerosol Aging"
+                    data={diameterVsAgingData}
+                    fill="#38BDF8"
+                    isAnimationActive={true}
+                    animationDuration={800}
+                    animationEasing="ease-out"
+                  />
                 </ScatterChart>
               </ResponsiveContainer>
             ) : (
@@ -452,7 +468,14 @@ export const SmokewiseModulePage: React.FC = () => {
                       fontSize: '12px',
                     }}
                   />
-                  <Scatter name="Flow vs Particle Size" data={airflowVsParticleData} fill="#F5B942" />
+                  <Scatter
+                    name="Flow vs Particle Size"
+                    data={airflowVsParticleData}
+                    fill="#F5B942"
+                    isAnimationActive={true}
+                    animationDuration={800}
+                    animationEasing="ease-out"
+                  />
                 </ScatterChart>
               </ResponsiveContainer>
             ) : (
@@ -481,7 +504,15 @@ export const SmokewiseModulePage: React.FC = () => {
                       fontSize: '12px',
                     }}
                   />
-                  <Bar dataKey="sootPpm" name="Soot Volume Fraction (ppm)" fill="#FC3D21" radius={[4, 4, 0, 0]} />
+                  <Bar
+                    dataKey="sootPpm"
+                    name="Soot Volume Fraction (ppm)"
+                    fill="#FC3D21"
+                    radius={[4, 4, 0, 0]}
+                    isAnimationActive={true}
+                    animationDuration={800}
+                    animationEasing="ease-out"
+                  />
                 </BarChart>
               </ResponsiveContainer>
             ) : (
@@ -531,6 +562,9 @@ export const SmokewiseModulePage: React.FC = () => {
         </div>
 
         <div className="lg:col-span-4 space-y-4">
+          {/* Dynamic Microgravity Smoke Aerosol Visualizer */}
+          <SmokeAerosolVisualizer />
+
           <div className="rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-500/30 p-5 space-y-3">
             <div className="flex items-center gap-2 text-sm font-semibold text-amber-900 dark:text-[#F5B942]">
               <AlertTriangle className="w-4 h-4 shrink-0" />

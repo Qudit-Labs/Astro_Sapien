@@ -400,7 +400,14 @@ export const OverviewPage: React.FC = () => {
                   fontSize: '12px',
                 }}
               />
-              <Bar dataKey="runs" name="Test Runs" radius={[4, 4, 0, 0]}>
+              <Bar
+                dataKey="runs"
+                name="Test Runs"
+                radius={[4, 4, 0, 0]}
+                isAnimationActive={true}
+                animationDuration={800}
+                animationEasing="ease-out"
+              >
                 {experimentsByInvData.map((entry, idx) => (
                   <Cell
                     key={`cell-${idx}`}
@@ -445,7 +452,15 @@ export const OverviewPage: React.FC = () => {
                   fontSize: '12px',
                 }}
               />
-              <Bar dataKey="count" name="Investigations" fill="#0B3D91" radius={[0, 4, 4, 0]} />
+              <Bar
+                dataKey="count"
+                name="Investigations"
+                fill="#0B3D91"
+                radius={[0, 4, 4, 0]}
+                isAnimationActive={true}
+                animationDuration={800}
+                animationEasing="ease-out"
+              />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
@@ -477,7 +492,15 @@ export const OverviewPage: React.FC = () => {
                   fontSize: '12px',
                 }}
               />
-              <Bar dataKey="count" name="Measurements" fill="#24B8A0" radius={[0, 4, 4, 0]} />
+              <Bar
+                dataKey="count"
+                name="Measurements"
+                fill="#24B8A0"
+                radius={[0, 4, 4, 0]}
+                isAnimationActive={true}
+                animationDuration={800}
+                animationEasing="ease-out"
+              />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>

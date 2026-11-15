@@ -35,12 +35,12 @@ export const ExperimentCard: React.FC<ExperimentCardProps> = ({
             }
           : undefined
       }
-      className={`rounded-xl p-4 border transition-all duration-200 relative overflow-hidden ${
+      className={`rounded-xl p-4 border transition-all duration-300 relative overflow-hidden ${
         onSelect ? 'cursor-pointer' : ''
       } ${
         selected
-          ? 'bg-[#0B3D91]/20 dark:bg-[#0B3D91]/40 border-[#38BDF8] shadow-lg shadow-[#38BDF8]/10 ring-1 ring-[#38BDF8]/50'
-          : 'bg-white dark:bg-[#10243D] border-slate-200 dark:border-slate-700/60 hover:border-slate-400 dark:hover:border-[#38BDF8]/40 hover:-translate-y-0.5 shadow-sm'
+          ? 'bg-[#0B3D91]/20 dark:bg-[#0B3D91]/40 border-[#38BDF8] shadow-lg shadow-[#38BDF8]/20 ring-1 ring-[#38BDF8]/50 -translate-y-1'
+          : 'bg-white dark:bg-[#10243D] border-slate-200 dark:border-slate-700/60 hover:border-[#38BDF8] dark:hover:border-[#38BDF8] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#38BDF8]/10 dark:hover:shadow-[#38BDF8]/15 shadow-sm'
       }`}
     >
       <div className="flex items-start justify-between gap-2">
