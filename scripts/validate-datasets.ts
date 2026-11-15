@@ -38,8 +38,11 @@ import {
 } from '../shared/validation/schemas';
 import { PARAMETER_DICTIONARY, ParameterCode } from '../shared/types/parameters';
 
-const DATA_DIR = path.resolve(process.cwd(), 'datasets/mock');
-const SCHEMA_DIR = path.resolve(process.cwd(), 'shared/schemas');
+const ROOT_DIR = fs.existsSync(path.resolve(process.cwd(), 'datasets/mock'))
+  ? process.cwd()
+  : path.resolve(process.cwd(), '..');
+const DATA_DIR = path.resolve(ROOT_DIR, 'datasets/mock');
+const SCHEMA_DIR = path.resolve(ROOT_DIR, 'shared/schemas');
 
 function loadJson<T>(filename: string): T {
   const p = path.join(DATA_DIR, filename);
