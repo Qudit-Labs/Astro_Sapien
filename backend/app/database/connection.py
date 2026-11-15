@@ -217,11 +217,10 @@ _POOL_LOCK = threading.Lock()
 
 
 def _get_sqlite_conn():
-    if DB_PATH.exists():
-        conn = sqlite3.connect(str(DB_PATH), check_same_thread=False)
-        conn.row_factory = sqlite3.Row
-        return SQLitePostgresCompatConnection(conn)
-    raise ValueError(f"Local database file not found at {DB_PATH}")
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(str(DB_PATH), check_same_thread=False)
+    conn.row_factory = sqlite3.Row
+    return SQLitePostgresCompatConnection(conn)
 
 
 def get_connection(conn_str: str | None = None):
