@@ -1,7 +1,7 @@
 import sqlite3
 from pathlib import Path
 
-db_path = Path("fireline-backend/data/fireline.db")
+db_path = Path("backend/data/fireline.db")
 if not db_path.exists():
     print("fireline.db not found")
 else:

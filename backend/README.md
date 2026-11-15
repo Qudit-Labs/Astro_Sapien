@@ -64,7 +64,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Configure `.env`
-Create `.env` in `fireline-backend/`:
+Create `.env` in `backend/`:
 ```env
 DATABASE_URL=postgresql://postgres:[PASSWORD]@db.udjxwuzyyefkyqsnxslx.supabase.co:5432/postgres
 GEMINI_API_KEY=your_gemini_api_key_here

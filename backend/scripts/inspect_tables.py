@@ -2,7 +2,7 @@ import csv
 import openpyxl
 from pathlib import Path
 
-raw = Path("fireline-backend/data/raw")
+raw = Path("backend/data/raw")
 
 print("--- EXAMINING FILES IN RAW ---")
 for f in sorted(raw.iterdir()):

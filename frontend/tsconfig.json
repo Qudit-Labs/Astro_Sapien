@@ -19,9 +19,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@shared/*": ["shared/*"],
-      "@datasets/*": ["datasets/*"]
+      "@shared/*": ["../shared/*"],
+      "@datasets/*": ["../datasets/*"]
     }
   },
-  "include": ["src", "shared", "datasets", "scripts"]
+  "include": ["src", "../shared", "../datasets", "../scripts"]
 }

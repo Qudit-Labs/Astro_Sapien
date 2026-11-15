@@ -30,7 +30,7 @@ The engine ingests **5 complete NASA investigations** across **18 primary source
 ```text
 Astro_Sapien/
 │
-├── fireline-backend/              # FastAPI + Supabase PostgreSQL / SQLite FTS5 backend
+├── backend/                       # FastAPI + Supabase PostgreSQL / SQLite FTS5 backend
 │   ├── app/
 │   │   ├── ai/gemini_rag.py       # Grounded Gemini 2.5 Flash RAG with scientific guardrails
 │   │   ├── core/config.py         # Database and Gemini environment settings
@@ -49,17 +49,24 @@ Astro_Sapien/
 │   ├── pytest.ini                 # Pytest configuration
 │   └── requirements.txt           # Lightweight dependencies (no heavy ML/vector DBs)
 │
-├── openapi.json                   # Exported OpenAPI 3.1 specification for frontend contract
-│
-├── src/                           # React 18 + TypeScript + Vite frontend
-│   ├── components/                # Reusable aerospace UI library (ChartCard, KPIStatCard, AppShell)
-│   ├── context/                   # ResearchDataContext (switching between Mock & API modes)
-│   ├── data/                      # ResearchDataProvider, MockResearchDataProvider, ApiResearchDataProvider
-│   ├── pages/                     # Overview, FIRELINE, TESTMATCH, SMOKewise, AI Assistant, Reports, Sources
-│   └── services/                  # apiContracts.ts & analytical engine client integrations
+├── frontend/                      # React 18 + TypeScript + Vite frontend
+│   ├── src/
+│   │   ├── components/            # Reusable aerospace UI library (ChartCard, KPIStatCard, AppShell)
+│   │   ├── context/               # ResearchDataContext (switching between Mock & API modes)
+│   │   ├── data/                  # ResearchDataProvider, MockResearchDataProvider, ApiResearchDataProvider
+│   │   ├── pages/                 # Overview, FIRELINE, TESTMATCH, SMOKewise, AI Assistant, Reports, Sources
+│   │   └── services/              # apiContracts.ts & analytical engine client integrations
+│   ├── public/                    # Static assets
+│   ├── package.json               # Frontend dependencies & scripts
+│   ├── vite.config.ts             # Vite bundle splitting & path aliases
+│   ├── tailwind.config.js         # Styling & theme configuration
+│   └── tsconfig.json              # TypeScript configuration
 │
 ├── shared/schemas/                # Canonical JSON Schemas (experiment, finding, report)
-└── docs/                          # API_CONTRACT.md, DATA_CONTRACT.md, UNIT_STANDARDS.md
+├── datasets/                      # Mock and downloaded NASA datasets
+├── docs/                          # API_CONTRACT.md, DATA_CONTRACT.md, UNIT_STANDARDS.md
+├── openapi.json                   # Exported OpenAPI 3.1 specification for frontend contract
+└── README.md
 ```
 
 ---
@@ -120,7 +127,7 @@ Astro_Sapien/
 
 1. Navigate to the backend directory:
    ```bash
-   cd fireline-backend
+   cd backend
    ```
 
 2. Create and activate a Python virtual environment:
@@ -137,7 +144,7 @@ Astro_Sapien/
    pip install -r requirements.txt
    ```
 
-4. Configure environment variables in `fireline-backend/.env`:
+4. Configure environment variables in `backend/.env`:
    ```env
    DATABASE_URL=postgresql://postgres:[PASSWORD]@db.udjxwuzyyefkyqsnxslx.supabase.co:5432/postgres
    GEMINI_API_KEY=your_gemini_api_key_here
@@ -163,12 +170,13 @@ Astro_Sapien/
 
 ### Frontend Setup & Execution
 
-1. In the repository root, install dependencies:
+1. Navigate to the frontend directory:
    ```bash
+   cd frontend
    npm install
    ```
 
-2. Choose your data mode in `.env`:
+2. Choose your data mode in `frontend/.env`:
    - **Live API Mode (Connected to FastAPI backend)**:
      ```env
      VITE_DATA_MODE=api

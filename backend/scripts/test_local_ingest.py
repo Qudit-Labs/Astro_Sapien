@@ -5,8 +5,8 @@ from app.ingestion.saffire_ingestor import ingest_saffire
 from app.ingestion.flex_ingestor import ingest_flex
 from app.ingestion.spice_ingestor import ingest_spice
 
-raw = Path("fireline-backend/data/raw")
-db = Path("fireline-backend/data/fireline.db")
+raw = Path("backend/data/raw")
+db = Path("backend/data/fireline.db")
 
 print("Testing ingestion into fireline.db...")
 try:
