@@ -218,3 +218,16 @@ def test_auth_signup_and_login():
     login_data = res_login.json()
     assert login_data["status"] == "success"
     assert login_data["user"]["email"] == "marcus.vance@nasa.gov"
+
+
+def test_langchain_sql_agent_endpoint():
+    payload = {
+        "question": "How many investigations are in the database?"
+    }
+    res = client.post("/api/v1/agent/query", json=payload)
+    assert res.status_code == 200
+    data = res.json()
+    assert "output" in data
+    assert "intermediate_steps" in data
+    assert data["database"] == "supabase-postgresql"
+    assert "investigations" in data["output"].lower() or "5" in data["output"]

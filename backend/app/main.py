@@ -9,6 +9,7 @@ from app.engines.fireline_engine import analyze_combustion_evidence, search_evid
 from app.engines.testmatch_engine import compare_test_runs
 from app.engines.smokewise_engine import analyze_smoke_aerosols
 from app.ai.gemini_rag import answer_research_question
+from app.ai.langchain_agent import run_langchain_sql_agent
 
 
 @asynccontextmanager
@@ -396,6 +397,22 @@ class AssistantQueryRequest(BaseModel):
 @app.post("/api/v1/assistant/query")
 def assistant_query(req: AssistantQueryRequest):
     return answer_research_question(req.question, investigation_id=req.investigation_id)
+
+
+class AgentQueryRequest(BaseModel):
+    question: str = Field(
+        ...,
+        json_schema_extra={"example": "Show me all BASS-II test runs where oxygen was below 16 percent."},
+    )
+
+
+@app.post("/api/v1/agent/query")
+def agent_sql_query(req: AgentQueryRequest):
+    """
+    Translates natural language questions into safe, read-only PostgreSQL queries via LangChain SQL Agent,
+    executes them against Supabase, and returns explained scientific findings with intermediate steps.
+    """
+    return run_langchain_sql_agent(req.question)
 
 
 class ReportRequest(BaseModel):

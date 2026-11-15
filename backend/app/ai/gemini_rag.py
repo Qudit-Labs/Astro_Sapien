@@ -101,7 +101,9 @@ Please provide a scientifically rigorous, evidence-labeled answer with exact inl
             "mode": "error_fallback",
             "answer": (
                 f"[Unknown] An error occurred while contacting Gemini API: {exc}. "
-                f"[NASA observation] Retrieved {len(chunks)} relevant NASA PSI excerpts matching this inquiry."
+                f"[NASA observation] Retrieved {len(chunks)} relevant NASA PSI excerpts matching this inquiry. "
+                "[Research implication] Scientific limitation: NASA PSI data covers microgravity (ISS) and 1-g reference conditions; "
+                "validated partial-gravity flammability data for Lunar (1/6 g) or Martian (3/8 g) spacecraft atmospheres remains an experimental gap."
             ),
             "citations": citations,
             "evidence_chunk_count": len(chunks),

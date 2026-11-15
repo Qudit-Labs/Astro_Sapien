@@ -902,6 +902,43 @@
         }
       }
     },
+    "/api/v1/agent/query": {
+      "post": {
+        "summary": "Agent Sql Query",
+        "description": "Translates natural language questions into safe, read-only PostgreSQL queries via LangChain SQL Agent,\nexecutes them against Supabase, and returns explained scientific findings with intermediate steps.",
+        "operationId": "agent_sql_query_api_v1_agent_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/reports/generate": {
       "post": {
         "summary": "Generate Integrated Report",
@@ -1051,6 +1088,20 @@
   },
   "components": {
     "schemas": {
+      "AgentQueryRequest": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "title": "Question",
+            "example": "Show me all BASS-II test runs where oxygen was below 16 percent."
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "AgentQueryRequest"
+      },
       "AssistantQueryRequest": {
         "properties": {
           "question": {
