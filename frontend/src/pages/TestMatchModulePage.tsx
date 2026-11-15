@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
   CheckCircle2,
   AlertTriangle,
@@ -6,6 +6,10 @@ import {
   Ban,
   ArrowLeftRight,
   Sparkles,
+  Play,
+  Pause,
+  RotateCcw,
+  Flame,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useResearchData } from '@/context/ResearchDataContext';
@@ -16,6 +20,7 @@ import {
 import { PageHeader } from '@/components/common/PageHeader';
 import { ComparisonScoreCard } from '@/components/common/ComparisonScoreCard';
 import { DataStatusBadge } from '@/components/common/DataStatusBadge';
+import { CombustionChamberCanvas } from '@/components/common/CombustionChamberCanvas';
 
 const STATUS_BADGE: Record<
   VariableComparisonStatus,
@@ -98,10 +103,88 @@ export const TestMatchModulePage: React.FC = () => {
     );
   }, [runA, runB, measurementsByTestRunId]);
 
+  // Extract measurements & spread rates for Run A and Run B
+  const runAMeasurements = measurementsByTestRunId[runA?.id || ''] || [];
+  const runBMeasurements = measurementsByTestRunId[runB?.id || ''] || [];
+
+  const runASpreadMeas = runAMeasurements.find((m) => m.parameter_code === 'flame_spread_rate');
+  const runASpreadRate =
+    runASpreadMeas?.normalized_unit === 'm/s' && runASpreadMeas.normalized_value != null
+      ? runASpreadMeas.normalized_value * 100
+      : runASpreadMeas?.raw_value != null
+      ? runASpreadMeas.raw_unit === 'mm/s'
+        ? runASpreadMeas.raw_value / 10
+        : runASpreadMeas.raw_value
+      : null;
+
+  const runBSpreadMeas = runBMeasurements.find((m) => m.parameter_code === 'flame_spread_rate');
+  const runBSpreadRate =
+    runBSpreadMeas?.normalized_unit === 'm/s' && runBSpreadMeas.normalized_value != null
+      ? runBSpreadMeas.normalized_value * 100
+      : runBSpreadMeas?.raw_value != null
+      ? runBSpreadMeas.raw_unit === 'mm/s'
+        ? runBSpreadMeas.raw_value / 10
+        : runBSpreadMeas.raw_value
+      : null;
+
+  const runADurationMeas = runAMeasurements.find((m) => m.parameter_code === 'burning_duration');
+  const runADuration = runADurationMeas?.normalized_value ?? runADurationMeas?.raw_value ?? null;
+
+  const runBDurationMeas = runBMeasurements.find((m) => m.parameter_code === 'burning_duration');
+  const runBDuration = runBDurationMeas?.normalized_value ?? runBDurationMeas?.raw_value ?? null;
+
+  // Effective spread rates for delta badge
+  const effectiveSpreadA = runASpreadRate ?? (runA?.gravity_regime === 'earth_normal' ? 0.75 : 0.35);
+  const effectiveSpreadB = runBSpreadRate ?? (runB?.gravity_regime === 'earth_normal' ? 0.75 : 0.35);
+  const spreadDeltaPct = Math.round(((effectiveSpreadB - effectiveSpreadA) / effectiveSpreadA) * 100);
+
+  // Synchronized Dual-Burn Playback state
+  const [syncPlaying, setSyncPlaying] = useState<boolean>(false);
+  const [syncTime, setSyncTime] = useState<number>(0);
+  const [syncSpeed, setSyncSpeed] = useState<number>(1);
+
+  const maxSyncDuration = Math.max(30, (runADuration ?? 25), (runBDuration ?? 25));
+
+  useEffect(() => {
+    if (!syncPlaying) return;
+    let lastTime = performance.now();
+    let animId: number;
+
+    const tick = (now: number) => {
+      const dt = (now - lastTime) / 1000;
+      lastTime = now;
+      setSyncTime((prev) => {
+        const next = prev + dt * syncSpeed;
+        if (next >= maxSyncDuration) {
+          setSyncPlaying(false);
+          return maxSyncDuration;
+        }
+        return next;
+      });
+      animId = requestAnimationFrame(tick);
+    };
+
+    animId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animId);
+  }, [syncPlaying, syncSpeed, maxSyncDuration]);
+
+  const handleSyncReset = () => {
+    setSyncTime(0);
+    setSyncPlaying(false);
+  };
+
+  const handleSyncTogglePlay = () => {
+    if (syncTime >= maxSyncDuration) {
+      setSyncTime(0);
+    }
+    setSyncPlaying((p) => !p);
+  };
+
   const swapRuns = () => {
     const temp = runAId;
     setRunAId(runBId);
     setRunBId(temp);
+    setSyncTime(0);
   };
 
   return (
@@ -133,6 +216,7 @@ export const TestMatchModulePage: React.FC = () => {
               onClick={() => {
                 setRunAId(cmp.test_run_a_id);
                 setRunBId(cmp.test_run_b_id);
+                setSyncTime(0);
               }}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono border transition ${
                 runA?.id === cmp.test_run_a_id && runB?.id === cmp.test_run_b_id
@@ -166,7 +250,10 @@ export const TestMatchModulePage: React.FC = () => {
           <select
             id="select-run-a"
             value={runA?.id || ''}
-            onChange={(e) => setRunAId(e.target.value)}
+            onChange={(e) => {
+              setRunAId(e.target.value);
+              setSyncTime(0);
+            }}
             className="w-full text-xs rounded-lg bg-slate-50 dark:bg-[#07172B] border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-[#F4F7FC]"
           >
             {testRuns.map((tr) => (
@@ -234,7 +321,10 @@ export const TestMatchModulePage: React.FC = () => {
           <select
             id="select-run-b"
             value={runB?.id || ''}
-            onChange={(e) => setRunBId(e.target.value)}
+            onChange={(e) => {
+              setRunBId(e.target.value);
+              setSyncTime(0);
+            }}
             className="w-full text-xs rounded-lg bg-slate-50 dark:bg-[#07172B] border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-[#F4F7FC]"
           >
             {testRuns.map((tr) => (
@@ -268,6 +358,139 @@ export const TestMatchModulePage: React.FC = () => {
           )}
         </motion.div>
       </div>
+
+      {/* DUAL-BURN SPLIT-SCREEN COMBUSTION SIMULATION */}
+      {runA && runB && (
+        <div className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5 space-y-4 shadow-md hud-panel">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2">
+              <Flame className="w-4 h-4 text-[#38BDF8]" />
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-[#F4F7FC]">
+                Dual-Burn Split-Screen Combustion Simulation
+              </h3>
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-sky-950 border border-sky-800 text-[#38BDF8]">
+                60 FPS Hybrid Physics
+              </span>
+            </div>
+
+            {/* Comparative Delta Badges */}
+            <div className="flex items-center gap-2 flex-wrap">
+              {spreadDeltaPct !== 0 && (
+                <span
+                  className={`text-[11px] font-mono px-2 py-0.5 rounded border font-semibold ${
+                    spreadDeltaPct > 0
+                      ? 'bg-amber-950/40 text-amber-300 border-amber-600/50'
+                      : 'bg-teal-950/40 text-teal-300 border-teal-600/50'
+                  }`}
+                >
+                  {spreadDeltaPct > 0
+                    ? `Run B spread +${spreadDeltaPct}% faster`
+                    : `Run A spread +${Math.abs(spreadDeltaPct)}% faster`}
+                </span>
+              )}
+              {runA.gravity_regime !== runB.gravity_regime && (
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-950/50 text-purple-300 border border-purple-700/60">
+                  Regime Shift: {runA.gravity_regime === 'microgravity' ? 'µg Dome' : '1g Plume'} vs{' '}
+                  {runB.gravity_regime === 'microgravity' ? 'µg Dome' : '1g Plume'}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Centralized Synchronized Controls Bar */}
+          <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleSyncTogglePlay}
+                className="px-3.5 py-1.5 rounded-lg bg-[#0B3D91] hover:bg-sky-700 text-white text-xs font-semibold flex items-center gap-1.5 transition shadow-sm"
+              >
+                {syncPlaying ? (
+                  <>
+                    <Pause className="w-3.5 h-3.5" />
+                    Pause Both Tests
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5" />
+                    Play Both Tests
+                  </>
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={handleSyncReset}
+                className="p-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-white transition"
+                title="Reset both chambers to ignition (t=0)"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setSyncSpeed((s) => (s === 1 ? 2 : 1))}
+                className="px-2.5 py-1 rounded text-xs font-mono bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-500"
+              >
+                {syncSpeed}x Speed
+              </button>
+            </div>
+
+            {/* Sync Scrub Slider & Timer */}
+            <div className="flex items-center gap-3 flex-1 min-w-[240px]">
+              <span className="text-xs font-mono text-slate-500 dark:text-[#9FB1C7]">
+                T+{syncTime.toFixed(1)}s / {maxSyncDuration.toFixed(0)}s
+              </span>
+              <input
+                type="range"
+                min={0}
+                max={maxSyncDuration}
+                step={0.1}
+                value={syncTime}
+                onChange={(e) => setSyncTime(parseFloat(e.target.value))}
+                aria-label="Sync scrub slider"
+                className="flex-1 h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[#38BDF8]"
+              />
+            </div>
+          </div>
+
+          {/* Responsive Dual Split Screen Viewports */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <CombustionChamberCanvas
+              title={`Run A: ${runA.fuel_name}`}
+              testRunId={runA.id}
+              fuelName={runA.fuel_name}
+              gravityRegime={runA.gravity_regime}
+              oxygenPct={runA.experimental_conditions.oxygen_pct_vol}
+              airflowCmS={runA.experimental_conditions.airflow_cm_s}
+              pressureKpa={runA.experimental_conditions.pressure_kpa}
+              flameSpreadRateCmS={runASpreadRate}
+              burnDurationS={runADuration}
+              syncTime={syncTime}
+              syncIsPlaying={syncPlaying}
+              syncPlaybackSpeed={syncSpeed}
+              onSyncTimeChange={setSyncTime}
+              onSyncTogglePlay={handleSyncTogglePlay}
+              isSyncControlled={true}
+            />
+            <CombustionChamberCanvas
+              title={`Run B: ${runB.fuel_name}`}
+              testRunId={runB.id}
+              fuelName={runB.fuel_name}
+              gravityRegime={runB.gravity_regime}
+              oxygenPct={runB.experimental_conditions.oxygen_pct_vol}
+              airflowCmS={runB.experimental_conditions.airflow_cm_s}
+              pressureKpa={runB.experimental_conditions.pressure_kpa}
+              flameSpreadRateCmS={runBSpreadRate}
+              burnDurationS={runBDuration}
+              syncTime={syncTime}
+              syncIsPlaying={syncPlaying}
+              syncPlaybackSpeed={syncSpeed}
+              onSyncTimeChange={setSyncTime}
+              onSyncTogglePlay={handleSyncTogglePlay}
+              isSyncControlled={true}
+            />
+          </div>
+        </div>
+      )}
 
       {/* C. Comparison Visualization wrapped in Animated Transitions */}
       <AnimatePresence mode="wait">
