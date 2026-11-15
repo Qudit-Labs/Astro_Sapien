@@ -75,6 +75,8 @@ def get_langchain_sql_agent(db: Optional[Any] = None, api_key: Optional[str] = N
         model=model_name,
         google_api_key=target_api_key,
         temperature=0.0,
+        max_retries=1,
+        timeout=8,
     )
 
     toolkit = SQLDatabaseToolkit(db=target_db, llm=llm)

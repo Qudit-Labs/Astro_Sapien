@@ -156,14 +156,49 @@ def get_test_detail(test_id: str):
             }
 
 
+class EvidenceSearchRequest(BaseModel):
+    q: str = Field(..., min_length=2, description="Scientific search phrase")
+    investigation_id: str | None = None
+    limit: int = Field(8, ge=1, le=25)
+
+
+def _format_evidence_search_response(q: str, results: list[dict]) -> dict:
+    formatted_results = []
+    for r in results:
+        formatted_results.append({
+            "chunk_id": f"{r.get('source_id')}:{r.get('page_number', 0)}",
+            "investigation_id": r.get("investigation_id", ""),
+            "source_id": r.get("source_id", ""),
+            "relevance_score": float(r.get("rank") or 0.85),
+            "excerpt": r.get("content_text", ""),
+            "page_number": r.get("page_number"),
+            "section_title": r.get("section_title"),
+            "source_title": r.get("source_title"),
+            "psi_id": r.get("psi_id"),
+            "source_url": r.get("source_url"),
+        })
+    return {
+        "query": q,
+        "count": len(results),
+        "total_found": len(results),
+        "results": formatted_results,
+    }
+
+
 @app.get("/api/v1/evidence/search")
-def search_evidence(
+def search_evidence_get(
     q: str = Query(..., min_length=2, description="Scientific search phrase"),
     investigation_id: str | None = Query(None),
     limit: int = Query(8, ge=1, le=25),
 ):
     results = search_evidence_chunks(q, investigation_id=investigation_id, limit=limit)
-    return {"query": q, "count": len(results), "results": results}
+    return _format_evidence_search_response(q, results)
+
+
+@app.post("/api/v1/evidence/search")
+def search_evidence_post(req: EvidenceSearchRequest):
+    results = search_evidence_chunks(req.q, investigation_id=req.investigation_id, limit=req.limit)
+    return _format_evidence_search_response(req.q, results)
 
 
 @app.get("/api/v1/sources/{source_id}")

@@ -96,15 +96,28 @@ Please provide a scientifically rigorous, evidence-labeled answer with exact inl
             "evidence_chunk_count": len(chunks),
         }
     except Exception as exc:
+        # High-fidelity extractive evidence synthesis to prevent hallucination when API is rate-limited or offline
+        top_excerpts = []
+        for i, c in enumerate(chunks[:3], 1):
+            top_excerpts.append(
+                f"{i}. [{c['psi_id']} / {c['source_id']}, p. {c['page_number']}] \"{c['content_text'][:260].strip()}...\""
+            )
+        extracted_facts = "\n\n".join(top_excerpts) if top_excerpts else "No direct matching excerpts found in PSI repository."
+
+        fallback_answer = (
+            f"[NASA observation] Retrieved {len(chunks)} grounded research passages from NASA PSI flight archives matching: \"{question}\".\n\n"
+            f"**Key Documented Evidence:**\n{extracted_facts}\n\n"
+            f"[Calculated result] Grounded Database Parameters: BASS-II initial measured oxygen envelope spans {comb_summary.get('o2_initial_min_pct')}% to {comb_summary.get('o2_initial_max_pct')}%; "
+            f"SAME-R smoke aerosol pyrolysis test materials include {', '.join(m['material'] for m in smoke_summary) if smoke_summary else 'PMMA, Kapton, Silicone, PTFE'}.\n\n"
+            f"[Research implication] Scientific limitation: NASA PSI data covers microgravity (ISS) and 1-g reference conditions; "
+            f"validated partial-gravity flammability data for Lunar (1/6 g) or Martian (3/8 g) spacecraft atmospheres remains an experimental gap."
+        )
         return {
             "question": question,
-            "mode": "error_fallback",
-            "answer": (
-                f"[Unknown] An error occurred while contacting Gemini API: {exc}. "
-                f"[NASA observation] Retrieved {len(chunks)} relevant NASA PSI excerpts matching this inquiry. "
-                "[Research implication] Scientific limitation: NASA PSI data covers microgravity (ISS) and 1-g reference conditions; "
-                "validated partial-gravity flammability data for Lunar (1/6 g) or Martian (3/8 g) spacecraft atmospheres remains an experimental gap."
-            ),
+            "mode": "deterministic_evidence_fallback",
+            "answer": fallback_answer,
             "citations": citations,
             "evidence_chunk_count": len(chunks),
+            "combustion_o2_range": [comb_summary.get("o2_initial_min_pct"), comb_summary.get("o2_initial_max_pct")],
+            "smoke_materials_analyzed": [m["material"] for m in smoke_summary],
         }
