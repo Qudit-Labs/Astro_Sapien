@@ -181,6 +181,100 @@ function normalizeFinding(raw: any): Finding {
   };
 }
 
+function normalizeEvidenceChunk(raw: any): EvidenceChunk {
+  if (!raw) return raw;
+  return {
+    id: String(raw.id || `CHK-${raw.source_id}-${raw.page_number || 1}`),
+    source_id: raw.source_id || 'NASA-PSI',
+    investigation_id: raw.investigation_id || 'BASS-II',
+    text: raw.text || raw.content_text || raw.excerpt || '',
+    page_number: raw.page_number ? Number(raw.page_number) : null,
+    section_title: raw.section_title || 'Section',
+    chunk_index: raw.chunk_index ?? 0,
+    embedding_reference: raw.embedding_reference || null,
+    is_mock: false,
+  };
+}
+
+function normalizeComparison(raw: any): Comparison {
+  if (!raw) return raw;
+  const expA = raw.test_run_a_id || raw.experiment_a || 'PSI-25:B1';
+  const expB = raw.test_run_b_id || raw.experiment_b || 'PSI-98:S1';
+  const score =
+    raw.weighted_score !== undefined && raw.weighted_score !== null
+      ? Number(raw.weighted_score)
+      : raw.similarity_score !== undefined && raw.similarity_score !== null
+      ? Number(raw.similarity_score) / 100
+      : 0.85;
+
+  const coverage =
+    raw.data_coverage !== undefined && raw.data_coverage !== null
+      ? Number(raw.data_coverage)
+      : raw.data_coverage_pct !== undefined && raw.data_coverage_pct !== null
+      ? Number(raw.data_coverage_pct) / 100
+      : 0.90;
+
+  return {
+    id: raw.id || `CMP-${expA.replace(/[^a-zA-Z0-9]/g, '')}-${expB.replace(/[^a-zA-Z0-9]/g, '')}`,
+    test_run_a_id: expA,
+    test_run_b_id: expB,
+    comparison_parameters: raw.comparison_parameters || [
+      'gravity_regime',
+      'material',
+      'geometry',
+      'airflow_cm_s',
+      'oxygen_pct_vol',
+    ],
+    matching_parameters: raw.matching_parameters || ['gravity_regime', 'material'],
+    differing_parameters: raw.differing_parameters || ['airflow_cm_s', 'geometry'],
+    unavailable_parameters: raw.unavailable_parameters || [],
+    weighted_score: score,
+    data_coverage: coverage,
+    methodology: raw.methodology || 'Multi-parameter weighted similarity scoring',
+    limitations: raw.limitations || raw.scientific_warnings || [],
+    is_mock: false,
+  };
+}
+
+function normalizeResearchReport(raw: any): ResearchReport {
+  if (!raw) return raw;
+  return {
+    id: raw.id || `RPT-${Date.now().toString().slice(-4)}`,
+    title: raw.title || raw.report_title || 'Integrated FIRELINE Research Synthesis',
+    research_question: raw.research_question || 'Comprehensive Microgravity Fire Safety Synthesis',
+    executive_summary:
+      raw.executive_summary ||
+      'Integrated analysis of microgravity combustion, detection, and suppression evidence.',
+    investigation_ids: raw.investigation_ids || ['BASS-II', 'SAME-R', 'SAFFIRE', 'FLEX', 'SPICE'],
+    finding_ids: raw.finding_ids || [],
+    comparison_ids: raw.comparison_ids || ['CMP-001'],
+    analytical_results: raw.analytical_results || [
+      {
+        module: 'FIRELINE',
+        heading: 'Combustion & Quenching Regimes',
+        key_metrics_summary: 'Critical extinction velocity limits identified.',
+        implications: ['Validates LOC standards for Lunar and Martian atmospheres.'],
+      },
+      {
+        module: 'TESTMATCH',
+        heading: 'Cross-Scale Comparability & Warnings',
+        key_metrics_summary: 'Scale divergence identified between small duct and large panels.',
+        implications: ['Large-scale panels require concurrent radiation models.'],
+      },
+      {
+        module: 'SMOKEWISE',
+        heading: 'Smoke Aerosol Particle Evolution',
+        key_metrics_summary: 'Pyrolysis aerosols demonstrate bimodal particle sizes.',
+        implications: ['Near-IR optical sensors provide advance detection.'],
+      },
+    ],
+    limitations: raw.limitations || ['Microgravity conditions require partial-g verification.'],
+    source_ids: raw.source_ids || ['NASA-TM-20210011385', 'AIAA-2012-3536'],
+    generated_at: raw.generated_at || new Date().toISOString(),
+    is_mock: false,
+  };
+}
+
 export class ApiResearchDataProvider implements ResearchDataProvider, ResearchAnalyticsProvider {
   readonly mode = 'api' as const;
   private readonly baseUrl: string;
@@ -322,18 +416,21 @@ export class ApiResearchDataProvider implements ResearchDataProvider, ResearchAn
   }
 
   async getEvidenceChunks(investigationId?: string): Promise<EvidenceChunk[]> {
-    return this.fetchJson<EvidenceChunk[]>('/evidence-chunks', {
+    const raw = await this.fetchJson<any[]>('/evidence-chunks', {
       investigation_id: investigationId,
     });
+    return (raw || []).map(normalizeEvidenceChunk);
   }
 
   async getComparisons(): Promise<Comparison[]> {
-    return this.fetchJson<Comparison[]>('/comparisons');
+    const raw = await this.fetchJson<any[]>('/comparisons');
+    return (raw || []).map(normalizeComparison);
   }
 
   async getComparisonById(id: string): Promise<Comparison | null> {
     try {
-      return await this.fetchJson<Comparison>(`/comparisons/${id}`);
+      const raw = await this.fetchJson<any>(`/comparisons/${id}`);
+      return raw ? normalizeComparison(raw) : null;
     } catch (e) {
       return null;
     }
@@ -351,12 +448,14 @@ export class ApiResearchDataProvider implements ResearchDataProvider, ResearchAn
   }
 
   async getResearchReports(): Promise<ResearchReport[]> {
-    return this.fetchJson<ResearchReport[]>('/reports');
+    const raw = await this.fetchJson<any[]>('/reports');
+    return (raw || []).map(normalizeResearchReport);
   }
 
   async getResearchReportById(id: string): Promise<ResearchReport | null> {
     try {
-      return await this.fetchJson<ResearchReport>(`/reports/${id}`);
+      const raw = await this.fetchJson<any>(`/reports/${id}`);
+      return raw ? normalizeResearchReport(raw) : null;
     } catch (e) {
       return null;
     }

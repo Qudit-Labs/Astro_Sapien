@@ -25,15 +25,14 @@ export const ResearchReportsPage: React.FC = () => {
 
   const [researchQuestion, setResearchQuestion] = useState(PRESET_QUESTIONS[0]);
   const [selectedInvIds, setSelectedInvIds] = useState<string[]>([
-    'INV-BASS-II',
-    'INV-SAFFIRE-I',
-    'INV-SAME-R',
+    'BASS-II',
+    'SAFFIRE',
+    'SAME-R',
   ]);
   const [selectedFindingIds, setSelectedFindingIds] = useState<string[]>([
     'FND-BASS-01',
-    'FND-SAF1-01',
-    'FND-SAMER-02',
-    'FND-INTEG-01',
+    'FND-BASS-02',
+    'FND-SAMER-01',
   ]);
   const [includeComparison, setIncludeComparison] = useState(true);
   const [includeSmokeAnalysis, setIncludeSmokeAnalysis] = useState(true);

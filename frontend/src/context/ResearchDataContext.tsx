@@ -75,7 +75,7 @@ export const ResearchDataProviderWrapper: React.FC<{ children: React.ReactNode }
         chunksRes,
         cmpsRes,
         rptsRes,
-      ] = await Promise.all([
+      ] = await Promise.allSettled([
         dataProvider.getManifest(),
         dataProvider.getInvestigations(),
         dataProvider.getTestRuns(),
@@ -87,15 +87,21 @@ export const ResearchDataProviderWrapper: React.FC<{ children: React.ReactNode }
         dataProvider.getResearchReports(),
       ]);
 
-      setManifest(manifestRes);
-      setInvestigations(invsRes);
-      setTestRuns(runsRes);
-      setMeasurements(measRes);
-      setFindings(fndsRes);
-      setSources(srcsRes);
-      setEvidenceChunks(chunksRes);
-      setComparisons(cmpsRes);
-      setResearchReports(rptsRes);
+      if (manifestRes.status === 'fulfilled') setManifest(manifestRes.value);
+      if (invsRes.status === 'fulfilled') setInvestigations(invsRes.value);
+      if (runsRes.status === 'fulfilled') setTestRuns(runsRes.value);
+      if (measRes.status === 'fulfilled') setMeasurements(measRes.value);
+      if (fndsRes.status === 'fulfilled') setFindings(fndsRes.value);
+      if (srcsRes.status === 'fulfilled') setSources(srcsRes.value);
+      if (chunksRes.status === 'fulfilled') setEvidenceChunks(chunksRes.value);
+      if (cmpsRes.status === 'fulfilled') setComparisons(cmpsRes.value);
+      if (rptsRes.status === 'fulfilled') setResearchReports(rptsRes.value);
+
+      const rejected = [manifestRes, invsRes, runsRes, measRes, fndsRes, srcsRes, chunksRes, cmpsRes, rptsRes]
+        .filter((r): r is PromiseRejectedResult => r.status === 'rejected');
+      if (rejected.length > 0 && invsRes.status === 'rejected') {
+        setError(rejected[0].reason?.message || 'Failed to load research datasets.');
+      }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Failed to load research datasets.';
       setError(message);

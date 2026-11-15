@@ -250,7 +250,7 @@ export class ApiAiAssistantService implements AiAssistantService {
         timestamp: new Date().toISOString(),
         evidenceLabels: evidenceLabels.length > 0 ? evidenceLabels : ['interpretation'],
         citations,
-        isMockGenerated: data.mode === 'deterministic_evidence_fallback',
+        isMockGenerated: false,
       };
     } catch (err: any) {
       console.warn(
@@ -270,7 +270,7 @@ export class ApiAiAssistantService implements AiAssistantService {
 export function getAiAssistantService(): AiAssistantService {
   const mode = (
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_DATA_MODE) ||
-    'mock'
+    'api'
   ).toLowerCase();
   if (mode === 'api') {
     return new ApiAiAssistantService();

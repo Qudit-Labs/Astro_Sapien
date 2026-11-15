@@ -23,7 +23,7 @@ export function getDataProvider(): ResearchDataProvider {
     const mode = (
       (typeof import.meta !== 'undefined' && import.meta.env?.VITE_DATA_MODE) ||
       (typeof process !== 'undefined' && process.env?.VITE_DATA_MODE) ||
-      'mock'
+      'api'
     ).toLowerCase();
 
     if (mode === 'api') {
