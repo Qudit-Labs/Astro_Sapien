@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   CheckCircle2,
   AlertTriangle,
@@ -10,6 +11,7 @@ import {
   Pause,
   RotateCcw,
   Flame,
+  Sliders,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useResearchData } from '@/context/ResearchDataContext';
@@ -371,6 +373,13 @@ export const TestMatchModulePage: React.FC = () => {
               <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-950 border border-sky-200 dark:border-sky-800 text-sky-800 dark:text-[#38BDF8]">
                 60 FPS Hybrid Physics
               </span>
+              <Link
+                to="/simulation"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-semibold hover:bg-amber-500/25 transition shadow-sm ml-auto"
+              >
+                <Sliders className="w-3.5 h-3.5" />
+                <span>Open Interactive Sandbox & Challenges</span>
+              </Link>
             </div>
 
             {/* Comparative Delta Badges */}

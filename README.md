@@ -6,6 +6,7 @@
 [![Google Gemini](https://img.shields.io/badge/AI-Gemini%202.5%20Flash%20RAG-4285F4.svg)](https://deepmind.google/technologies/gemini/)
 [![Voice AI CapCom](https://img.shields.io/badge/Voice%20AI-CapCom%20Bidirectional-FC3D21.svg)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 [![Aerospace UI](https://img.shields.io/badge/GUI-Mission%20Control%20HUD-38BDF8.svg)](http://localhost:5173/)
+[![Simulation Lab](https://img.shields.io/badge/Simulation%20Lab-Sandbox%20%26%20Challenges-F5B942.svg)](http://localhost:5173/simulation)
 [![Research Paper](https://img.shields.io/badge/Research%20Paper-Resolving%20Hallucination%20on%20NASA%20Data-9333EA.svg)](#-research-paper-resolving-hallucination-on-nasa-data)
 
 **Team Astro_Sapien • NASA Space Apps Challenge 2026**
@@ -244,6 +245,11 @@ The user interface delivers a mission-control intelligence console designed for 
 - **Orbital Telemetry HUD Ticker**: Positioned directly beneath the header, streaming live mission telemetry, quad-engine statuses (`ENGINES: FLAME • MATCH • SMOKE • VISION`), active gravity regime (`ISS LEO μg`), and partial-gravity guardrail alerts.
 - **Grouped Flight Navigation Rail**: Sectioned into `MISSION CONTROL`, `QUAD-CAPABILITY SUITE [μg]`, `INTELLIGENCE & SYNTHESIS`, and `SECURITY & ACCESS`, featuring active laser indicators, module badges (`M1`, `M2`, `M3`, `M4`, `LIVE RAG`, `ID PASS`), and smooth collapse-to-rail toggle.
 - **Real-Time Video Surveillance HUD (`/smokevision`)**: Live video playback synchronized with OpenCV computer vision inference, displaying live boundary contours, centroid crosshair reticles, optical depth heatmaps, CapCom chronological event logs, and spatial accumulation dead-zone overlays.
+- **Interactive Spacecraft Fire Physics & Simulation Lab (`/simulation`)**:
+  - **Virtual Combustion Sandbox**: Parametric real-time sliders for gravity ($0\text{g} \to 1.5\text{g}$ covering ISS $\mu\text{g}$, Moon $1/6\text{g}$, Mars $3/8\text{g}$, Earth $1\text{g}$), oxygen concentration ($10\%\text{--}35\%$), airflow velocity ($0\text{--}30\text{ cm/s}$), pressure ($30\text{--}140\text{ kPa}$), and 5 fuel materials.
+  - **Live Multi-Spectral Camera Modes**: Toggle seamlessly between Visible Optical, FLIR False-Color Thermal Infrared ($200^\circ\text{C} \to 1200^\circ\text{C}$ isotherms), and convective flow streamlines.
+  - **Real-Time Physics HUD**: Dynamic computation of flame spread rate ($V_f$), flame temperature, Reynolds number ($Re$), Damköhler number ($Da$), optical depth ($\tau$), with automated radiative quenching & blowoff alerts.
+  - **Gamified Flight Safety Officer Challenges**: 3 high-stakes interactive NASA missions (Artemis Lunar Base Life-Support Tuning, ISS Glovebox Suppression Sprint, SmokeWise Avionics Detection Trap) with real-time scoring, pass/fail evaluation, and Flight Clearance Badges.
 - **Dual-Burn 2D Combustion Chamber Canvas (`/testmatch`)**: Real-time canvas rendering spherical microgravity vs buoyant Earth flame dynamics, thermal gradients, and airflow vectors in a synchronized side-by-side split screen.
 - **Interactive Holographic Researcher Pass (`/auth`)**: Live digital badge preview rendering dynamic researcher initials, institutional affiliation (NASA GRC, Ames, ESA, JAXA, MIT, Stanford, DLR), clearance tier, token identifier, and security barcode in real time.
 - **Dark Glassmorphic HUD Panels**: High-contrast dark space backgrounds (`#0B1D36` / `#10243D`) with hover lifts, animated glow borders (`hud-panel-flame`, `hud-panel-smoke`), and radar sweeps.

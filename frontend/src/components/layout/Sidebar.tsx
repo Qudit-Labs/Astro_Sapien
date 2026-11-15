@@ -16,6 +16,7 @@ import {
   X,
   Radio,
   Sparkles,
+  Sliders,
 } from 'lucide-react';
 import { FirelineLogo } from '../common/FirelineLogo';
 
@@ -97,6 +98,15 @@ export const NAV_GROUPS: NavGroup[] = [
         badge: 'M4',
         badgeClass: 'bg-cyan-500/15 text-[#38BDF8] border-cyan-500/30 font-semibold',
         subtext: 'CV & Accumulation',
+      },
+      {
+        to: '/simulation',
+        label: 'Simulation Lab',
+        icon: Sliders,
+        accentColor: '#F5B942',
+        badge: 'LAB',
+        badgeClass: 'bg-amber-500/15 text-amber-700 dark:text-[#F5B942] border-amber-500/30 font-semibold',
+        subtext: 'Sandbox & Challenges',
       },
     ],
   },

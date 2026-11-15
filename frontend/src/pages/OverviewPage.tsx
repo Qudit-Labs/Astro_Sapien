@@ -21,6 +21,7 @@ import {
   Wind,
   Bot,
   ArrowRight,
+  Sliders,
 } from 'lucide-react';
 import { useResearchData } from '@/context/ResearchDataContext';
 import { useTheme } from '@/context/ThemeContext';
@@ -585,7 +586,7 @@ export const OverviewPage: React.FC = () => {
         <h2 className="text-sm font-semibold text-slate-900 dark:text-[#F4F7FC] mb-3">
           Quick Analytical Workflows
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           <button
             type="button"
             onClick={() => navigate('/explorer')}
@@ -600,6 +601,24 @@ export const OverviewPage: React.FC = () => {
               </div>
               <div className="text-[11px] text-slate-500 dark:text-[#9FB1C7]">
                 Search & filter 8 PSI missions
+              </div>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate('/simulation')}
+            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50/90 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 dark:hover:border-purple-400/40 hover:bg-purple-50/60 dark:hover:bg-[#1A1230]/60 text-left transition shadow-sm"
+          >
+            <div className="p-2 rounded-lg bg-purple-500/10 dark:bg-purple-500/15 text-purple-700 dark:text-purple-300 shrink-0">
+              <Sliders className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-slate-900 dark:text-[#F4F7FC]">
+                Launch Simulation Lab
+              </div>
+              <div className="text-[11px] text-slate-500 dark:text-[#9FB1C7]">
+                Sandbox & flight challenges
               </div>
             </div>
           </button>
