@@ -171,6 +171,7 @@ def _format_evidence_search_response(q: str, results: list[dict]) -> dict:
             "source_id": r.get("source_id", ""),
             "relevance_score": float(r.get("rank") or 0.85),
             "excerpt": r.get("content_text", ""),
+            "content_text": r.get("content_text", ""),
             "page_number": r.get("page_number"),
             "section_title": r.get("section_title"),
             "source_title": r.get("source_title"),

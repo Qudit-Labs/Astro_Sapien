@@ -1,0 +1,275 @@
+{
+  "tsv_retrieval_tests": [
+    {
+      "query": "PMMA opposed flow spread rate",
+      "target_investigation": "BASS-II",
+      "latency_ms": 2102.13,
+      "hit_count": 5,
+      "top_source_id": "NASA-TM-20210011385",
+      "top_page": "28",
+      "top_rank": 0.9384,
+      "grounding_pass": true
+    },
+    {
+      "query": "Kapton smoke particle size distribution",
+      "target_investigation": "SAME-R",
+      "latency_ms": 2855.64,
+      "hit_count": 5,
+      "top_source_id": "NASA-PSI-101-FINAL-REPORT",
+      "top_page": "19",
+      "top_rank": 0.7752,
+      "grounding_pass": true
+    },
+    {
+      "query": "heptane droplet extinction diameter",
+      "target_investigation": "FLEX",
+      "latency_ms": 1735.69,
+      "hit_count": 5,
+      "top_source_id": "NASA-TP-2015-216046",
+      "top_page": "25",
+      "top_rank": 0.8223,
+      "grounding_pass": true
+    },
+    {
+      "query": "co-flow soot inception smoke point",
+      "target_investigation": "SPICE",
+      "latency_ms": 2721.56,
+      "hit_count": 0,
+      "top_source_id": "None",
+      "top_page": null,
+      "top_rank": 0.0,
+      "grounding_pass": false
+    },
+    {
+      "query": "Cygnus large-scale fabric flammability",
+      "target_investigation": "SAFFIRE",
+      "latency_ms": 1917.74,
+      "hit_count": 5,
+      "top_source_id": "NASA-NTRS-20170000230",
+      "top_page": "1",
+      "top_rank": 0.0578,
+      "grounding_pass": true
+    },
+    {
+      "query": "radiative quenching velocity limit",
+      "target_investigation": "BASS-II",
+      "latency_ms": 1573.84,
+      "hit_count": 3,
+      "top_source_id": "NASA-TM-20210011385",
+      "top_page": "109",
+      "top_rank": 0.6853,
+      "grounding_pass": true
+    },
+    {
+      "query": "MPASS two-moment smoke detector",
+      "target_investigation": "SAME-R",
+      "latency_ms": 1701.54,
+      "hit_count": 3,
+      "top_source_id": "NASA-PSI-101-FINAL-REPORT",
+      "top_page": "6",
+      "top_rank": 0.7929,
+      "grounding_pass": true
+    },
+    {
+      "query": "Teflon wire insulation pyrolysis",
+      "target_investigation": "SAME-R",
+      "latency_ms": 1799.23,
+      "hit_count": 5,
+      "top_source_id": "NASA-PSI-101-FINAL-REPORT",
+      "top_page": "8",
+      "top_rank": 0.0607,
+      "grounding_pass": true
+    },
+    {
+      "query": "SIBAL fabric concurrent flame growth",
+      "target_investigation": "BASS-II",
+      "latency_ms": 2283.21,
+      "hit_count": 4,
+      "top_source_id": "NASA-TM-20210011385",
+      "top_page": "101",
+      "top_rank": 0.6981,
+      "grounding_pass": true
+    },
+    {
+      "query": "cool flame burning rate constant",
+      "target_investigation": "FLEX",
+      "latency_ms": 1746.74,
+      "hit_count": 1,
+      "top_source_id": "NASA-TP-2015-216046",
+      "top_page": "69",
+      "top_rank": 0.7248,
+      "grounding_pass": true
+    }
+  ],
+  "sql_execution_tests": [
+    {
+      "label": "Count total test runs",
+      "sql": "SELECT COUNT(*) AS total_runs FROM test_runs;",
+      "latency_ms": 661.76,
+      "result_preview": "[(1077,)]",
+      "execution_pass": true
+    },
+    {
+      "label": "Count total sensor measurements",
+      "sql": "SELECT COUNT(*) AS total_meas FROM measurements;",
+      "latency_ms": 1842.12,
+      "result_preview": "[(6287,)]",
+      "execution_pass": true
+    },
+    {
+      "label": "Investigations by fire-safety pillar",
+      "sql": "SELECT pillar, COUNT(*) FROM investigations GROUP BY pillar;",
+      "latency_ms": 584.1,
+      "result_preview": "[('detection', 2), ('prevention', 2), ('suppression', 1)]",
+      "execution_pass": true
+    },
+    {
+      "label": "BASS-II thin fuel runs with low airflow",
+      "sql": "SELECT COUNT(*) FROM test_runs WHERE investigation_id = 'BASS-II' AND geometry = 'film';",
+      "latency_ms": 567.11,
+      "result_preview": "[(22,)]",
+      "execution_pass": true
+    },
+    {
+      "label": "FLEX droplet fuels list",
+      "sql": "SELECT DISTINCT material_normalized FROM test_runs WHERE investigation_id = 'FLEX';",
+      "latency_ms": 1363.11,
+      "result_preview": "[('Methanol',), ('Heptane',)]",
+      "execution_pass": true
+    },
+    {
+      "label": "SAME-R wire insulation materials",
+      "sql": "SELECT DISTINCT material_normalized FROM test_runs WHERE investigation_id = 'SAME-R';",
+      "latency_ms": 541.06,
+      "result_preview": "[('Teflon',), ('Pyrell',), ('Silicone',), ('Lampwick',), ('Kapton',)]",
+      "execution_pass": true
+    },
+    {
+      "label": "SAFFIRE test runs list",
+      "sql": "SELECT id, test_code, geometry FROM test_runs WHERE investigation_id = 'SAFFIRE';",
+      "latency_ms": 594.03,
+      "result_preview": "[('PSI-98:S1', 'S1', 'large_scale_sheet'), ('PSI-98:S2', 'S2', 'large_scale_sheet'), ('PSI-98:F1C1/F1C2', 'F1C1/F1C2', '",
+      "execution_pass": true
+    },
+    {
+      "label": "SPICE soot laminar tests",
+      "sql": "SELECT COUNT(*) FROM test_runs WHERE investigation_id = 'SPICE';",
+      "latency_ms": 923.72,
+      "result_preview": "[(469,)]",
+      "execution_pass": true
+    },
+    {
+      "label": "Findings evidence label distribution",
+      "sql": "SELECT evidence_label, COUNT(*) FROM findings GROUP BY evidence_label;",
+      "latency_ms": 584.37,
+      "result_preview": "[('NASA observation', 8)]",
+      "execution_pass": true
+    },
+    {
+      "label": "Indexed research sources count",
+      "sql": "SELECT COUNT(*) FROM sources;",
+      "latency_ms": 590.67,
+      "result_preview": "[(18,)]",
+      "execution_pass": true
+    }
+  ],
+  "testmatch_comparability_tests": [
+    {
+      "label": "Within-Investigation BASS-II Thin Spread",
+      "id_a": "PSI-25:B1",
+      "id_b": "PSI-25:B4",
+      "comparability_mode": "within_investigation",
+      "similarity_score": 94.4,
+      "coverage_pct": 85.7,
+      "warnings_count": 1,
+      "first_warning": "PSI-25:B4 measurement 'co_initial_ppm' has quality_status='suspect' (raw='-1').",
+      "latency_ms": 3112.38
+    },
+    {
+      "label": "Within-Investigation SAME-R Kapton Aging",
+      "id_a": "PSI-101:TBL1-KAPTON-U",
+      "id_b": "PSI-101:TBL1-KAPTON-A",
+      "comparability_mode": "within_investigation",
+      "similarity_score": 100.0,
+      "coverage_pct": 92.9,
+      "warnings_count": 0,
+      "first_warning": "None",
+      "latency_ms": 2375.63
+    },
+    {
+      "label": "Cross-Investigation BASS-II vs SAME-R",
+      "id_a": "PSI-25:B1",
+      "id_b": "PSI-101:TBL1-KAPTON-U",
+      "comparability_mode": "cross_domain_complementary",
+      "similarity_score": 38.8,
+      "coverage_pct": 78.6,
+      "warnings_count": 3,
+      "first_warning": "Cross-investigation comparison (BASS-II vs. SAME-R): findings represent complementary fire-safety evidence across different physical phenomena (e.g. solid flame spread vs. droplet extinction vs. smoke aerosol pyrolysis) and are NOT directly interchangeable.",
+      "latency_ms": 2896.31
+    },
+    {
+      "label": "Cross-Scale BASS-II vs SAFFIRE Cygnus",
+      "id_a": "PSI-25:B1",
+      "id_b": "PSI-98:S1",
+      "comparability_mode": "cross_domain_complementary",
+      "similarity_score": 34.8,
+      "coverage_pct": 85.7,
+      "warnings_count": 4,
+      "first_warning": "Cross-investigation comparison (BASS-II vs. SAFFIRE): findings represent complementary fire-safety evidence across different physical phenomena (e.g. solid flame spread vs. droplet extinction vs. smoke aerosol pyrolysis) and are NOT directly interchangeable.",
+      "latency_ms": 3585.5
+    },
+    {
+      "label": "Cross-Regime Droplet vs Smoke (FLEX vs SAME-R)",
+      "id_a": "PSI-69:30CAL07",
+      "id_b": "PSI-101:TBL1-TEFLON-U",
+      "comparability_mode": "cross_domain_complementary",
+      "similarity_score": 43.3,
+      "coverage_pct": 82.1,
+      "warnings_count": 3,
+      "first_warning": "Cross-investigation comparison (FLEX vs. SAME-R): findings represent complementary fire-safety evidence across different physical phenomena (e.g. solid flame spread vs. droplet extinction vs. smoke aerosol pyrolysis) and are NOT directly interchangeable.",
+      "latency_ms": 4372.34
+    }
+  ],
+  "smokewise_aerosol_tests": [
+    {
+      "material": "Kapton",
+      "runs": 38,
+      "unaged_dmm_nm": 261.5,
+      "aged_dmm_nm": 286.0,
+      "quiescent_dmm_nm": 348.5,
+      "ventilated_dmm_nm": 254.1
+    },
+    {
+      "material": "Lampwick",
+      "runs": 27,
+      "unaged_dmm_nm": 381.8,
+      "aged_dmm_nm": 384.0,
+      "quiescent_dmm_nm": 478.0,
+      "ventilated_dmm_nm": 311.2
+    },
+    {
+      "material": "Silicone",
+      "runs": 25,
+      "unaged_dmm_nm": 500.5,
+      "aged_dmm_nm": 628.0,
+      "quiescent_dmm_nm": null,
+      "ventilated_dmm_nm": 543.0
+    },
+    {
+      "material": "Teflon",
+      "runs": 21,
+      "unaged_dmm_nm": 239.5,
+      "aged_dmm_nm": 280.5,
+      "quiescent_dmm_nm": 315.0,
+      "ventilated_dmm_nm": 205.0
+    },
+    {
+      "material": "Pyrell",
+      "runs": 29,
+      "unaged_dmm_nm": 563.8,
+      "aged_dmm_nm": 654.2,
+      "quiescent_dmm_nm": 683.0,
+      "ventilated_dmm_nm": 594.1
+    }
+  ]
+}
