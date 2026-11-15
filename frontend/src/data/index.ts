@@ -22,14 +22,14 @@ export function getDataProvider(): ResearchDataProvider {
   if (!providerInstance) {
     const mode = (
       (typeof import.meta !== 'undefined' && import.meta.env?.VITE_DATA_MODE) ||
-      process.env.VITE_DATA_MODE ||
+      (typeof process !== 'undefined' && process.env?.VITE_DATA_MODE) ||
       'mock'
     ).toLowerCase();
 
     if (mode === 'api') {
       const apiUrl =
         (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) ||
-        process.env.VITE_API_BASE_URL ||
+        (typeof process !== 'undefined' && process.env?.VITE_API_BASE_URL) ||
         'http://localhost:8000/api/v1';
       providerInstance = new ApiResearchDataProvider(apiUrl);
     } else {
