@@ -1,143 +1,200 @@
-{
-  "sources": [
-    {
-      "id": "NASA-PSI-25-EXP-TABLE",
-      "investigation_id": "BASS-II",
-      "psi_id": "PSI-25",
-      "title": "BASS-II Experimental Test Table (129 ISS Runs)",
-      "file_name": "PSI-25_Experimental table_BASS-II.csv",
-      "doi": "10.60555/4qc4-de67",
-      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-      "source_type": "csv",
-      "page_or_row_count": 129
-    },
-    {
-      "id": "NASA-TM-20210011385",
-      "investigation_id": "BASS-II",
-      "psi_id": "PSI-25",
-      "title": "Burning and Suppression of Solids-II (BASS-II) Summary Report (NASA/TM-20210011385)",
-      "file_name": "TM-20210011385.pdf",
-      "doi": "10.60555/4qc4-de67",
-      "url": "https://ntrs.nasa.gov/citations/20210011385",
-      "source_type": "pdf",
-      "page_or_row_count": 144
-    },
-    {
-      "id": "NASA-PSI-25-FAQ",
-      "investigation_id": "BASS-II",
-      "psi_id": "PSI-25",
-      "title": "BASS-II Data FAQ & Test Matrix Calibration Notes",
-      "file_name": "BASS-II data FAQ.docx",
-      "doi": "10.60555/4qc4-de67",
-      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-      "source_type": "docx",
-      "page_or_row_count": 1
-    },
-    {
-      "id": "NASA-PSI-25-PROC",
-      "investigation_id": "BASS-II",
-      "psi_id": "PSI-25",
-      "title": "BASS-II ISS Crew Flight Procedure",
-      "file_name": "BASS-II Procedure.docx",
-      "doi": "10.60555/4qc4-de67",
-      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-      "source_type": "docx",
-      "page_or_row_count": 1
-    },
-    {
-      "id": "NASA-PSI-25-ENG-REQ",
-      "investigation_id": "BASS-II",
-      "psi_id": "PSI-25",
-      "title": "BASS-2 Engineering Requirements & Hardware Overview",
-      "file_name": "BASS-2 Engineering Requirements.pptx",
-      "doi": "10.60555/4qc4-de67",
-      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-      "source_type": "pptx",
-      "page_or_row_count": 7
-    },
-    {
-      "id": "NASA-PSI-101-FINAL-REPORT",
-      "investigation_id": "SAME-R",
-      "psi_id": "PSI-101",
-      "title": "Smoke Aerosol Measurement Experiment Re-flight (SAMER) Final Report",
-      "file_name": "SAMER_Final 0602 2014.pdf",
-      "doi": "10.60555/2np7-jv14",
-      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
-      "source_type": "pdf",
-      "page_or_row_count": 89
-    },
-    {
-      "id": "NASA-AIAA-2012-3536",
-      "investigation_id": "SAME-R",
-      "psi_id": "PSI-101",
-      "title": "Particle Morphology and Size Results from SAME-2 (AIAA 2012-3536 / NTRS 20130000422)",
-      "file_name": "20130000422 (1).pdf",
-      "doi": "10.2514/6.2012-3536",
-      "url": "https://ntrs.nasa.gov/citations/20130000422",
-      "source_type": "pdf",
-      "page_or_row_count": 13
-    }
-  ],
-  "findings": [
-    {
-      "id": "FND-BASS2-01",
-      "investigation_id": "BASS-II",
-      "pillar": "prevention",
-      "title": "Microgravity Flammability Boundary Extends Below Normal-Gravity Limits",
-      "statement": "In microgravity axial stagnation flow, PMMA rods sustained burning down to 13.5% O2 at stretch rates of 8-12 s^-1 (flow ~1-2 cm/s), well below the normal-gravity upward flame spread limit of 15.4% O2.",
-      "evidence_label": "NASA observation",
-      "source_id": "NASA-TM-20210011385",
-      "page_or_row_ref": "Section 6.1.4.4, Figs. 6.9-6.10, pp. 75-76"
-    },
-    {
-      "id": "FND-BASS2-02",
-      "investigation_id": "BASS-II",
-      "pillar": "prevention",
-      "title": "Critical Radiative Extinction Velocity Is Independent of Fuel Thickness",
-      "statement": "For thermally thin PMMA films (100 to 400 microns) in opposed microgravity flow at 21% O2, radiative extinction occurred at a critical opposed-flow velocity of ~1.0 to 1.5 cm/s regardless of thickness, increasing to ~2.6-4.0 cm/s at 16% O2.",
-      "evidence_label": "NASA observation",
-      "source_id": "NASA-TM-20210011385",
-      "page_or_row_ref": "Section 2.1.2.1 & Table 2.1, pp. 13-15, 28"
-    },
-    {
-      "id": "FND-BASS2-03",
-      "investigation_id": "BASS-II",
-      "pillar": "prevention",
-      "title": "NASA-STD-6001 Test 1 25-Second Ignition Time Underestimates Low-O2 Ignition",
-      "statement": "At reduced O2 concentrations (<16% O2), PMMA rod ignition delay times reached up to 230 seconds due to conductive heat loss into the cold solid\u2014nearly 10x longer than the standard 25-second NASA-STD-6001 Test 1 igniter duration.",
-      "evidence_label": "NASA observation",
-      "source_id": "NASA-TM-20210011385",
-      "page_or_row_ref": "Section 6.1.4.1, Fig. 6.2, pp. 68-69"
-    },
-    {
-      "id": "FND-BASS2-04",
-      "investigation_id": "BASS-II",
-      "pillar": "suppression",
-      "title": "Post-Suppression Re-Ignition Hazard from Subsurface Vapor Bubbles & High CO Yield",
-      "statement": "Microgravity PMMA flames burned fuel-rich (average global equivalence ratio 1.3) with CO/CO2 ratios an order of magnitude higher than efficient terrestrial burners, while subsurface pressurized monomer bubbles persisted after flame extinction and risked re-ignition until cooled.",
-      "evidence_label": "NASA observation",
-      "source_id": "NASA-TM-20210011385",
-      "page_or_row_ref": "Sections 1.4-1.5 & 4.1.2, pp. 8-11, 52"
-    },
-    {
-      "id": "FND-SAMER-01",
-      "investigation_id": "SAME-R",
-      "pillar": "detection",
-      "title": "Zero-Flow Microgravity Pyrolysis Produces 30-40% Larger Smoke Particles",
-      "statement": "Under quiescent (0 cm/s) microgravity conditions, smoke remained confined near the heater (~64 cm^3 vs 6000 cm^3 piston), increasing initial concentration ~50x and producing diameters of average mass 30-40% larger than 8 cm/s ventilated runs (and shifting Pyrell morphology from fractal chains to spheres).",
-      "evidence_label": "NASA observation",
-      "source_id": "NASA-PSI-101-FINAL-REPORT",
-      "page_or_row_ref": "Section D, Fig. 13, pp. 8-9"
-    },
-    {
-      "id": "FND-SAMER-02",
-      "investigation_id": "SAME-R",
-      "pillar": "detection",
-      "title": "Two-Moment Optical Detection (MPASS) Cuts False-Alarm Variance by >2x",
-      "statement": "Single-moment detectors struggle to detect sub-100 nm Kapton/Teflon pyrolysis smoke without false alarms from >1 um dust. Combining two scattering moments in MPASS reduced response variance by more than a factor of 2 across all 5 spacecraft materials.",
-      "evidence_label": "NASA observation",
-      "source_id": "NASA-PSI-101-FINAL-REPORT",
-      "page_or_row_ref": "Section B, Figs. 9-10, pp. 6-7"
-    }
-  ]
-}
+[
+  {
+    "id": "NASA-AIAA-2012-3536",
+    "investigation_id": "SAME-R",
+    "psi_id": "PSI-101",
+    "title": "Particle Morphology and Size Results from SAME-2 (AIAA 2012-3536 / NTRS 20130000422)",
+    "file_name": "20130000422 (1).pdf",
+    "doi": "10.2514/6.2012-3536",
+    "url": "https://ntrs.nasa.gov/citations/20130000422",
+    "source_type": "pdf",
+    "page_or_row_count": 13
+  },
+  {
+    "id": "NASA-NTRS-20170000230",
+    "investigation_id": "SAFFIRE",
+    "psi_id": "PSI-98",
+    "title": "Saffire Spacecraft Fire Safety Demonstration Overview (NTRS 20170000230)",
+    "file_name": "20170000230.pdf",
+    "doi": "10.60555/saffire-2016",
+    "url": "https://ntrs.nasa.gov/citations/20170000230",
+    "source_type": "pdf",
+    "page_or_row_count": 9
+  },
+  {
+    "id": "NASA-PSI-101-EXP-TABLE",
+    "investigation_id": "SAME-R",
+    "psi_id": "PSI-101",
+    "title": "SAME-R Experimental Table (109 Flight Runs)",
+    "file_name": "SAME-R_Experimental_Table.csv",
+    "doi": "10.60555/2np7-jv14",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+    "source_type": "csv",
+    "page_or_row_count": 109
+  },
+  {
+    "id": "NASA-PSI-101-FINAL-REPORT",
+    "investigation_id": "SAME-R",
+    "psi_id": "PSI-101",
+    "title": "Smoke Aerosol Measurement Experiment Re-flight (SAMER) Final Report",
+    "file_name": "SAMER_Final 0602 2014.pdf",
+    "doi": "10.60555/2np7-jv14",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+    "source_type": "pdf",
+    "page_or_row_count": 75
+  },
+  {
+    "id": "NASA-PSI-107-EXP-TABLE",
+    "investigation_id": "SPICE",
+    "psi_id": "PSI-107",
+    "title": "SPICE Experimental Table (Laminar Co-flow Soot Point Runs)",
+    "file_name": "SPICE_Experimental_Table.csv",
+    "doi": "10.60555/spice-2015",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",
+    "source_type": "csv",
+    "page_or_row_count": 469
+  },
+  {
+    "id": "NASA-PSI-25-ENG-REQ",
+    "investigation_id": "BASS-II",
+    "psi_id": "PSI-25",
+    "title": "BASS-2 Engineering Requirements & Hardware Overview",
+    "file_name": "BASS-2 Engineering Requirements.pptx",
+    "doi": "10.60555/4qc4-de67",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "source_type": "pptx",
+    "page_or_row_count": 7
+  },
+  {
+    "id": "NASA-PSI-25-EXP-TABLE",
+    "investigation_id": "BASS-II",
+    "psi_id": "PSI-25",
+    "title": "BASS-II Experimental Test Table (129 ISS Runs)",
+    "file_name": "PSI-25_Experimental table_BASS-II.csv",
+    "doi": "10.60555/4qc4-de67",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "source_type": "csv",
+    "page_or_row_count": 129
+  },
+  {
+    "id": "NASA-PSI-25-FAQ",
+    "investigation_id": "BASS-II",
+    "psi_id": "PSI-25",
+    "title": "BASS-II Data FAQ & Test Matrix Calibration Notes",
+    "file_name": "BASS-II data FAQ.docx",
+    "doi": "10.60555/4qc4-de67",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "source_type": "docx",
+    "page_or_row_count": 1
+  },
+  {
+    "id": "NASA-PSI-25-PROC",
+    "investigation_id": "BASS-II",
+    "psi_id": "PSI-25",
+    "title": "BASS-II ISS Crew Flight Procedure",
+    "file_name": "BASS-II Procedure.docx",
+    "doi": "10.60555/4qc4-de67",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "source_type": "docx",
+    "page_or_row_count": 1
+  },
+  {
+    "id": "NASA-PSI-25-README",
+    "investigation_id": "BASS-II",
+    "psi_id": "PSI-25",
+    "title": "BASS-II Data FAQ & ReadMe Documentation",
+    "file_name": "BASS-II_ReadMe.docx",
+    "doi": "10.60555/4qc4-de67",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "source_type": "docx",
+    "page_or_row_count": 1
+  },
+  {
+    "id": "NASA-PSI-69-EXP-TABLE",
+    "investigation_id": "FLEX",
+    "psi_id": "PSI-69",
+    "title": "FLEX Experimental Table (Microgravity Droplet Extinction Runs)",
+    "file_name": "FLEX_Experimental_Table.csv",
+    "doi": "10.60555/flex-2015",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+    "source_type": "csv",
+    "page_or_row_count": 274
+  },
+  {
+    "id": "NASA-PSI-98-EXP-TABLE",
+    "investigation_id": "SAFFIRE",
+    "psi_id": "PSI-98",
+    "title": "Saffire-I Large-Scale SIBAL Burn Runs",
+    "file_name": "SAFFIRE-I_Experimental_Table.csv",
+    "doi": "10.60555/saffire-2016",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+    "source_type": "csv",
+    "page_or_row_count": 4
+  },
+  {
+    "id": "NASA-PSI-99-EXP-TABLE",
+    "investigation_id": "SAFFIRE",
+    "psi_id": "PSI-99",
+    "title": "Saffire-II Multi-Material Spacecraft Flammability Runs",
+    "file_name": "SAFFIRE-II_Experimental_Table.csv",
+    "doi": "10.60555/saffire-2016",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+    "source_type": "csv",
+    "page_or_row_count": 15
+  },
+  {
+    "id": "NASA-SAME-CONCEPT",
+    "investigation_id": "SAME-R",
+    "psi_id": "PSI-101",
+    "title": "SAME Baseline Concept Description and Sensor Architecture",
+    "file_name": "SAME_Baseline_Concept_Description.pdf",
+    "doi": "10.60555/2np7-jv14",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+    "source_type": "pdf",
+    "page_or_row_count": 15
+  },
+  {
+    "id": "NASA-TM-20210011385",
+    "investigation_id": "BASS-II",
+    "psi_id": "PSI-25",
+    "title": "Burning and Suppression of Solids-II (BASS-II) Summary Report (NASA/TM-20210011385)",
+    "file_name": "TM-20210011385.pdf",
+    "doi": "10.60555/4qc4-de67",
+    "url": "https://ntrs.nasa.gov/citations/20210011385",
+    "source_type": "pdf",
+    "page_or_row_count": 120
+  },
+  {
+    "id": "NASA-TM-20210011385-TBL-5-1",
+    "investigation_id": "BASS-II",
+    "psi_id": "PSI-25",
+    "title": "Miller PMMA Slab Spread Rates (TM-20210011385 Table 5.1)",
+    "file_name": "TM-20210011385.pdf",
+    "doi": "10.60555/4qc4-de67",
+    "url": "https://ntrs.nasa.gov/citations/20210011385",
+    "source_type": "pdf",
+    "page_or_row_count": 20
+  },
+  {
+    "id": "NASA-TM-20210011385-TBL-7-1",
+    "investigation_id": "BASS-II",
+    "psi_id": "PSI-25",
+    "title": "T'ien SIBAL Fabric Concurrent Runs (TM-20210011385 Table 7.1)",
+    "file_name": "TM-20210011385.pdf",
+    "doi": "10.60555/4qc4-de67",
+    "url": "https://ntrs.nasa.gov/citations/20210011385",
+    "source_type": "pdf",
+    "page_or_row_count": 27
+  },
+  {
+    "id": "NASA-TP-2015-216046",
+    "investigation_id": "FLEX",
+    "psi_id": "PSI-69",
+    "title": "Flame Extinction Experiment (FLEX) Final Results (NASA/TP-2015-216046)",
+    "file_name": "NASA-TP-2015-216046.pdf",
+    "doi": "10.60555/flex-2015",
+    "url": "https://ntrs.nasa.gov/citations/20150017013",
+    "source_type": "pdf",
+    "page_or_row_count": 120
+  }
+]

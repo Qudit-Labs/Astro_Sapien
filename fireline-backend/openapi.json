@@ -1,0 +1,741 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FIRELINE Spacecraft Fire-Safety Intelligence API",
+    "description": "Unified scientific evidence engine over NASA PSI microgravity combustion, detection, and suppression datasets (BASS-II, SAME-R, SAFFIRE, FLEX, SPICE).",
+    "version": "2.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations": {
+      "get": {
+        "summary": "List Investigations",
+        "operationId": "list_investigations_api_v1_investigations_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/investigations/{investigation_id}": {
+      "get": {
+        "summary": "Get Investigation",
+        "operationId": "get_investigation_api_v1_investigations__investigation_id__get",
+        "parameters": [
+          {
+            "name": "investigation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Investigation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests": {
+      "get": {
+        "summary": "List Tests",
+        "operationId": "list_tests_api_v1_tests_get",
+        "parameters": [
+          {
+            "name": "investigation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "BASS-II, SAME-R, SAFFIRE, FLEX, SPICE",
+              "title": "Investigation Id"
+            },
+            "description": "BASS-II, SAME-R, SAFFIRE, FLEX, SPICE"
+          },
+          {
+            "name": "material",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "PMMA, SIBAL, Kapton, Pyrell, Silicone, Lampwick, Teflon, Methanol, Heptane, Ethylene",
+              "title": "Material"
+            },
+            "description": "PMMA, SIBAL, Kapton, Pyrell, Silicone, Lampwick, Teflon, Methanol, Heptane, Ethylene"
+          },
+          {
+            "name": "geometry",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "film, slab, rod, fabric, droplet, large_scale_sheet",
+              "title": "Geometry"
+            },
+            "description": "film, slab, rod, fabric, droplet, large_scale_sheet"
+          },
+          {
+            "name": "flow_regime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "opposed, concurrent, quiescent, forced_flow",
+              "title": "Flow Regime"
+            },
+            "description": "opposed, concurrent, quiescent, forced_flow"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 500,
+              "minimum": 1,
+              "default": 200,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tests/{test_id}": {
+      "get": {
+        "summary": "Get Test Detail",
+        "operationId": "get_test_detail_api_v1_tests__test_id__get",
+        "parameters": [
+          {
+            "name": "test_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Test Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/evidence/search": {
+      "get": {
+        "summary": "Search Evidence",
+        "operationId": "search_evidence_api_v1_evidence_search_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "description": "Scientific search phrase",
+              "title": "Q"
+            },
+            "description": "Scientific search phrase"
+          },
+          {
+            "name": "investigation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Investigation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 25,
+              "minimum": 1,
+              "default": 8,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/{source_id}": {
+      "get": {
+        "summary": "Get Source",
+        "operationId": "get_source_api_v1_sources__source_id__get",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fireline/analyze": {
+      "post": {
+        "summary": "Fireline Analyze",
+        "operationId": "fireline_analyze_api_v1_fireline_analyze_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FirelineAnalyzeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/testmatch/compare": {
+      "post": {
+        "summary": "Testmatch Compare",
+        "operationId": "testmatch_compare_api_v1_testmatch_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TestMatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/smokewise/analyze": {
+      "post": {
+        "summary": "Smokewise Analyze",
+        "operationId": "smokewise_analyze_api_v1_smokewise_analyze_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmokewiseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/assistant/query": {
+      "post": {
+        "summary": "Assistant Query",
+        "operationId": "assistant_query_api_v1_assistant_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistantQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reports/generate": {
+      "post": {
+        "summary": "Generate Integrated Report",
+        "operationId": "generate_integrated_report_api_v1_reports_generate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AssistantQueryRequest": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "minLength": 4,
+            "title": "Question"
+          },
+          "investigation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Investigation Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "AssistantQueryRequest"
+      },
+      "FirelineAnalyzeRequest": {
+        "properties": {
+          "investigation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Investigation Id"
+          },
+          "material": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material"
+          },
+          "flow_regime": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Flow Regime"
+          },
+          "geometry": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geometry"
+          },
+          "min_o2_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min O2 Pct"
+          },
+          "max_o2_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max O2 Pct"
+          },
+          "pillar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pillar"
+          }
+        },
+        "type": "object",
+        "title": "FirelineAnalyzeRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ReportRequest": {
+        "properties": {
+          "topic": {
+            "type": "string",
+            "title": "Topic",
+            "default": "Spacecraft Fire Prevention, Detection, and Suppression Synthesis"
+          },
+          "experiment_a": {
+            "type": "string",
+            "title": "Experiment A",
+            "default": "PSI-25:B1"
+          },
+          "experiment_b": {
+            "type": "string",
+            "title": "Experiment B",
+            "default": "PSI-98:S1"
+          }
+        },
+        "type": "object",
+        "title": "ReportRequest"
+      },
+      "SmokewiseRequest": {
+        "properties": {
+          "material": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material"
+          },
+          "include_spice": {
+            "type": "boolean",
+            "title": "Include Spice",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "SmokewiseRequest"
+      },
+      "TestMatchRequest": {
+        "properties": {
+          "experiment_a": {
+            "type": "string",
+            "title": "Experiment A",
+            "example": "PSI-25:B1"
+          },
+          "experiment_b": {
+            "type": "string",
+            "title": "Experiment B",
+            "example": "PSI-98:S1"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_a",
+          "experiment_b"
+        ],
+        "title": "TestMatchRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

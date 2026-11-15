@@ -33,19 +33,28 @@ class SQLitePostgresCompatCursor:
         # Translate websearch_to_tsquery full-text search syntax for SQLite FTS5
         if "websearch_to_tsquery" in translated_sql:
             translated_sql = re.sub(
-                r"ts_rank\([^)]+websearch_to_tsquery\([^)]+\)[^)]*\)",
-                "bm25(evidence_chunks)",
+                r"ts_rank\s*\([^;]+?\)\s*AS\s+rank",
+                "bm25(evidence_chunks) AS rank",
                 translated_sql,
                 flags=re.IGNORECASE,
             )
             translated_sql = re.sub(
-                r"[a-zA-Z0-9_.]*search_tsv\s*@@\s*websearch_to_tsquery\([^)]+\)",
+                r"[a-zA-Z0-9_.]*search_tsv\s*@@\s*websearch_to_tsquery\s*\([^;]+?\)",
                 "evidence_chunks MATCH ?",
                 translated_sql,
                 flags=re.IGNORECASE,
             )
+            raw_q = str(params[0]) if params else ""
+            stop_words = {"what", "is", "the", "for", "in", "and", "with", "this", "that", "how", "are", "from"}
+            tokens = [w for w in re.findall(r"\w+", raw_q) if w.lower() not in stop_words and len(w) > 1]
+            if not tokens:
+                tokens = re.findall(r"\w+", raw_q)
+            fts_q = " OR ".join(tokens) if tokens else raw_q
+
             if len(params) >= 2 and params[0] == params[1]:
-                params = [params[0]] + list(params[2:])
+                params = [fts_q] + list(params[2:])
+            elif len(params) >= 1:
+                params = [fts_q] + list(params[1:])
 
         return self._cur.execute(translated_sql, params)
 

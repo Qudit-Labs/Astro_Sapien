@@ -10,3 +10,4 @@ google-genai==0.8.0
 python-dotenv==1.0.1
 requests==2.32.3
 pytest==8.3.3
+httpx>=0.28.0

@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -8,10 +9,21 @@ from app.engines.testmatch_engine import compare_test_runs
 from app.engines.smokewise_engine import analyze_smoke_aerosols
 from app.ai.gemini_rag import answer_research_question
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        init_db()
+    except Exception as exc:
+        print(f"Warning on startup init_db: {exc}")
+    yield
+
+
 app = FastAPI(
     title="FIRELINE Spacecraft Fire-Safety Intelligence API",
     description="Unified scientific evidence engine over NASA PSI microgravity combustion, detection, and suppression datasets (BASS-II, SAME-R, SAFFIRE, FLEX, SPICE).",
     version="2.0.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -23,23 +35,31 @@ app.add_middleware(
 )
 
 
-@app.on_event("startup")
-def on_startup() -> None:
-    try:
-        init_db()
-    except Exception as exc:
-        print(f"Warning on startup init_db: {exc}")
-
-
 @app.get("/health")
 def health_check():
     with get_connection() as conn:
         with conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) AS c FROM investigations;")
+            invs = cur.fetchone()["c"]
+            cur.execute("SELECT COUNT(*) AS c FROM sources;")
+            sources = cur.fetchone()["c"]
             cur.execute("SELECT COUNT(*) AS c FROM test_runs;")
             runs = cur.fetchone()["c"]
+            cur.execute("SELECT COUNT(*) AS c FROM measurements;")
+            measurements = cur.fetchone()["c"]
+            cur.execute("SELECT COUNT(*) AS c FROM findings;")
+            findings = cur.fetchone()["c"]
             cur.execute("SELECT COUNT(*) AS c FROM evidence_chunks;")
             chunks = cur.fetchone()["c"]
-    return {"status": "ok", "test_runs_loaded": runs, "evidence_chunks_indexed": chunks}
+    return {
+        "status": "ok",
+        "investigations_count": invs,
+        "sources_count": sources,
+        "test_runs_loaded": runs,
+        "measurements_count": measurements,
+        "findings_count": findings,
+        "evidence_chunks_indexed": chunks,
+    }
 
 
 @app.get("/api/v1/investigations")
@@ -113,13 +133,16 @@ def list_tests(
 def get_test_detail(test_id: str):
     with get_connection() as conn:
         with conn.cursor() as cur:
-            cur.execute("SELECT * FROM test_runs WHERE id = %s;", (test_id,))
+            cur.execute(
+                "SELECT * FROM test_runs WHERE id = %s OR LOWER(id) = LOWER(%s) OR test_code = %s LIMIT 1;",
+                (test_id, test_id, test_id),
+            )
             run = cur.fetchone()
             if not run:
                 raise HTTPException(status_code=404, detail=f"Test run '{test_id}' not found")
             cur.execute(
                 "SELECT parameter, raw_value, normalized_value, unit, quality_status FROM measurements WHERE test_run_id = %s;",
-                (test_id,),
+                (run["id"],),
             )
             meas = cur.fetchall()
             cur.execute("SELECT * FROM sources WHERE id = %s;", (run["source_id"],))
@@ -145,7 +168,10 @@ def search_evidence(
 def get_source(source_id: str):
     with get_connection() as conn:
         with conn.cursor() as cur:
-            cur.execute("SELECT * FROM sources WHERE id = %s;", (source_id,))
+            cur.execute(
+                "SELECT * FROM sources WHERE id = %s OR LOWER(id) = LOWER(%s) LIMIT 1;",
+                (source_id, source_id),
+            )
             src = cur.fetchone()
             if not src:
                 raise HTTPException(status_code=404, detail=f"Source '{source_id}' not found")
@@ -176,8 +202,8 @@ def fireline_analyze(req: FirelineAnalyzeRequest):
 
 
 class TestMatchRequest(BaseModel):
-    experiment_a: str = Field(..., example="PSI-25:B1")
-    experiment_b: str = Field(..., example="PSI-98:S1")
+    experiment_a: str = Field(..., json_schema_extra={"example": "PSI-25:B1"})
+    experiment_b: str = Field(..., json_schema_extra={"example": "PSI-98:S1"})
 
 
 @app.post("/api/v1/testmatch/compare")
