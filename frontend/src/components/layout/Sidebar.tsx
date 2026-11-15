@@ -9,6 +9,7 @@ import {
   Bot,
   FileText,
   BookOpen,
+  ShieldCheck,
   ChevronLeft,
   ChevronRight,
   X,
@@ -24,6 +25,7 @@ export const NAV_ITEMS = [
   { to: '/assistant', label: 'AI Research Assistant', icon: Bot },
   { to: '/reports', label: 'Research Reports', icon: FileText },
   { to: '/sources', label: 'Sources & Methodology', icon: BookOpen },
+  { to: '/auth', label: 'Researcher Portal', icon: ShieldCheck },
 ];
 
 interface SidebarProps {
