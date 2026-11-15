@@ -40,7 +40,7 @@ export const AppShell: React.FC = () => {
           <div className="flex items-center gap-3 shrink-0">
             <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-[#38BDF8]">
               <Cpu className="w-3 h-3" />
-              <span>ENGINES: FLAME • MATCH • SMOKE</span>
+              <span>ENGINES: FLAME • MATCH • SMOKE • VISION</span>
             </span>
             <span className="hidden lg:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-[#F5B942]">
               <ShieldAlert className="w-3 h-3" />

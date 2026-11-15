@@ -30,6 +30,7 @@ __pycache__/
 *.db-wal
 *.sqlite3
 *.zip
+video_assets/rendered_clips/
 
 # Editor directories and files
 .vscode/*

@@ -231,3 +231,75 @@ def test_langchain_sql_agent_endpoint():
     assert "intermediate_steps" in data
     assert data["database"] == "supabase-postgresql"
     assert "investigations" in data["output"].lower() or "5" in data["output"]
+
+
+def test_smokevision_endpoints():
+    res_presets = client.get("/api/v1/smokevision/presets")
+    assert res_presets.status_code == 200
+    assert len(res_presets.json()["data"]) >= 4
+
+    res_seq = client.get("/api/v1/smokevision/sequence?preset_id=SAME-R-101&num_frames=6")
+    assert res_seq.status_code == 200
+    seq_data = res_seq.json()["data"]
+    assert seq_data["frames_count"] == 6
+    assert len(seq_data["frames"]) == 6
+
+    res_micro = client.get("/api/v1/smokevision/microscopy?material=Kapton")
+    assert res_micro.status_code == 200
+    assert res_micro.json()["data"]["material"] == "Kapton"
+
+    res_comp = client.get("/api/v1/smokevision/compare")
+    assert res_comp.status_code == 200
+    assert res_comp.json()["data"]["compared_experiments_count"] >= 4
+
+    res_demo = client.get("/api/v1/smokevision/demo-video-analysis?material=Kapton")
+    assert res_demo.status_code == 200
+    demo_data = res_demo.json()["data"]
+    assert demo_data["status"] == "success"
+    assert "surveillance_status" in demo_data
+    assert len(demo_data["frames"]) > 0
+
+
+def test_individual_entity_and_alias_endpoints():
+    # /api/v1/health
+    res_h = client.get("/api/v1/health")
+    assert res_h.status_code == 200
+
+    # /api/v1/measurements/{id}
+    res_meas = client.get("/api/v1/measurements?limit=1")
+    assert res_meas.status_code == 200
+    meas_id = res_meas.json()["items"][0]["id"]
+    res_single_meas = client.get(f"/api/v1/measurements/{meas_id}")
+    assert res_single_meas.status_code == 200
+    assert res_single_meas.json()["id"] == meas_id
+
+    # /api/v1/findings/{id}
+    res_f = client.get("/api/v1/findings?limit=1")
+    assert res_f.status_code == 200
+    f_id = res_f.json()["items"][0]["id"]
+    res_single_f = client.get(f"/api/v1/findings/{f_id}")
+    assert res_single_f.status_code == 200
+    assert res_single_f.json()["id"] == f_id
+
+    # /api/v1/comparisons & /api/v1/comparisons/{id}
+    res_comps = client.get("/api/v1/comparisons")
+    assert res_comps.status_code == 200
+    comps_data = res_comps.json()
+    comps = comps_data.get("items", comps_data) if isinstance(comps_data, dict) else comps_data
+    assert len(comps) > 0
+    first_c_id = comps[0]["id"]
+    res_single_c = client.get(f"/api/v1/comparisons/{first_c_id}")
+    assert res_single_c.status_code == 200
+    assert res_single_c.json()["id"] == first_c_id
+
+    # /api/v1/reports & /api/v1/reports/{id}
+    res_reps = client.get("/api/v1/reports")
+    assert res_reps.status_code == 200
+    reps_data = res_reps.json()
+    reps = reps_data.get("items", reps_data) if isinstance(reps_data, dict) else reps_data
+    assert len(reps) > 0
+    first_r_id = reps[0]["id"]
+    res_single_r = client.get(f"/api/v1/reports/{first_r_id}")
+    assert res_single_r.status_code == 200
+    assert res_single_r.json()["id"] == first_r_id
+

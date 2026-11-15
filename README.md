@@ -38,10 +38,11 @@ flowchart TD
         DB[("Supabase PostgreSQL\n1,077 Runs • 6,287 Measurements\n18 Sources • 662 Chunks")]
     end
 
-    subgraph Analytical_Pillars ["Tri-Capability Intelligence Modules"]
+    subgraph Analytical_Pillars ["Quad-Engine Scientific Architecture"]
         M1["Module 1: FIRELINE\nCombustion Evidence & LOC Engine"]
         M2["Module 2: TESTMATCH\nFlight-to-1g Regime Comparability (S, C)"]
         M3["Module 3: SMOKEwise\nSmoke Aerosols & Sensor Dynamics"]
+        M4["Module 4: SMOKEVISION\nPlume Kinematics & Accumulation CV"]
     end
 
     subgraph Intelligence_Layer ["AI & Interface Layer"]
@@ -85,6 +86,17 @@ FIRELINE integrates three core scientific capabilities solving distinct facets o
   - **Shuttle Ionization Detectors**: Highly sensitive to sub-micron particles, but prone to false alarms caused by cabin humidity and dust particles.
   - **Two-Moment MPASS Prototype**: Combines number concentration (0th/1st moment) with optical mass (2nd/3rd moment), cutting response variance by $>2\times$ and discriminating true smoke from background dust.
 - **Scientific Segregation**: Flaming soot point records (`SPICE`) are strictly segregated from pyrolysis smoke records (`SAME-R`).
+
+### Module 4: SMOKEVISION — Smoke Plume Kinematics & Accumulation Intelligence
+- **Smoke-Region Segmentation & Cloud Boundary Detection**: Extracts continuous closed plume contours, convex hulls, and perimeter node coordinates against microgravity chamber backgrounds.
+- **Plume Expansion Kinematics**: Computes temporal expansion rate $dA/dt$ ($\text{cm}^2/\text{s}$), centroid drift velocity $\vec{v}_c$, and radial dispersion symmetry.
+- **Calibrated Smoke Density Estimation**: Enforces the physics principle that *image brightness $\neq$ smoke concentration*. Evaluates transmittance $T = I / I_0 = \exp(-\tau)$ and computes optical depth $\tau = k_{ext} \cdot L \cdot C_s$ using material-specific mass extinction coefficients ($k_{ext}$).
+- **Microscopy Particle Detection (TEM / SEM)**: Automated sizing of captured microgravity smoke particles from SAME-R thermophoretic grids. Computes count mean diameter (CMD), mass mean diameter ($d_{mm}$), lognormal geometric mean ($d_g$), and particle size distribution (PSD) histograms.
+- **Smoke Dispersion & Flow Vector Fields**: Dense optical flow gradient vectors visualizing laminar advection vs. turbulent eddy shedding.
+- **Smoke Accumulation Mapping (Temporal Dwell Tensor)**: Integrates smoke masks across time:
+  $$A(x, y) = \frac{1}{T} \sum_{t=1}^T M(x, y, t) \cdot \tau(x, y, t)$$
+  identifying hazardous stagnation and recirculation pockets in spacecraft cabins to recommend optimal smoke detector placement coordinates.
+- **Cross-Experiment Benchmarking**: Synchronized side-by-side comparison across SAME-R (quiescent & duct), BASS-II (glovebox flow), and SAFFIRE (large vehicle).
 
 ---
 

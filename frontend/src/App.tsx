@@ -9,6 +9,7 @@ import { ResearchExplorerPage } from './pages/ResearchExplorerPage';
 import { FirelineModulePage } from './pages/FirelineModulePage';
 import { TestMatchModulePage } from './pages/TestMatchModulePage';
 import { SmokewiseModulePage } from './pages/SmokewiseModulePage';
+import { SmokeVisionPage } from './pages/SmokeVisionPage';
 import { AiAssistantPage } from './pages/AiAssistantPage';
 import { ResearchReportsPage } from './pages/ResearchReportsPage';
 import { SourcesMethodologyPage } from './pages/SourcesMethodologyPage';
@@ -27,6 +28,7 @@ export const App: React.FC = () => {
                 <Route path="/fireline" element={<FirelineModulePage />} />
                 <Route path="/testmatch" element={<TestMatchModulePage />} />
                 <Route path="/smokewise" element={<SmokewiseModulePage />} />
+                <Route path="/smokevision" element={<SmokeVisionPage />} />
                 <Route path="/assistant" element={<AiAssistantPage />} />
                 <Route path="/reports" element={<ResearchReportsPage />} />
                 <Route path="/sources" element={<SourcesMethodologyPage />} />
