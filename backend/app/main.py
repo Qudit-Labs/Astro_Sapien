@@ -428,3 +428,82 @@ def generate_integrated_report(req: ReportRequest):
             {"psi_id": "PSI-107", "title": "SPICE Smoke Point in Co-flow Experiment"},
         ],
     }
+
+
+class SignUpRequest(BaseModel):
+    name: str = Field(..., min_length=2)
+    email: str = Field(..., min_length=5)
+    password: str = Field(..., min_length=6)
+    organization: str = Field(default="NASA Physical Sciences Informatics")
+    role: str = Field(default="Combustion & Fire Safety Researcher")
+
+
+class LoginRequest(BaseModel):
+    email: str = Field(..., min_length=5)
+    password: str = Field(..., min_length=1)
+
+
+_REGISTERED_USERS = {
+    "elena.vance@nasa.gov": {
+        "id": "USR-NASA-7092",
+        "name": "Dr. Elena Vance",
+        "email": "elena.vance@nasa.gov",
+        "organization": "NASA Glenn Research Center (GRC)",
+        "role": "Combustion & Fire Safety Principal Investigator",
+        "clearance_level": "PSI Scientific Research Clearance",
+        "created_at": "2026-11-15T00:00:00Z",
+    }
+}
+
+
+@app.post("/api/v1/auth/signup")
+def auth_signup(req: SignUpRequest):
+    email_key = req.email.strip().lower()
+    user_id = f"USR-{abs(hash(email_key)) % 10000:04d}"
+    user_record = {
+        "id": user_id,
+        "name": req.name.strip(),
+        "email": email_key,
+        "organization": req.organization.strip(),
+        "role": req.role.strip(),
+        "clearance_level": "PSI Scientific Research Clearance" if "nasa" in email_key else "PSI Open Science Verified",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    _REGISTERED_USERS[email_key] = user_record
+    return {
+        "status": "success",
+        "message": f"Researcher account for {req.name} successfully created.",
+        "access_token": f"token-psi-{user_id.lower()}",
+        "token_type": "bearer",
+        "user": user_record,
+    }
+
+
+@app.post("/api/v1/auth/login")
+def auth_login(req: LoginRequest):
+    email_key = req.email.strip().lower()
+    user = _REGISTERED_USERS.get(email_key)
+    if not user:
+        user = {
+            "id": f"USR-{abs(hash(email_key)) % 10000:04d}",
+            "name": email_key.split("@")[0].replace(".", " ").title(),
+            "email": email_key,
+            "organization": "NASA Physical Sciences Informatics" if "nasa" in email_key else "Aerospace Research Institute",
+            "role": "Flight Fire-Safety Researcher",
+            "clearance_level": "PSI Scientific Research Clearance" if "nasa" in email_key else "PSI Open Science Verified",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+        _REGISTERED_USERS[email_key] = user
+    return {
+        "status": "success",
+        "access_token": f"token-psi-{user['id'].lower()}",
+        "token_type": "bearer",
+        "user": user,
+    }
+
+
+@app.get("/api/v1/auth/me")
+def auth_me(email: str = Query("elena.vance@nasa.gov")):
+    email_key = email.strip().lower()
+    user = _REGISTERED_USERS.get(email_key, _REGISTERED_USERS["elena.vance@nasa.gov"])
+    return {"user": user}

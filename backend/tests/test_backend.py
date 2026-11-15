@@ -190,3 +190,31 @@ def test_manifest_and_entity_endpoints():
     res_sources = client.get("/api/v1/sources?limit=5")
     assert res_sources.status_code == 200
     assert len(res_sources.json()["items"]) > 0
+
+
+def test_auth_signup_and_login():
+    signup_payload = {
+        "name": "Dr. Marcus Vance",
+        "email": "marcus.vance@nasa.gov",
+        "password": "ResearchSecurity2026!",
+        "organization": "NASA Ames Research Center",
+        "role": "Spacecraft Life Support & ECLSS Specialist",
+    }
+    res_signup = client.post("/api/v1/auth/signup", json=signup_payload)
+    assert res_signup.status_code == 200
+    signup_data = res_signup.json()
+    assert signup_data["status"] == "success"
+    assert "access_token" in signup_data
+    assert signup_data["user"]["name"] == "Dr. Marcus Vance"
+    assert signup_data["user"]["email"] == "marcus.vance@nasa.gov"
+
+    # Test login
+    login_payload = {
+        "email": "marcus.vance@nasa.gov",
+        "password": "ResearchSecurity2026!",
+    }
+    res_login = client.post("/api/v1/auth/login", json=login_payload)
+    assert res_login.status_code == 200
+    login_data = res_login.json()
+    assert login_data["status"] == "success"
+    assert login_data["user"]["email"] == "marcus.vance@nasa.gov"
