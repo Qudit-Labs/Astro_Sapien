@@ -33,20 +33,29 @@
 
 /* High-tech glassmorphism and border glow */
 .hud-panel {
-  background: rgba(11, 29, 54, 0.75);
+  background: rgba(248, 250, 252, 0.85);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(56, 189, 248, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
 }
 
 .hud-panel:hover {
   border-color: rgba(56, 189, 248, 0.4);
 }
 
+.dark .hud-panel {
+  background: rgba(11, 29, 54, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
 .hud-panel-flame {
-  background: rgba(11, 29, 54, 0.8);
+  background: rgba(248, 250, 252, 0.85);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(252, 61, 33, 0.25);
+}
+
+.dark .hud-panel-flame {
+  background: rgba(11, 29, 54, 0.8);
 }
 
 .hud-panel-flame:hover {
@@ -55,9 +64,13 @@
 }
 
 .hud-panel-smoke {
-  background: rgba(11, 29, 54, 0.8);
+  background: rgba(248, 250, 252, 0.85);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(36, 184, 160, 0.25);
+}
+
+.dark .hud-panel-smoke {
+  background: rgba(11, 29, 54, 0.8);
 }
 
 .hud-panel-smoke:hover {

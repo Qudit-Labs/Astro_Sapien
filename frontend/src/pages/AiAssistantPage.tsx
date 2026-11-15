@@ -178,7 +178,7 @@ export const AiAssistantPage: React.FC = () => {
       )}
 
       {/* A. Top Aerospace Voice AI Command Deck */}
-      <div className="rounded-2xl bg-gradient-to-r from-slate-900/90 via-[#0B1D36] to-slate-900/90 border border-slate-700/60 p-4 sm:p-5 shadow-xl hud-panel relative overflow-hidden">
+      <div className="rounded-2xl bg-gradient-to-r from-slate-100 via-sky-50/60 to-slate-100 dark:from-slate-900/90 dark:via-[#0B1D36] dark:to-slate-900/90 border border-slate-200 dark:border-slate-700/60 p-4 sm:p-5 shadow-xl hud-panel relative overflow-hidden">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
           {/* Left: Push-to-Talk and Status */}
           <div className="flex items-center gap-4 w-full lg:w-auto">
@@ -205,7 +205,7 @@ export const AiAssistantPage: React.FC = () => {
 
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold tracking-wider uppercase text-slate-400">
+                <span className="text-xs font-mono font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
                   VOICE AI CAPCOM:
                 </span>
                 <span
@@ -213,10 +213,10 @@ export const AiAssistantPage: React.FC = () => {
                     voiceState === 'listening'
                       ? 'bg-red-500/15 text-[#FC3D21] border-red-500/30 animate-pulse'
                       : voiceState === 'speaking'
-                      ? 'bg-sky-500/15 text-[#38BDF8] border-sky-500/30'
+                      ? 'bg-sky-500/15 text-[#0B3D91] dark:text-[#38BDF8] border-sky-500/30'
                       : voiceState === 'processing'
-                      ? 'bg-amber-500/15 text-[#F5B942] border-amber-500/30'
-                      : 'bg-teal-500/15 text-[#24B8A0] border-teal-500/30'
+                      ? 'bg-amber-500/15 text-amber-700 dark:text-[#F5B942] border-amber-500/30'
+                      : 'bg-teal-500/15 text-teal-700 dark:text-[#24B8A0] border-teal-500/30'
                   }`}
                 >
                   {voiceState === 'listening'
@@ -228,9 +228,9 @@ export const AiAssistantPage: React.FC = () => {
                     : 'READY (CLICK TO SPEAK)'}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
                 {voiceTranscript ? (
-                  <span className="font-mono text-[#38BDF8]">
+                  <span className="font-mono text-[#0B3D91] dark:text-[#38BDF8]">
                     &ldquo;{voiceTranscript}&rdquo;
                   </span>
                 ) : voiceState === 'listening' ? (
@@ -265,18 +265,18 @@ export const AiAssistantPage: React.FC = () => {
               onClick={() => setAutoSpeak((v) => !v)}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium transition ${
                 autoSpeak
-                  ? 'bg-teal-500/15 text-[#24B8A0] border-teal-500/30'
-                  : 'bg-slate-800 text-slate-400 border-slate-700'
+                  ? 'bg-teal-500/15 text-teal-700 dark:text-[#24B8A0] border-teal-500/30'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}
             >
               {autoSpeak ? (
                 <>
-                  <Volume2 className="w-3.5 h-3.5 text-[#24B8A0]" />
+                  <Volume2 className="w-3.5 h-3.5 text-teal-600 dark:text-[#24B8A0]" />
                   <span>Auto-Audio: ON</span>
                 </>
               ) : (
                 <>
-                  <VolumeX className="w-3.5 h-3.5 text-slate-400" />
+                  <VolumeX className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                   <span>Auto-Audio: OFF</span>
                 </>
               )}
@@ -342,7 +342,7 @@ export const AiAssistantPage: React.FC = () => {
                   className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
                     msg.role === 'user'
                       ? 'bg-[#0B3D91] text-white shadow-md'
-                      : 'bg-[#07172B] border border-[#38BDF8]/40 text-[#38BDF8] shadow-md'
+                      : 'bg-sky-50 dark:bg-[#07172B] border border-sky-300 dark:border-[#38BDF8]/40 text-[#0B3D91] dark:text-[#38BDF8] shadow-sm'
                   }`}
                 >
                   {msg.role === 'user' ? (
@@ -377,7 +377,7 @@ export const AiAssistantPage: React.FC = () => {
                         className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono transition ${
                           activeSpeakingMsgId === msg.id
                             ? 'bg-red-500/15 text-[#FC3D21] border border-red-500/30 animate-pulse'
-                            : 'bg-slate-200/70 dark:bg-[#10243D] text-[#38BDF8] hover:bg-[#38BDF8]/20'
+                            : 'bg-slate-200/70 dark:bg-[#10243D] text-[#0B3D91] dark:text-[#38BDF8] hover:bg-[#38BDF8]/20'
                         }`}
                       >
                         {activeSpeakingMsgId === msg.id ? (
@@ -424,7 +424,7 @@ export const AiAssistantPage: React.FC = () => {
 
             {isThinking && (
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#07172B] border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-sky-50 dark:bg-[#07172B] border border-sky-300 dark:border-[#38BDF8]/40 text-[#0B3D91] dark:text-[#38BDF8] flex items-center justify-center shrink-0">
                   <Bot className="w-4 h-4" />
                 </div>
                 <div className="rounded-xl p-4 bg-slate-50 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-xs text-slate-500 dark:text-[#9FB1C7]">

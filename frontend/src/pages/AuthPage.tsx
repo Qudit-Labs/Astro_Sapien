@@ -466,7 +466,7 @@ export const AuthPage: React.FC = () => {
               {/* Right Column: Live Interactive Holographic NASA Badge */}
               <div className="lg:col-span-5 flex flex-col items-center justify-center p-4">
                 <div className="text-center mb-3">
-                  <div className="text-xs font-mono text-[#38BDF8] font-semibold tracking-wider">LIVE CREDENTIAL PREVIEW</div>
+                  <div className="text-xs font-mono text-[#0B3D91] dark:text-[#38BDF8] font-semibold tracking-wider">LIVE CREDENTIAL PREVIEW</div>
                   <div className="text-[11px] text-slate-500 dark:text-[#9FB1C7]">NASA PSI Digital Mission Pass</div>
                 </div>
 
@@ -573,7 +573,7 @@ export const AuthPage: React.FC = () => {
                       setLoginEmail('elena.vance@nasa.gov');
                       setLoginPassword('DemoPassword2026!');
                     }}
-                    className="text-[11px] text-[#38BDF8] hover:underline"
+                    className="text-[11px] text-[#0B3D91] dark:text-[#38BDF8] hover:underline font-medium"
                   >
                     Fill sample credentials
                   </button>

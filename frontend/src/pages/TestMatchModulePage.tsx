@@ -368,7 +368,7 @@ export const TestMatchModulePage: React.FC = () => {
               <h3 className="text-sm font-semibold text-slate-900 dark:text-[#F4F7FC]">
                 Dual-Burn Split-Screen Combustion Simulation
               </h3>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-sky-950 border border-sky-800 text-[#38BDF8]">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-950 border border-sky-200 dark:border-sky-800 text-sky-800 dark:text-[#38BDF8]">
                 60 FPS Hybrid Physics
               </span>
             </div>
@@ -379,8 +379,8 @@ export const TestMatchModulePage: React.FC = () => {
                 <span
                   className={`text-[11px] font-mono px-2 py-0.5 rounded border font-semibold ${
                     spreadDeltaPct > 0
-                      ? 'bg-amber-950/40 text-amber-300 border-amber-600/50'
-                      : 'bg-teal-950/40 text-teal-300 border-teal-600/50'
+                      ? 'bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-600/50'
+                      : 'bg-teal-100 dark:bg-teal-950/40 text-teal-800 dark:text-teal-300 border-teal-300 dark:border-teal-600/50'
                   }`}
                 >
                   {spreadDeltaPct > 0
@@ -389,7 +389,7 @@ export const TestMatchModulePage: React.FC = () => {
                 </span>
               )}
               {runA.gravity_regime !== runB.gravity_regime && (
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-950/50 text-purple-300 border border-purple-700/60">
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950/50 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-700/60">
                   Regime Shift: {runA.gravity_regime === 'microgravity' ? 'µg Dome' : '1g Plume'} vs{' '}
                   {runB.gravity_regime === 'microgravity' ? 'µg Dome' : '1g Plume'}
                 </span>
@@ -420,7 +420,7 @@ export const TestMatchModulePage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleSyncReset}
-                className="p-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-white transition"
+                className="p-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition"
                 title="Reset both chambers to ignition (t=0)"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -428,7 +428,7 @@ export const TestMatchModulePage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSyncSpeed((s) => (s === 1 ? 2 : 1))}
-                className="px-2.5 py-1 rounded text-xs font-mono bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-500"
+                className="px-2.5 py-1 rounded text-xs font-mono bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition"
               >
                 {syncSpeed}x Speed
               </button>

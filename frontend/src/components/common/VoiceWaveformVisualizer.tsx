@@ -48,7 +48,7 @@ export const VoiceWaveformVisualizer: React.FC<VoiceWaveformVisualizerProps> = (
   };
 
   return (
-    <div className="flex items-center justify-center gap-1 h-9 px-3 py-1 rounded-xl bg-slate-900/40 border border-slate-700/40 backdrop-blur-sm">
+    <div className="flex items-center justify-center gap-1 h-9 px-3 py-1 rounded-xl bg-slate-200/60 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700/40 backdrop-blur-sm">
       {heights.map((h, idx) => (
         <div
           key={idx}

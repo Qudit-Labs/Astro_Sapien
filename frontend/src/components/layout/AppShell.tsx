@@ -25,28 +25,28 @@ export const AppShell: React.FC = () => {
         <Header onOpenMobileNav={() => setMobileOpen(true)} />
 
         {/* High-Tech Aerospace Telemetry Strip */}
-        <div className="bg-[#0B1D36] border-b border-slate-700/60 px-4 sm:px-6 py-1.5 flex items-center justify-between text-[11px] font-mono text-[#9FB1C7] overflow-x-auto gap-4 scrollbar-none">
+        <div className="bg-slate-100 dark:bg-[#0B1D36] border-b border-slate-200 dark:border-slate-700/60 px-4 sm:px-6 py-1.5 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-[#9FB1C7] overflow-x-auto gap-4 scrollbar-none">
           <div className="flex items-center gap-3 shrink-0">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-[#24B8A0] font-semibold text-[10px]">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-[#24B8A0] font-semibold text-[10px]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#24B8A0] hud-beacon" />
               LIVE TELEMETRY
             </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 text-slate-300">
+            <span className="hidden sm:inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
               <Database className="w-3.5 h-3.5 text-[#38BDF8]" />
               <span>NASA PSI: {investigations.length} Missions ({testRuns.length > 0 ? testRuns.length : '1,077'} Runs • {measurements.length > 0 ? measurements.length : '6,287'} Points)</span>
             </span>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-[#38BDF8]">
+            <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-sky-700 dark:text-[#38BDF8]">
               <Cpu className="w-3 h-3" />
               <span>ENGINES: FLAME • MATCH • SMOKE • VISION</span>
             </span>
-            <span className="hidden lg:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-[#F5B942]">
+            <span className="hidden lg:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-[#F5B942]">
               <ShieldAlert className="w-3 h-3" />
               <span>PARTIAL-g GUARDS ENFORCED</span>
             </span>
-            <span className="text-slate-400 font-sans text-[10px]">ISS LEO μg</span>
+            <span className="text-slate-400 dark:text-slate-400 font-sans text-[10px]">ISS LEO μg</span>
           </div>
         </div>
 
@@ -71,14 +71,14 @@ export const AppShell: React.FC = () => {
         <footer className="border-t border-slate-200 dark:border-slate-800/80 py-4 px-6 bg-white/50 dark:bg-[#0B1D36]/50 backdrop-blur text-xs text-slate-500 dark:text-[#9FB1C7]">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <div>
-              <span className="font-semibold text-slate-800 dark:text-white">FIRELINE</span> — Spacecraft Fire-Safety Intelligence Engine • <span className="font-mono text-[11px] text-[#38BDF8]">Team Astro_Sapien</span>
+              <span className="font-semibold text-slate-800 dark:text-white">FIRELINE</span> — Spacecraft Fire-Safety Intelligence Engine • <span className="font-mono text-[11px] text-[#0B3D91] dark:text-[#38BDF8] font-semibold">Team Astro_Sapien</span>
             </div>
             <div className="flex items-center gap-4 text-[11px]">
               <a
                 href="https://psi.nasa.gov/"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#38BDF8] inline-flex items-center gap-1 transition"
+                className="hover:text-[#0B3D91] dark:hover:text-[#38BDF8] inline-flex items-center gap-1 transition"
               >
                 <span>NASA PSI Repository</span>
                 <ExternalLink className="w-3 h-3" />
@@ -88,7 +88,7 @@ export const AppShell: React.FC = () => {
                 href="https://ntrs.nasa.gov/"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#38BDF8] inline-flex items-center gap-1 transition"
+                className="hover:text-[#0B3D91] dark:hover:text-[#38BDF8] inline-flex items-center gap-1 transition"
               >
                 <span>NASA NTRS Server</span>
                 <ExternalLink className="w-3 h-3" />

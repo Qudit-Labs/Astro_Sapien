@@ -534,7 +534,7 @@ export const FirelineModulePage: React.FC = () => {
         <div className="lg:col-span-4">
           <div className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5 space-y-4 sticky top-24 shadow-md">
             <div className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-[#F4F7FC]">
-              <Info className="w-4 h-4 text-[#38BDF8]" />
+              <Info className="w-4 h-4 text-[#0B3D91] dark:text-[#38BDF8]" />
               <span>Scientific Explainability</span>
             </div>
 

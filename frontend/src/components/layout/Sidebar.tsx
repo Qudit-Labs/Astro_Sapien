@@ -77,7 +77,7 @@ export const NAV_GROUPS: NavGroup[] = [
         icon: GitCompare,
         accentColor: '#38BDF8',
         badge: 'M2',
-        badgeClass: 'bg-sky-500/15 text-[#38BDF8] border-sky-500/30',
+        badgeClass: 'bg-sky-500/15 text-sky-800 dark:text-[#38BDF8] border-sky-500/30',
         subtext: 'Comparability S & C',
       },
       {
@@ -86,7 +86,7 @@ export const NAV_GROUPS: NavGroup[] = [
         icon: Wind,
         accentColor: '#24B8A0',
         badge: 'M3',
-        badgeClass: 'bg-teal-500/15 text-[#24B8A0] border-teal-500/30',
+        badgeClass: 'bg-teal-500/15 text-teal-800 dark:text-[#24B8A0] border-teal-500/30',
         subtext: 'Aerosol Dynamics',
       },
       {
@@ -110,7 +110,7 @@ export const NAV_GROUPS: NavGroup[] = [
         icon: Bot,
         accentColor: '#F5B942',
         badge: 'LIVE RAG',
-        badgeClass: 'bg-amber-500/15 text-[#F5B942] border-amber-500/30 font-semibold',
+        badgeClass: 'bg-amber-500/15 text-amber-800 dark:text-[#F5B942] border-amber-500/30 font-semibold',
         subtext: 'Gemini Grounding',
       },
       {
@@ -139,7 +139,7 @@ export const NAV_GROUPS: NavGroup[] = [
         icon: ShieldCheck,
         accentColor: '#38BDF8',
         badge: 'ID PASS',
-        badgeClass: 'bg-cyan-500/15 text-[#38BDF8] border-cyan-500/30',
+        badgeClass: 'bg-cyan-500/15 text-sky-800 dark:text-[#38BDF8] border-cyan-500/30',
         subtext: 'Digital Credentials',
       },
     ],
@@ -187,9 +187,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
               className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:text-[#9FB1C7] dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 border border-transparent hover:border-slate-300 dark:hover:border-slate-700 transition duration-150"
             >
               {collapsed ? (
-                <ChevronRight className="w-4 h-4 text-[#38BDF8]" />
+                <ChevronRight className="w-4 h-4 text-[#0B3D91] dark:text-[#38BDF8]" />
               ) : (
-                <ChevronLeft className="w-4 h-4 text-[#38BDF8]" />
+                <ChevronLeft className="w-4 h-4 text-[#0B3D91] dark:text-[#38BDF8]" />
               )}
             </button>
           )}
@@ -207,7 +207,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <div className="px-2.5 pb-1 flex items-center justify-between text-[10px] font-mono font-bold tracking-wider uppercase text-slate-600 dark:text-slate-400">
                   <span>{group.title}</span>
                   {group.tag && (
-                    <span className="px-1.5 py-0.2 rounded bg-sky-500/10 text-[#38BDF8] border border-sky-500/20 text-[9px] font-mono">
+                    <span className="px-1.5 py-0.2 rounded bg-sky-500/10 text-sky-700 dark:text-[#38BDF8] border border-sky-500/20 text-[9px] font-mono font-semibold">
                       {group.tag}
                     </span>
                   )}
@@ -305,7 +305,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <Radio className="w-3 h-3 text-[#24B8A0] animate-pulse" />
                 <span>ISS LEO μg</span>
               </div>
-              <span className="px-1.5 py-0.2 rounded bg-teal-500/15 text-[#24B8A0] border border-teal-500/30 text-[9px]">
+              <span className="px-1.5 py-0.2 rounded bg-teal-500/15 text-teal-700 dark:text-[#24B8A0] border border-teal-500/30 text-[9px] font-semibold">
                 ONLINE
               </span>
             </div>

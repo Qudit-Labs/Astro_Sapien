@@ -513,18 +513,18 @@ export const CombustionChamberCanvas: React.FC<CombustionChamberProps> = ({
   };
 
   return (
-    <div className="rounded-xl bg-slate-950 dark:bg-[#07172B] border border-slate-700/80 dark:border-sky-900/60 overflow-hidden shadow-xl flex flex-col">
+    <div className="rounded-xl bg-white dark:bg-[#07172B] border border-slate-200 dark:border-sky-900/60 overflow-hidden shadow-xl flex flex-col">
       {/* Chamber Top HUD Header */}
-      <div className="px-4 py-2.5 bg-slate-900/90 dark:bg-[#0B1E36] border-b border-slate-800 flex items-center justify-between flex-wrap gap-2 text-xs">
+      <div className="px-4 py-2.5 bg-slate-100 dark:bg-[#0B1E36] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-2 text-xs">
         <div className="flex items-center gap-2">
           <Flame
             className={`w-4 h-4 ${
               gravityRegime === 'microgravity' ? 'text-[#38BDF8]' : 'text-amber-500'
             }`}
           />
-          <span className="font-semibold text-white tracking-wide">{title}</span>
+          <span className="font-semibold text-slate-900 dark:text-white tracking-wide">{title}</span>
           {testRunId && (
-            <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-sky-950 border border-sky-800 text-[#38BDF8]">
+            <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-sky-100 dark:bg-sky-950 border border-sky-200 dark:border-sky-800 text-sky-800 dark:text-[#38BDF8]">
               {testRunId}
             </span>
           )}
@@ -537,8 +537,8 @@ export const CombustionChamberCanvas: React.FC<CombustionChamberProps> = ({
             onClick={() => setViewMode((m) => (m === 'optical' ? 'thermal' : 'optical'))}
             className={`px-2 py-0.5 rounded text-[11px] font-mono border transition flex items-center gap-1 ${
               viewMode === 'thermal'
-                ? 'bg-purple-950/80 border-purple-500 text-purple-300'
-                : 'bg-slate-800/80 border-slate-700 text-slate-300 hover:border-slate-500'
+                ? 'bg-purple-100 dark:bg-purple-950/80 border-purple-300 dark:border-purple-500 text-purple-800 dark:text-purple-300'
+                : 'bg-white dark:bg-slate-800/80 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500'
             }`}
           >
             {viewMode === 'thermal' ? (
@@ -615,7 +615,7 @@ export const CombustionChamberCanvas: React.FC<CombustionChamberProps> = ({
       </div>
 
       {/* Scrub & Playback Controls Bar */}
-      <div className="p-3 bg-slate-900/90 dark:bg-[#07172B] border-t border-slate-800 space-y-2">
+      <div className="p-3 bg-slate-100 dark:bg-[#07172B] border-t border-slate-200 dark:border-slate-800 space-y-2">
         <div className="flex items-center gap-2">
           {/* Play / Pause Button */}
           <button
@@ -631,7 +631,7 @@ export const CombustionChamberCanvas: React.FC<CombustionChamberProps> = ({
           <button
             type="button"
             onClick={handleReset}
-            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition"
+            className="p-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-700 transition shadow-sm"
             title="Reset to Ignition"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -646,7 +646,7 @@ export const CombustionChamberCanvas: React.FC<CombustionChamberProps> = ({
             value={currentTime}
             onChange={(e) => setCurrentTime(parseFloat(e.target.value))}
             aria-label="Timeline scrub"
-            className="flex-1 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[#38BDF8]"
+            className="flex-1 h-1.5 bg-slate-300 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[#0B3D91] dark:accent-[#38BDF8]"
           />
 
           {/* Speed Multiplier Button */}
@@ -656,7 +656,7 @@ export const CombustionChamberCanvas: React.FC<CombustionChamberProps> = ({
               const next = playbackSpeed === 1 ? 2 : 1;
               if (!isSyncControlled) setLocalSpeed(next);
             }}
-            className="px-2 py-1 rounded text-[11px] font-mono bg-slate-800 text-slate-300 hover:text-white border border-slate-700"
+            className="px-2 py-1 rounded text-[11px] font-mono bg-white dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-700 transition shadow-sm"
             title="Toggle playback speed"
           >
             {playbackSpeed}x

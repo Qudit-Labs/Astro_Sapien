@@ -155,7 +155,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileNav }) => {
                     }}
                     className="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-[#10243D] text-slate-700 dark:text-[#F4F7FC] flex items-center gap-2"
                   >
-                    <UserPlus className="w-3.5 h-3.5 text-[#38BDF8]" />
+                    <UserPlus className="w-3.5 h-3.5 text-[#0B3D91] dark:text-[#38BDF8]" />
                     <span>Switch or Register Account</span>
                   </button>
 
@@ -189,7 +189,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileNav }) => {
               onClick={() => navigate('/auth?mode=login')}
               className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-[#F4F7FC] hover:border-[#38BDF8] text-xs font-medium transition hidden sm:inline-flex items-center gap-1.5"
             >
-              <KeyRound className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <KeyRound className="w-3.5 h-3.5 text-[#0B3D91] dark:text-[#38BDF8]" />
               <span>Sign In</span>
             </button>
           </div>

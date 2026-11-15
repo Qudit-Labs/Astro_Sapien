@@ -173,7 +173,7 @@ export const SourcesMethodologyPage: React.FC = () => {
           </div>
 
           <div className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5 space-y-2">
-            <div className="flex items-center gap-2 text-sm font-semibold text-[#38BDF8]">
+            <div className="flex items-center gap-2 text-sm font-semibold text-[#0B3D91] dark:text-[#38BDF8]">
               <GitCompare className="w-4 h-4" />
               <span>How TESTMATCH Evaluates Similarity</span>
             </div>

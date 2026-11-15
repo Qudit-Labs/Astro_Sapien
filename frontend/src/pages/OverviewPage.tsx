@@ -259,7 +259,7 @@ export const OverviewPage: React.FC = () => {
               From microgravity flame spread and gaseous suppression to smoke aerosol detection and cross-mission comparison.
             </p>
           </div>
-          <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-[#38BDF8] border border-blue-500/20">
+          <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-[#0B3D91] dark:text-[#38BDF8] border border-blue-500/20">
             DETERMINISTIC ANALYTICAL ENGINES
           </span>
         </div>
@@ -310,11 +310,11 @@ export const OverviewPage: React.FC = () => {
             className="cursor-pointer rounded-2xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-6 transition duration-200 hud-panel relative overflow-hidden group shadow-lg"
           >
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5 text-[#38BDF8] font-bold text-sm tracking-wide">
-                <GitCompare className="w-5 h-5 text-[#38BDF8] group-hover:scale-110 transition-transform" />
+              <div className="flex items-center gap-2.5 text-sky-700 dark:text-[#38BDF8] font-bold text-sm tracking-wide">
+                <GitCompare className="w-5 h-5 text-sky-700 dark:text-[#38BDF8] group-hover:scale-110 transition-transform" />
                 <span>TESTMATCH</span>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/15 text-[#38BDF8] border border-blue-500/30 font-semibold">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/15 text-sky-800 dark:text-[#38BDF8] border border-blue-500/30 font-semibold">
                 MODULE 2
               </span>
             </div>
@@ -332,7 +332,7 @@ export const OverviewPage: React.FC = () => {
               <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Scale Divergence</span>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-[#38BDF8] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-sky-700 dark:text-[#38BDF8] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
               Compare Experiments <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </div>
@@ -346,11 +346,11 @@ export const OverviewPage: React.FC = () => {
             className="cursor-pointer rounded-2xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-6 transition duration-200 hud-panel-smoke relative overflow-hidden group shadow-lg"
           >
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5 text-[#24B8A0] font-bold text-sm tracking-wide">
-                <Wind className="w-5 h-5 text-[#24B8A0] group-hover:scale-110 transition-transform" />
+              <div className="flex items-center gap-2.5 text-teal-700 dark:text-[#24B8A0] font-bold text-sm tracking-wide">
+                <Wind className="w-5 h-5 text-teal-700 dark:text-[#24B8A0] group-hover:scale-110 transition-transform" />
                 <span>SMOKewise</span>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/15 text-[#24B8A0] border border-teal-500/30 font-semibold">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/15 text-teal-800 dark:text-[#24B8A0] border border-teal-500/30 font-semibold">
                 MODULE 3
               </span>
             </div>
@@ -368,7 +368,7 @@ export const OverviewPage: React.FC = () => {
               <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Teflon</span>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-[#24B8A0] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-teal-700 dark:text-[#24B8A0] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
               Analyze Smoke Aerosols <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </div>

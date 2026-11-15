@@ -17,12 +17,12 @@ export const MicrogravityFlameVisualizer: React.FC<MicrogravityFlameVisualizerPr
   const isUg = regime === 'microgravity';
 
   return (
-    <div className="rounded-xl bg-slate-950/90 dark:bg-[#07172B] border border-sky-900/50 p-4 space-y-3 font-sans text-slate-200 shadow-inner">
+    <div className="rounded-xl bg-slate-100 dark:bg-[#07172B] border border-slate-200 dark:border-sky-900/50 p-4 space-y-3 font-sans text-slate-800 dark:text-slate-200 shadow-sm">
       {/* Header and Toggle Controls */}
-      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-slate-800 pb-2.5">
+      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 dark:border-slate-800 pb-2.5">
         <div className="flex items-center gap-2">
-          <Flame className={`w-4 h-4 ${isUg ? 'text-[#38BDF8]' : 'text-amber-500'}`} />
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white">
+          <Flame className={`w-4 h-4 ${isUg ? 'text-[#0B3D91] dark:text-[#38BDF8]' : 'text-amber-500'}`} />
+          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900 dark:text-white">
             {isUg ? 'Microgravity Flame Dome (µg)' : 'Earth Buoyant Flame (1g)'}
           </span>
         </div>
@@ -30,7 +30,7 @@ export const MicrogravityFlameVisualizer: React.FC<MicrogravityFlameVisualizerPr
           <button
             type="button"
             onClick={() => setRegime((r) => (r === 'microgravity' ? 'earth' : 'microgravity'))}
-            className="text-[10px] font-mono px-2 py-0.5 rounded border border-sky-500/40 bg-sky-950/60 text-[#38BDF8] hover:bg-sky-900/60 transition"
+            className="text-[10px] font-mono px-2 py-0.5 rounded border border-sky-300 dark:border-sky-500/40 bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-[#38BDF8] hover:bg-sky-200 dark:hover:bg-sky-900/60 transition"
           >
             Switch to {isUg ? '1g Earth' : 'µg Spherical'}
           </button>
@@ -39,8 +39,8 @@ export const MicrogravityFlameVisualizer: React.FC<MicrogravityFlameVisualizerPr
             onClick={() => setHasForcedFlow((f) => !f)}
             className={`text-[10px] font-mono px-2 py-0.5 rounded border transition flex items-center gap-1 ${
               hasForcedFlow
-                ? 'border-teal-500/50 bg-teal-950/60 text-[#24B8A0]'
-                : 'border-slate-700 bg-slate-800/60 text-slate-400'
+                ? 'border-teal-300 dark:border-teal-500/50 bg-teal-100 dark:bg-teal-950/60 text-teal-800 dark:text-[#24B8A0]'
+                : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/60 text-slate-600 dark:text-slate-400'
             }`}
           >
             <Wind className="w-3 h-3" />
@@ -208,15 +208,15 @@ export const MicrogravityFlameVisualizer: React.FC<MicrogravityFlameVisualizerPr
       {/* Telemetry Explanatory Badges */}
       {!compact && (
         <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
-          <div className="p-2 rounded bg-slate-900/60 border border-slate-800">
-            <span className="text-slate-400 block text-[9px] uppercase">Convective Draft</span>
-            <span className="font-semibold text-[#38BDF8]">
+          <div className="p-2 rounded bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+            <span className="text-slate-500 dark:text-slate-400 block text-[9px] uppercase">Convective Draft</span>
+            <span className="font-semibold text-sky-700 dark:text-[#38BDF8]">
               {isUg ? '0 g (Pure Diffusion)' : '1 g (Strong Buoyant Chimney)'}
             </span>
           </div>
-          <div className="p-2 rounded bg-slate-900/60 border border-slate-800">
-            <span className="text-slate-400 block text-[9px] uppercase">Chemiluminescence</span>
-            <span className="font-semibold text-teal-400">
+          <div className="p-2 rounded bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+            <span className="text-slate-500 dark:text-slate-400 block text-[9px] uppercase">Chemiluminescence</span>
+            <span className="font-semibold text-teal-700 dark:text-teal-400">
               {isUg ? 'Blue CH*/C2* Radicals' : 'Soot Incandescence (Yellow)'}
             </span>
           </div>

@@ -31,12 +31,12 @@ export const SmokeAerosolVisualizer: React.FC<SmokeAerosolVisualizerProps> = ({
   ];
 
   return (
-    <div className="rounded-xl bg-slate-950/90 dark:bg-[#07172B] border border-teal-900/50 p-4 space-y-3 font-sans text-slate-200 shadow-inner">
+    <div className="rounded-xl bg-slate-100 dark:bg-[#07172B] border border-slate-200 dark:border-teal-900/50 p-4 space-y-3 font-sans text-slate-800 dark:text-slate-200 shadow-sm">
       {/* Header and Controls */}
-      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-slate-800 pb-2.5">
+      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 dark:border-slate-800 pb-2.5">
         <div className="flex items-center gap-2">
-          <Wind className="w-4 h-4 text-[#24B8A0]" />
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white">
+          <Wind className="w-4 h-4 text-teal-700 dark:text-[#24B8A0]" />
+          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900 dark:text-white">
             Microgravity Aerosol Vector & Detector Chamber
           </span>
         </div>
@@ -44,14 +44,14 @@ export const SmokeAerosolVisualizer: React.FC<SmokeAerosolVisualizerProps> = ({
           <button
             type="button"
             onClick={() => setAirflowLevel((l) => (l === 'nominal' ? 'low' : 'nominal'))}
-            className="text-[10px] font-mono px-2 py-0.5 rounded border border-teal-500/40 bg-teal-950/60 text-[#24B8A0] hover:bg-teal-900/60 transition"
+            className="text-[10px] font-mono px-2 py-0.5 rounded border border-teal-300 dark:border-teal-500/40 bg-teal-100 dark:bg-teal-950/60 text-teal-800 dark:text-[#24B8A0] hover:bg-teal-200 dark:hover:bg-teal-900/60 transition"
           >
             Airflow: {airflowLevel === 'nominal' ? '15 cm/s' : '4 cm/s (Slow)'}
           </button>
           <button
             type="button"
             onClick={() => setDetectorType((d) => (d === 'optical' ? 'ionization' : 'optical'))}
-            className="text-[10px] font-mono px-2 py-0.5 rounded border border-sky-500/40 bg-sky-950/60 text-[#38BDF8] hover:bg-sky-900/60 transition"
+            className="text-[10px] font-mono px-2 py-0.5 rounded border border-sky-300 dark:border-sky-500/40 bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-[#38BDF8] hover:bg-sky-200 dark:hover:bg-sky-900/60 transition"
           >
             Sensor: {detectorType === 'optical' ? 'Optical Scatter' : 'Ionization'}
           </button>
@@ -140,15 +140,15 @@ export const SmokeAerosolVisualizer: React.FC<SmokeAerosolVisualizerProps> = ({
       {/* Telemetry Explanatory Badges */}
       {!compact && (
         <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
-          <div className="p-2 rounded bg-slate-900/60 border border-slate-800">
-            <span className="text-slate-400 block text-[9px] uppercase">Aerosol Morphology</span>
-            <span className="font-semibold text-[#24B8A0]">
+          <div className="p-2 rounded bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+            <span className="text-slate-500 dark:text-slate-400 block text-[9px] uppercase">Aerosol Morphology</span>
+            <span className="font-semibold text-teal-700 dark:text-[#24B8A0]">
               Sub-micron (&lt; 0.1 µm) Un-agglomerated
             </span>
           </div>
-          <div className="p-2 rounded bg-slate-900/60 border border-slate-800">
-            <span className="text-slate-400 block text-[9px] uppercase">Detector Implication</span>
-            <span className="font-semibold text-amber-400">
+          <div className="p-2 rounded bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+            <span className="text-slate-500 dark:text-slate-400 block text-[9px] uppercase">Detector Implication</span>
+            <span className="font-semibold text-amber-700 dark:text-amber-400">
               Delayed Optical Scatter Alarm
             </span>
           </div>
