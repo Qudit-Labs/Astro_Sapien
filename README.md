@@ -1,4 +1,4 @@
-# FIRELINE — Spacecraft Fire-Safety Intelligence Engine
+# IGNIS-G — Spacecraft Fire-Safety Intelligence Engine
 
 [![NASA PSI Datasets](https://img.shields.io/badge/NASA%20PSI-5%20Investigations-0B3D91.svg)](https://psi.nasa.gov/)
 [![Supabase PostgreSQL](https://img.shields.io/badge/Database-Supabase%20PostgreSQL-3ECF8E.svg)](https://supabase.com/)
@@ -10,7 +10,7 @@
 **Team Astro_Sapien • NASA Space Apps Challenge 2026**
 
 ---
-# 🚀 WATCH FIRELINE IN ACTION — PROJECT DEMO VIDEO
+# 🚀 WATCH IGNIS-G IN ACTION — PROJECT DEMO VIDEO
 
 🎬 **See how FIRELINE transforms NASA combustion research into intelligent spacecraft fire-safety insights.**
 
