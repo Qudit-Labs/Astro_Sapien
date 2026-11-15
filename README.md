@@ -10,6 +10,14 @@
 **Team Astro_Sapien • NASA Space Apps / HackAthlone 2026**
 
 ---
+# 🚀 WATCH FIRELINE IN ACTION — PROJECT DEMO VIDEO
+
+🎬 **See how FIRELINE transforms NASA combustion research into intelligent spacecraft fire-safety insights.**
+
+[▶️ WATCH THE 50-SECOND PROJECT VIDEO ON YOUTUBE](https://youtu.be/ZJ2zW66XxaE?si=P6-077j6pg3WKkx-)
+
+---
+---
 
 ## 1. Executive Summary & Problem Statement
 
