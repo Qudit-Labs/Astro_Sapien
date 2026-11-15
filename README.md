@@ -1,4 +1,4 @@
-# IGNIS-G (FIRELINE)— Spacecraft Fire-Safety Intelligence Engine
+# IGNIS-G (FIRELINE) — Spacecraft Fire-Safety Intelligence Engine
 
 [![NASA PSI Datasets](https://img.shields.io/badge/NASA%20PSI-5%20Investigations-0B3D91.svg)](https://psi.nasa.gov/)
 [![Supabase PostgreSQL](https://img.shields.io/badge/Database-Supabase%20PostgreSQL-3ECF8E.svg)](https://supabase.com/)
@@ -7,25 +7,48 @@
 [![Voice AI CapCom](https://img.shields.io/badge/Voice%20AI-CapCom%20Bidirectional-FC3D21.svg)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 [![Aerospace UI](https://img.shields.io/badge/GUI-Mission%20Control%20HUD-38BDF8.svg)](http://localhost:5173/)
 [![Simulation Lab](https://img.shields.io/badge/Simulation%20Lab-Sandbox%20%26%20Challenges-F5B942.svg)](http://localhost:5173/simulation)
-[![Research Paper](https://img.shields.io/badge/Research%20Paper-Resolving%20Hallucination%20on%20NASA%20Data-9333EA.svg)](#-research-paper-resolving-hallucination-on-nasa-data)
+[![Research Paper](https://img.shields.io/badge/Research%20Paper-Resolving%20Hallucination%20on%20NASA%20Data-9333EA.svg)](#3--academic-research-paper-resolving-hallucination-on-nasa-data)
 
 **Team Astro_Sapien • NASA Space Apps Challenge 2026**
 
 ---
-# 🚀 WATCH IGNIS-G (FIRELINE) IN ACTION — PROJECT DEMO VIDEO
 
-🎬 **See how IGNIS-G (FIRELINE) transforms NASA combustion research into intelligent spacecraft fire-safety insights.**
+## 🎬 Project Video & Demo Walkthrough
 
-[▶️ WATCH THE 50-SECOND PROJECT VIDEO ON YOUTUBE](https://youtu.be/ZJ2zW66XxaE?si=P6-077j6pg3WKkx-)
+### 📺 Watch the Official Project Presentation & Demo
+
+See how **IGNIS-G (FIRELINE)** unifies decades of fragmented NASA combustion experiments into an interactive, grounded decision-support engine for astronaut safety:
+
+[![Watch the Official Demo Video](https://img.shields.io/badge/YouTube-Watch%20Demo%20Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/ZJ2zW66XxaE?si=P6-077j6pg3WKkx-)
+
+> **Direct Link**: [https://youtu.be/ZJ2zW66XxaE?si=P6-077j6pg3WKkx-](https://youtu.be/ZJ2zW66XxaE?si=P6-077j6pg3WKkx-)  
+> **Master 1080p Video File**: [`video_assets/FIRELINE_NASA_SpaceApps_Presentation.mp4`](./video_assets/FIRELINE_NASA_SpaceApps_Presentation.mp4) (Rendered at 1920x1080, 24 fps with full voiceover and visual overlays)
 
 ---
+
+### 🎞️ Detailed Scene-by-Scene Video Walkthrough
+
+The presentation video is structured into 9 chronological chapters:
+
+| Clip | Chapter Title | Key Visuals & Telemetry | Core Scientific Topic |
+| :---: | :--- | :--- | :--- |
+| **01** | **The Silent Peril of Microgravity** | Spherical blue flame envelope, zero buoyant stretch | In microgravity ($g \approx 0$), buoyancy vanishes. Flames burn as cold, silent spherical domes that survive undetected at low oxygen. |
+| **02** | **The Buoyancy & Ventilation Paradox** | Side-by-side 1g teardrop vs $\mu$g forced-air crawl | On Earth, hot air rises at 1–3 m/s. In space, hot air stagnates, and flames spread exclusively in the direction of cabin ventilation ducts. |
+| **03** | **The Sub-Micron Smoke Detector Trap** | Particle growth timeline (10 nm $\to$ 1000 nm) | Fresh pyrolysis produces ultrafine aerosols ($<100$ nm) that evade commercial optical smoke alarms until reaching hazardous cabin densities. |
+| **04** | **Decades of NASA Research Fragmented** | Fragmented spreadsheets, papers, calibration sheets | Decades of invaluable flight data (`BASS-II`, `SAME-R`, `SAFFIRE`, `FLEX`, `SPICE`) remained isolated in incompatible archives and PDFs. |
+| **05** | **Introducing FIRELINE Engine** | Mission-Control HUD reveal, quad-engine laser rail | Team Astro_Sapien presents the first unified, traceable fire-safety intelligence engine for human spaceflight. |
+| **06** | **Unified NASA PSI Ingestion & LOC Engine** | 1,077 test runs, 6,287 data points, 662 TM chunks | Instant retrieval of limiting oxygen concentrations (LOC), radiative quenching limits, and gaseous extinguishment thresholds. |
+| **07** | **TESTMATCH & SMOKEWISE Analytics** | Pairwise comparability ($S$, $C$), aerosol coagulation | Mathematically detects glovebox-to-vehicle scale errors and models smoke aging kinetics across spacecraft materials. |
+| **08** | **AI CapCom Voice & Conversational SQL** | Live audio waveform visualizer, SQL execution tree | Hands-free astronaut voice commands with Gemini 2.5 Flash transcription and deterministic read-only Supabase PostgreSQL agent. |
+| **09** | **Mission-Ready for Artemis & Mars** | Lunar base & Mars habitat partial-gravity indicators | Operational decision-support protecting astronauts on the ISS, Lunar Gateway, Artemis Base, and future Mars missions. |
+
 ---
 
 ## 1. Executive Summary & Problem Statement
 
 ### The Problem
-Fire safety in human spacecraft is fundamentally challenging because **combustion behaves drastically differently in microgravity ($\mu\text{g}$) than it does on Earth ($1\text{ g}$)**. Without natural buoyant convection:
-- Hot combustion products do not rise, dramatically altering flame spread geometries, radiative quenching dynamics, and low-speed blowoff limits.
+Fire safety in human spacecraft is fundamentally challenging because **combustion behaves drastically differently in microgravity ($\mu\text{g}$) than it does on Earth ($1\text{ g}$)**:
+- Without buoyant convection, hot combustion products do not rise, dramatically altering flame geometries, radiative quenching dynamics, and low-speed blowoff limits.
 - Fresh pyrolysis smoke particles remain trapped in sub-micron sizes without buoyant agglomeration, rendering traditional commercial ionization and optical scatter detectors prone to delayed detection or false alarms.
 - Oxygen transport is dominated by forced ventilation, creating localized flammability hazards that differ between small glovebox ducts and full-scale spacecraft cabins.
 
@@ -55,22 +78,32 @@ flowchart TD
         M4["Module 4: SMOKEVISION\nPlume Kinematics & Accumulation CV"]
     end
 
+    subgraph Simulation_Lab ["Module 5: Interactive Simulation Lab"]
+        Sim1["Virtual Combustion Sandbox (2D Fluid Streamlines & FLIR)"]
+        Sim2["Gamified NASA Flight Safety Challenges (3 Missions)"]
+        Sim3["Custom Rig Builder & 1-Click Ground Truth Benchmark"]
+        Sim4["Interactive Guided Science Discovery Tours"]
+        Sim5["Procedural Web Audio API Spaceflight Sound Synthesizer"]
+    end
+
     subgraph Intelligence_Layer ["AI & Interface Layer"]
         SQLAgent["LangChain Conversational SQL Agent\n(Gemini 2.5 Flash + Supabase)"]
-        VoiceAI["Voice AI CapCom Assistant\n(Hands-Free STT + TTS + Waveform)"]
+        VoiceAI["Voice AI CapCom Assistant\n(Hands-Free STT + Gemini Fallback + Waveform)"]
         HUD["Mission-Control Aerospace HUD\n(Telemetry Ticker • Holographic Pass)"]
     end
 
     NASA_Data --> Core_Storage
     Core_Storage --> Analytical_Pillars
+    Core_Storage --> Simulation_Lab
     Analytical_Pillars --> Intelligence_Layer
+    Simulation_Lab --> Intelligence_Layer
 ```
 
 ---
 
-## 2. Quad-Capability Module Architecture
+## 2. Core Scientific Capability Modules
 
-IGNIS-G (FIRELINE) integrates four core scientific capabilities solving distinct facets of spacecraft fire protection:
+IGNIS-G (FIRELINE) integrates five scientific capabilities solving distinct facets of spacecraft fire protection:
 
 ### Module 1: FIRELINE — Evidence Intelligence & Flammability Limits
 - **Combustion & Suppression Analysis**: Investigates solid-fuel flame spread, limiting oxygen concentration (LOC) flammability thresholds, radiative quenching, and gaseous extinguishment ($\text{CO}_2$, $\text{He}$, $\text{SF}_6$).
@@ -84,10 +117,9 @@ IGNIS-G (FIRELINE) integrates four core scientific capabilities solving distinct
   $$C = 100 \times \frac{\sum w_i m_i}{\sum w_i}$$
   across 9 experimental parameters: gravity regime, material, geometry, flow regime, scale dimension, $\text{O}_2\%$, airflow ($\text{cm/s}$), pressure ($\text{kPa}$), and thickness ($\text{mm}$).
 - **Interactive 2D Canvas Combustion Simulation (`CombustionChamberCanvas`)**:
-  - Physics-driven real-time canvas simulating microgravity vs Earth 1g flame geometries.
-  - Toggles between spherical microgravity flame structure (diffusion-dominated, soot shell formation) and buoyant Earth tear-drop plumes.
+  - Real-time canvas simulating microgravity vs Earth 1g flame geometries.
+  - Toggles between spherical microgravity flame structure (diffusion-dominated) and buoyant Earth tear-drop plumes.
   - Interactive parameter modulation: airflow velocity slider ($0\text{--}25\,\text{cm/s}$), oxygen concentration ($15\text{--}30\%\,\text{O}_2$), and ambient pressure.
-  - Dynamic vector fields rendering convective airflow streamlines and thermal dissipation gradients.
   - **Dual-Burn Split-Screen Comparison**: Synchronized side-by-side combustion chambers enabling simultaneous flight-versus-ground visual verification.
 - **Automated Scientific Warning Guards**:
   - **Scale Divergence Alert (`BASS-II` vs. `SAFFIRE`)**: Proactively flags that small glovebox ducts ($1\text{--}2\text{ cm}$) exhibit up to an order-of-magnitude difference in radiative preheating and concurrent flame spread compared to full Cygnus spacecraft panels ($0.4\text{ m} \times 0.94\text{ m}$).
@@ -100,7 +132,7 @@ IGNIS-G (FIRELINE) integrates four core scientific capabilities solving distinct
 - **Detector Technology Benchmarking**:
   - **ISS Near-IR Scattering ($>1000\text{ nm}$)**: Fresh Kapton/Teflon pyrolysis produces sub-$100\text{ nm}$ particles that evade near-IR detection until $>700\text{ s}$ of coagulation aging.
   - **Shuttle Ionization Detectors**: Highly sensitive to sub-micron particles, but prone to false alarms caused by cabin humidity and dust particles.
-  - **Two-Moment MPASS Prototype**: Combines number concentration (0th/1st moment) with optical mass (2nd/3rd moment), cutting response variance by $>2\times$ and discriminating true smoke from background dust.
+  - **Two-Moment MPASS Prototype**: Combines number concentration with optical mass, cutting response variance by $>2\times$ and discriminating true smoke from background dust.
 - **Scientific Segregation**: Flaming soot point records (`SPICE`) are strictly segregated from pyrolysis smoke records (`SAME-R`).
 
 ### Module 4: SMOKEVISION — Smoke Plume Kinematics, Accumulation & Real-Time Surveillance Engine
@@ -114,25 +146,67 @@ IGNIS-G (FIRELINE) integrates four core scientific capabilities solving distinct
 - **Transmission Electron Microscopy (TEM / SEM) Sizing Engine**:
   - Automated particle morphology analysis on NASA SAME-R thermophoretic soot grids.
   - Extracts Count Mean Diameter (CMD), Mass Mean Diameter ($d_{mm}$), lognormal geometric mean ($d_g$), and geometric standard deviation ($\sigma_g$).
-  - Particle Size Distribution (PSD) histograms classifying primary spherules vs fractal chain agglomerates.
 - **Dense Optical Flow & Dispersion Vector Fields**: Quiver arrow overlays showing ventilation-driven convective transport versus quiescent diffusion.
-- **★ Smoke Accumulation Mapping (Temporal Dwell Tensor)**:
+- **Smoke Accumulation Mapping (Temporal Dwell Tensor)**:
   - Integrates smoke masks across time:
     $$A(x, y) = \frac{1}{T} \sum_{t=1}^T M(x, y, t) \cdot \tau(x, y, t)$$
   - Detects recirculating eddies and air stagnation pockets where microgravity traps smoke without buoyant dispersal.
   - Outputs **Stagnation Severity Scores (0–100)** and generates actionable **Spacecraft Smoke Detector Placement Advisories** for ISS, Orion, and Lunar Gateway cabins.
 - **Real-Time Video Surveillance & Ingestion Engine**:
   - Ingests video streams (`.mp4`, `.webm`, `.avi`, `.mov`) from laboratory cameras, drop towers, and spacecraft cabin feeds.
-  - **Dynamic Baseline Lock ($I_0$)**: Automatically extracts ambient background reference from pre-ignition frames.
-  - **Autonomous Flight Safety Threat Classifier**:
-    - `CLEAR`: Nominal cabin environment.
-    - `ADVISORY: SMOLDERING TRACE`: Early slow-growth pyrolysis ($dA/dt < 4\,\text{cm}^2/\text{s}$).
-    - `WARNING: ACTIVE PLUME GROWTH`: Propagating flame wake ($dA/dt > 4\,\text{cm}^2/\text{s}$).
-    - `CRITICAL FIRE / ACCUMULATION`: Severe expansion ($dA/dt > 12\,\text{cm}^2/\text{s}$) or heavy ventilation recirculation ($>65\%$).
-  - **Flight Controller CapCom Event Log**: Live chronological console logging detection milestones with millisecond precision.
-  - **Dual-Mode Video Player**: Seamlessly toggles between **CV Augmented Inspection (Zero-codec canvas player)** and native HTML5 `<video>`.
-  - **Pre-Staged NASA Demo Video**: Bundled with microgravity smoke footage for instant 1-click execution.
-- **Cross-Experiment Benchmarking**: Synchronized side-by-side comparison across SAME-R Run 101 ($0\text{ cm/s}$ quiescent), SAME-R Run 104 ($2\text{ cm/s}$ duct), BASS-II Run 25 ($5\text{ cm/s}$ glovebox flow), and SAFFIRE-I ($20\text{ cm/s}$ Cygnus vehicle).
+  - **Pre-Staged NASA Demo Video**: Bundled with microgravity smoke footage in `frontend/public/demo_microgravity_smoke.mp4` for instant 1-click execution.
+
+---
+
+### Module 5: Interactive Spacecraft Fire Physics & Simulation Lab (`/simulation`)
+
+The Simulation Lab is a complete experimental simulation, benchmarking, and training suite organized into 5 major capabilities:
+
+```mermaid
+graph LR
+    SimLab["Spacecraft Simulation Lab\n(/simulation)"]
+    
+    SimLab --> F1["Feature 1: Virtual Combustion Sandbox\n(2D Streamlines • FLIR IR • Real-Time HUD)"]
+    SimLab --> F2["Feature 2: Safety Officer Challenges\n(3 NASA Missions • Live Scoring • Badges)"]
+    SimLab --> F3["Feature 3: Custom Rig Builder & Benchmark\n(1-Click NASA Ground Truth • Flight Dossier Export)"]
+    SimLab --> F4["Feature 4: Science Discovery Tours\n(Interactive Masterclasses • 1-Click Chamber Apply)"]
+    SimLab --> F5["Feature 5: Procedural Space Audio\n(Web Audio API • 55Hz Cabin Hum • Sound FX)"]
+```
+
+#### Feature 1: Virtual Combustion Sandbox (`InteractiveChamberCanvas.tsx`)
+- **Parametric Sliders**: Gravity ($0.0\text{g} \to 1.0\text{g}$ covering ISS $\mu\text{g}$, Moon $1/6\text{g}$, Mars $3/8\text{g}$, Earth $1\text{g}$), Oxygen Concentration ($12\%\text{--}40\%$), Forced Ventilation ($0\text{--}40\text{ cm/s}$), Pressure ($40\text{--}150\text{ kPa}$), and 5 Fuel Substrates (PMMA, SIBAL, Kapton, Silicone, Methanol).
+- **Live Multi-Spectral Camera Modes**:
+  - *Visible Optical*: Natural color flame luminescence, soot particle dispersion, and pyrolysis smoke drift.
+  - *FLIR Thermal Infrared*: False-color temperature gradients with calibrated isotherm bands ($200^\circ\text{C} \to 1400^\circ\text{C}$).
+  - *Fluid Streamlines*: Animated Eulerian vector field illustrating convective buoyancy vs forced ventilation draft.
+- **Real-Time Physics HUD**: Live calculations of flame spread rate ($V_f$), flame temperature, Reynolds number ($Re$), Damköhler number ($Da$), optical depth ($\tau$), with automated radiative quenching & blowoff alerts.
+
+#### Feature 2: Gamified NASA Flight Safety Officer Challenges (`MissionChallengeDeck.tsx`)
+Three interactive flight missions with live scoring, parameter verification, and Flight Clearance Badges:
+1. **Mission 1: Artemis Lunar Habitat Life-Support Tuning ($1/6\text{ g}$)**: Configure atmosphere ($70.3\text{ kPa}$, $24\%\,\text{O}_2$) to prevent catastrophic fabric flame spread while preserving astronaut EVA efficiency.
+2. **Mission 2: ISS Microgravity Glovebox Fire Extinction Sprint ($0\text{ g}$)**: Quench a PMMA flame within 45 seconds using inert gas draft while preventing toxic smoke blowoff into cabin ventilation.
+3. **Mission 3: SmokeWise Avionics Detection Trap ($0\text{ g}$)**: Detect Kapton pyrolysis smoke within 120 seconds before aerosol coagulation blinds optical sensors.
+
+#### Feature 3: Custom Experiment Rig Builder & NASA PSI Benchmark (`CustomExperimentBuilder.tsx`)
+- **Hardware & Geometry Configuration**: Flow Duct (MSG Tunnel), Spherical Vessel (CIR Chamber), Cargo Panel (Saffire Bay), or Droplet Cage (FLEX Rig).
+- **1-Click NASA PSI Ground Truth Benchmark**: Evaluates similarity percentage $S$, coverage $C$, spread rate delta ($\Delta V_f$), flame temperature delta, and physical divergence alerts against historical NASA flight datasets (`BASS-II`, `SAFFIRE-IV`, `FLEX-2`).
+- **Flight Dossier Export**: Downloads formatted JSON flight test dossiers with 1-click execution.
+- **Chamber Handoff**: "Load into 2D Chamber" instantly applies the custom rig parameters to the live simulator.
+
+#### Feature 4: Interactive Guided Science Discovery Tours (`DiscoveryToursDeck.tsx`)
+Interactive masterclasses with step-by-step navigation, governing equations, core takeaways, and 1-click canvas demonstrations:
+1. *"Why Don't Flames Rise in Space?"*: Buoyancy elimination ($Gr \to 0$), molecular diffusion isotropy, and low-$\text{O}_2$ stealth persistence.
+2. *"The Soot Shell Mystery"*: Extended microgravity residence time, thermophoretic repulsion force, and fibrous soot agglomeration.
+3. *"The Smoke Aging Time-Lapse & Sensor Deception"*: Aerosol coagulation from 10 nm to $>1000$ nm, Rayleigh-to-Mie optical transitions, and NASA multi-angle polarization detection.
+
+#### Feature 5: Procedural Spaceflight Audio Immersion Synthesizer (`simulationAudioService.ts`)
+- Zero external audio assets—100% synthesized in real time via the Web Audio API:
+  - **Cabin Ventilation Hum**: 55 Hz sine drone combined with lowpass-filtered white noise air turbulence.
+  - **Ignition Whoosh**: Exponential frequency decay triangle oscillator.
+  - **Extinction Quench Hiss**: Bandpass-filtered decaying pink noise burst.
+  - **Master Caution Chime**: Dual-tone 880 Hz / 1175 Hz emergency alert.
+  - **CapCom Radio Clicks**: High-frequency square wave transmission burst.
+- Interactive header dock featuring **SFX: ON / OFF** and **Cabin Hum: RUNNING / STANDBY** toggles.
 
 ---
 
@@ -140,7 +214,7 @@ IGNIS-G (FIRELINE) integrates four core scientific capabilities solving distinct
 
 > **Paper Title**: *Resolving Hallucination on NASA Data: A Layered Epistemic-Grounding Architecture for Microgravity Combustion Decision Support*  
 > **Authors**: Team Astro_Sapien • NASA International Space Apps Challenge • November 2026  
-> **Open Access Code & Findings**: [github.com/Qudit-Labs/Astro_Sapien](https://github.com/Qudit-Labs/Astro_Sapien)
+> **Full Manuscript PDF**: [`Resolving_Hallucination_on_NASA_Data.pdf`](./Resolving_Hallucination_on_NASA_Data.pdf)
 
 Language models deployed as research assistants over specialized scientific archives frequently fabricate citations, invent non-existent sensor values, and silently carry findings across mismatched gravity regimes. In spacecraft fire safety—where experimental regimes are narrow and sensor coverage is sparse—such hallucinations can directly compromise critical life-support and vehicle design decisions.
 
@@ -184,8 +258,6 @@ Every statement generated by the system carries strictly one mandatory epistemic
 
 ### C. Grounding Benchmark Results (FIRELINE vs. Raw Foundation LLM)
 
-Evaluation across a 30-query stress-test battery against the live database demonstrates the impact of architectural grounding over raw LLM generation:
-
 | Grounding Metric | Raw Foundation LLM | IGNIS-G (FIRELINE) | Improvement |
 | :--- | :---: | :---: | :---: |
 | **Citation Precision** | 18.4% | **100.0%** | $+81.6\%$ |
@@ -194,68 +266,34 @@ Evaluation across a 30-query stress-test battery against the live database demon
 | **Partial-Gravity Boundary Adherence** | 0.0% | **100.0%** | $+100.0\%$ |
 | **Hallucination Rate** *(lower is better)* | 38.5% | **0.0%** | $-38.5\%$ |
 
-> **Core Design Principle**: *"A scientific decision-support system must prefer to flag over to fill."* Unmeasured sensor channels, sparse samples, and untested gravity regimes are surfaced explicitly rather than smoothed over or imputed.
-
 ---
 
 ## 4. Advanced AI & Voice Capabilities
 
 ### LangChain Conversational SQL Agent (`POST /api/v1/agent/query`)
 - **Direct Database Reasoning**: Connects to the live Supabase PostgreSQL database using `SQLDatabase.from_uri` via SQLAlchemy.
-- **Deterministic Translation**: Uses Google Gemini (`gemini-2.5-flash`, temperature 0.0) with LangChain's `create_sql_agent` and `SQLDatabaseToolkit` to translate natural language research questions into valid, read-only SQL queries.
+- **Deterministic Translation**: Uses Google Gemini (`gemini-2.5-flash`, temperature 0.0) with LangChain's `create_sql_agent` to translate natural language research questions into valid, read-only SQL queries.
 - **Read-Only Scope Protection**: Strictly restricted to:
   ```python
   include_tables=["investigations", "sources", "test_runs", "measurements", "findings"]
   ```
 - **Intermediate Step Transparency**: Returns the full reasoning chain, inspected schema, generated SQL query, and execution output.
-- **Quota & Network Resilience**: Features a deterministic SQL fallback that runs live queries against Supabase even if the external LLM hits rate limits (429).
 
 ### Hands-Free Voice AI CapCom Assistant
 - **Hybrid Real-Time & Multimodal STT**:
   - **Primary**: Native W3C Web Speech API (`webkitSpeechRecognition`) for instant, zero-latency live text streaming.
-  - **Multimodal Gemini 2.5 Flash Fallback**: Records live microphone audio continuously via `MediaRecorder` (`audio/webm`, `audio/wav`). If the browser's speech recognition emits silence or fails, the audio is automatically transcribed via `POST /api/v1/voice/transcribe` with Gemini 2.5 Flash, preserving all NASA acronyms (BASS-II, LOC, PMMA, SAFFIRE).
+  - **Multimodal Gemini 2.5 Flash Fallback**: Records live microphone audio continuously via `MediaRecorder` (`audio/webm`, `audio/wav`). If the browser's speech recognition fails or emits silence, the audio buffer is automatically dispatched to `POST /api/v1/voice/transcribe` with Gemini 2.5 Flash, preserving all NASA acronyms.
 - **Live Web Audio RMS Volume Telemetry**: Built-in Web Audio API `AnalyserNode` computes real-time microphone volume, dynamically modulating the aerospace waveform visualizer as the researcher speaks.
-- **Push-to-Talk & Silence Auto-Dispatch**:
-  - Automatically finalizes and transmits questions after ~2.2 seconds of silence.
-  - Clicking the active microphone button instantly finalizes and transmits what was spoken.
-- **Aerospace Text-to-Speech (TTS) Normalization**: A dedicated speech cleaner converts complex scientific text and LaTeX equations into natural spoken English for NASA CapCom audio:
-  - $\text{CO}_2 \rightarrow$ *"carbon dioxide"*
-  - $\mu\text{g} \rightarrow$ *"microgravity"*
-  - $d_{mm} \rightarrow$ *"mass median diameter"*
-  - Strips citation tags and markdown delimiters for smooth audio playback.
-- **Live Audio Frequency Waveform Visualizer**: Renders dynamic animated frequency bars that pulse in alert-amber during speech input and glow in cyber-cyan during CapCom transmission.
-- **One-Click Astronaut Voice Commands**: Pre-programmed scientific flight inquiries with automated speech dispatch and audio response readout.
-- **On-Demand Message Audio Replay**: Dedicated `Voice` / `Stop` buttons on every assistant message bubble.
-
-### Grounded Gemini 2.5 Flash RAG Engine
-- **Mandatory Scientific Certainty Labels**: Every statement generated by the RAG synthesizer is labeled with one of:
-  - `[NASA observation]`
-  - `[Calculated result]`
-  - `[AI interpretation]`
-  - `[Research implication]`
-  - `[Unknown]`
-- **Partial-Gravity Guardrails**: Prohibits extrapolating microgravity (ISS LEO) or $1\text{ g}$ ground data to Lunar ($1/6\text{ g}$) or Martian ($3/8\text{ g}$) environments without explicit qualification of the experimental gap.
-- **Traceable Inline Citations**: Every finding includes exact inline citations (e.g., `[PSI-25 / NASA-TM-20210011385, p. 75]`).
+- **Aerospace Text-to-Speech (TTS) Normalization**: A dedicated speech cleaner converts complex scientific text and LaTeX equations into natural spoken English for NASA CapCom audio ($\text{CO}_2 \rightarrow$ *"carbon dioxide"*, $\mu\text{g} \rightarrow$ *"microgravity"*, $d_{mm} \rightarrow$ *"mass median diameter"*).
 
 ---
 
 ## 5. Mission-Control Aerospace GUI (v2.0)
 
-The user interface delivers a mission-control intelligence console designed for aerospace researchers:
 - **Orbital Telemetry HUD Ticker**: Positioned directly beneath the header, streaming live mission telemetry, quad-engine statuses (`ENGINES: FLAME • MATCH • SMOKE • VISION`), active gravity regime (`ISS LEO μg`), and partial-gravity guardrail alerts.
-- **Grouped Flight Navigation Rail**: Sectioned into `MISSION CONTROL`, `QUAD-CAPABILITY SUITE [μg]`, `INTELLIGENCE & SYNTHESIS`, and `SECURITY & ACCESS`, featuring active laser indicators, module badges (`M1`, `M2`, `M3`, `M4`, `LIVE RAG`, `ID PASS`), and smooth collapse-to-rail toggle.
-- **Real-Time Video Surveillance HUD (`/smokevision`)**: Live video playback synchronized with OpenCV computer vision inference, displaying live boundary contours, centroid crosshair reticles, optical depth heatmaps, CapCom chronological event logs, and spatial accumulation dead-zone overlays.
-- **Interactive Spacecraft Fire Physics & Simulation Lab (`/simulation`)**:
-  - **Virtual Combustion Sandbox**: Parametric real-time sliders for gravity ($0\text{g} \to 1.5\text{g}$ covering ISS $\mu\text{g}$, Moon $1/6\text{g}$, Mars $3/8\text{g}$, Earth $1\text{g}$), oxygen concentration ($12\%\text{--}40\%$), airflow velocity ($0\text{--}40\text{ cm/s}$), pressure ($40\text{--}150\text{ kPa}$), and 5 fuel materials.
-  - **Live Multi-Spectral Camera Modes**: Toggle seamlessly between Visible Optical, FLIR False-Color Thermal Infrared ($200^\circ\text{C} \to 1200^\circ\text{C}$ isotherms), and convective flow streamlines.
-  - **Real-Time Physics HUD**: Dynamic computation of flame spread rate ($V_f$), flame temperature, Reynolds number ($Re$), Damköhler number ($Da$), optical depth ($\tau$), with automated radiative quenching & blowoff alerts.
-  - **Gamified Flight Safety Officer Challenges**: 3 high-stakes interactive NASA missions (Artemis Lunar Base Life-Support Tuning, ISS Glovebox Suppression Sprint, SmokeWise Avionics Detection Trap) with real-time scoring, pass/fail evaluation, and Flight Clearance Badges.
-  - **Custom Experiment Rig Builder & NASA PSI Benchmark**: Design custom experiment rig hardware (flow duct, spherical vessel, cargo panel, droplet cage), predict flame spread and core temperature, run 1-click deterministic benchmarks against historical NASA flight datasets (`BASS-II`, `SAFFIRE-IV`, `FLEX-2`), inspect similarity ($S$) and divergence metrics, and export flight-ready JSON Flight Test Dossiers.
-  - **Interactive Guided Science Discovery Tours**: Interactive step-by-step masterclasses (*"Why Don't Flames Rise in Space?"*, *"The Soot Shell Mystery"*, and *"The Smoke Aging Time-Lapse & Sensor Deception"*) complete with governing physics formulas, core takeaways, and 1-click parameter application directly to the live 2D chamber canvas.
-  - **Procedural Spaceflight Audio Synthesizer (Web Audio API)**: Zero-asset procedural synthesizer producing authentic spacecraft cabin ventilation hum (55 Hz drone + low-pass air turbulence), flame ignition whoosh, radiative extinction quench hiss, dual-tone master caution alarm, and CapCom radio clicks with interactive SFX toggles.
-- **Dual-Burn 2D Combustion Chamber Canvas (`/testmatch`)**: Real-time canvas rendering spherical microgravity vs buoyant Earth flame dynamics, thermal gradients, and airflow vectors in a synchronized side-by-side split screen.
+- **Grouped Flight Navigation Rail**: Sectioned into `MISSION CONTROL`, `QUAD-CAPABILITY SUITE [μg]`, `SIMULATION LAB`, `INTELLIGENCE & SYNTHESIS`, and `SECURITY & ACCESS`.
+- **Real-Time Video Surveillance HUD (`/smokevision`)**: Live video playback synchronized with OpenCV computer vision inference, displaying live boundary contours, centroid crosshair reticles, optical depth heatmaps, and spatial accumulation dead-zone overlays.
 - **Interactive Holographic Researcher Pass (`/auth`)**: Live digital badge preview rendering dynamic researcher initials, institutional affiliation (NASA GRC, Ames, ESA, JAXA, MIT, Stanford, DLR), clearance tier, token identifier, and security barcode in real time.
-- **Dark Glassmorphic HUD Panels**: High-contrast dark space backgrounds (`#0B1D36` / `#10243D`) with hover lifts, animated glow borders (`hud-panel-flame`, `hud-panel-smoke`), and radar sweeps.
 
 ---
 
@@ -294,8 +332,8 @@ Astro_Sapien/
 │   │   └── main.py                # FastAPI REST API surface with CORS & video ingestion
 │   ├── data/                      # Raw and processed NASA records
 │   ├── tests/
-│   │   ├── test_backend.py        # Automated test suite (100% pass rate)
-│   │   └── test_smokevision.py    # SMOKEVISION CV, video & accumulation test suite
+│   │   ├── test_backend.py        # Automated test suite (16 tests, 100% pass rate)
+│   │   └── test_smokevision.py    # SMOKEVISION CV, video & accumulation test suite (5 tests, 100% pass rate)
 │   ├── pytest.ini                 # Pytest configuration
 │   └── requirements.txt           # Python dependencies (OpenCV, SciPy, LangChain, FastAPI)
 │
@@ -304,19 +342,26 @@ Astro_Sapien/
 │   │   ├── demo_microgravity_smoke.mp4  # Pre-staged NASA-style microgravity smoke video
 │   │   └── demo_microgravity_smoke.webm # High-compatibility WebM video
 │   ├── src/
-│   │   ├── components/            # Reusable aerospace HUD UI library
+│   │   ├── components/            # Aerospace HUD UI library
+│   │   │   ├── simulation/        # Interactive Simulation Lab components
+│   │   │   │   ├── InteractiveChamberCanvas.tsx  # 2D physics engine & FLIR Thermal view
+│   │   │   │   ├── MissionChallengeDeck.tsx      # Gamified Safety Officer Challenges
+│   │   │   │   ├── CustomExperimentBuilder.tsx   # Custom Rig Builder & NASA Benchmark
+│   │   │   │   └── DiscoveryToursDeck.tsx        # Science Discovery Tours Deck
 │   │   │   ├── common/            # CombustionChamberCanvas, VoiceWaveformVisualizer, KPIStatCard
 │   │   │   └── layout/            # AppShell (Telemetry Ticker), Sidebar (Laser Rail), Header
-│   │   ├── context/               # AuthContext (JWT & profiles), ResearchDataContext
-│   │   ├── data/                  # ApiResearchDataProvider & MockResearchDataProvider
-│   │   ├── pages/                 # Overview, Explorer, FIRELINE, TESTMATCH, SMOKewise, SMOKEVISION, Assistant, Auth
-│   │   └── services/              # smokeVisionService.ts, voiceAssistant.ts, aiAssistantService.ts
+│   │   ├── pages/                 # SimulationLabPage, Overview, Explorer, FIRELINE, TESTMATCH, SMOKewise, SMOKEVISION, Assistant, Auth
+│   │   └── services/              # simulationAudioService.ts, smokeVisionService.ts, voiceAssistant.ts
 │   ├── package.json               # Frontend dependencies & scripts
 │   ├── vite.config.ts             # Vite bundle splitting & path aliases
-│   ├── tailwind.config.js         # Aerospace theme configuration
-│   └── tsconfig.json              # TypeScript configuration
+│   └── tailwind.config.js         # Aerospace theme configuration
 │
-├── shared/schemas/                # Canonical JSON Schemas
+├── video_assets/                  # Official Presentation & Demo Video Assets
+│   ├── FIRELINE_NASA_SpaceApps_Presentation.mp4 # Full 1080p rendered master presentation video
+│   ├── audio/                     # Scene voiceovers and background score
+│   └── rendered_clips/            # Rendered video clips (01 through 09)
+│
+├── Resolving_Hallucination_on_NASA_Data.pdf # Academic Research Paper
 ├── openapi.json                   # Exported OpenAPI 3.1 specification
 └── README.md
 ```
@@ -361,9 +406,9 @@ Astro_Sapien/
 
 5. Run the automated pytest suite:
    ```bash
-   python -m pytest tests/test_backend.py -v
+   python -m pytest tests/test_backend.py tests/test_smokevision.py -v
    ```
-   *(Expected result: 13/13 passed).*
+   *(Expected result: 21/21 passed).*
 
 6. Start the FastAPI backend server:
    ```bash
@@ -395,6 +440,7 @@ Astro_Sapien/
    npm run dev
    ```
    - Accessible at `http://localhost:5173`
+   - Simulation Lab accessible at `http://localhost:5173/simulation`
 
 4. Production build:
    ```bash
@@ -444,9 +490,9 @@ The complete OpenAPI 3.1 specification is maintained in [`openapi.json`](./opena
 
 ## 10. Quality Assurance & Scientific Integrity
 
-- **Automated Backend Tests (`pytest -v`)**: 16/16 passed across all investigations, FTS search, TESTMATCH comparisons, SMOKewise aggregations, SMOKEVISION plume kinematics, TEM particle sizing, video surveillance ingestion, authentication endpoints, Gemini RAG, LangChain SQL agent, and Gemini voice transcription.
-- **Automated Frontend Tests (`vitest`)**: 16/16 passed across data providers, TESTMATCH scoring engine, and Voice AI speech normalization.
-- **TypeScript Type Safety**: `npm run typecheck` passed (0 TypeScript errors with strict typing).
+- **Automated Backend Tests (`pytest -v`)**: **21/21 passed (100%)** across all investigations, FTS search, TESTMATCH comparisons, SMOKewise aggregations, SMOKEVISION plume kinematics, TEM particle sizing, video surveillance ingestion, authentication endpoints, Gemini RAG, LangChain SQL agent, and Gemini voice transcription.
+- **Automated Frontend Tests (`vitest`)**: **16/16 passed (100%)** across data providers, TESTMATCH scoring engine, and Voice AI speech normalization.
+- **TypeScript Type Safety**: `npm run typecheck` & `npm run build` passed with **0 errors**.
 - **Deterministic Evaluation Battery**: In a 30-query battery run against the live database with zero language-model calls, all 30 queries passed (100% pass rate).
 - **Zero-Imputation Policy**: Missing experimental parameters are strictly preserved as `null` or `not_available` to prevent false equivalence conclusions.
 - **Scientific Honesty**: Explicit partial-gravity notices, physical calibration guards ($\tau = -\ln(I/I_0)$), and domain separation rules enforce that microgravity glovebox or Cygnus results are never conflated with Lunar ($1/6\text{ g}$) or Martian ($3/8\text{ g}$) environments without documented caveats.
