@@ -195,4 +195,87 @@ export class MockAiAssistantService implements AiAssistantService {
   }
 }
 
-export const aiAssistantService: AiAssistantService = new MockAiAssistantService();
+export class ApiAiAssistantService implements AiAssistantService {
+  readonly mode = 'api' as const;
+  private readonly baseUrl: string;
+
+  constructor(baseUrl?: string) {
+    this.baseUrl = (
+      baseUrl ||
+      (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) ||
+      'http://localhost:8000/api/v1'
+    ).replace(/\/+$/, '');
+  }
+
+  async askQuestion(
+    query: string,
+    context: AssistantQueryContext
+  ): Promise<AssistantMessage> {
+    try {
+      const response = await fetch(`${this.baseUrl}/assistant/query`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ question: query }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      const citations: AssistantCitation[] = (data.citations || []).map(
+        (c: { source_id: string; title: string; url: string; psi_id?: string }) => ({
+          sourceId: c.source_id,
+          title: c.title,
+          url: c.url,
+          investigationId: c.psi_id,
+        })
+      );
+
+      const evidenceLabels: EvidenceType[] = [];
+      const ans = data.answer || '';
+      if (ans.includes('[NASA observation]')) evidenceLabels.push('observed');
+      if (ans.includes('[Calculated result]')) evidenceLabels.push('calculated');
+      if (ans.includes('[AI interpretation]')) evidenceLabels.push('interpretation');
+      if (ans.includes('[Research implication]')) evidenceLabels.push('research_implication');
+
+      return {
+        id: `MSG-${Date.now()}`,
+        role: 'assistant',
+        content: ans,
+        timestamp: new Date().toISOString(),
+        evidenceLabels: evidenceLabels.length > 0 ? evidenceLabels : ['interpretation'],
+        citations,
+        isMockGenerated: data.mode === 'deterministic_evidence_fallback',
+      };
+    } catch (err: any) {
+      console.warn(
+        '[ApiAiAssistantService] Backend query failed, falling back to local synthesis:',
+        err
+      );
+      const mockFallback = new MockAiAssistantService();
+      const res = await mockFallback.askQuestion(query, context);
+      return {
+        ...res,
+        content: `*(Backend live connection unavailable: ${err.message || 'offline'}. Showing local offline synthesis)*\n\n${res.content}`,
+      };
+    }
+  }
+}
+
+export function getAiAssistantService(): AiAssistantService {
+  const mode = (
+    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_DATA_MODE) ||
+    'mock'
+  ).toLowerCase();
+  if (mode === 'api') {
+    return new ApiAiAssistantService();
+  }
+  return new MockAiAssistantService();
+}
+
+export const aiAssistantService: AiAssistantService = getAiAssistantService();
