@@ -17,6 +17,17 @@ dist-ssr
 .env
 .env.*
 !.env.example
+*.env
+
+# Python virtualenvs, bytecode & databases
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.db
+*.sqlite3
+*.zip
 
 # Editor directories and files
 .vscode/*
