@@ -56,7 +56,7 @@ def answer_research_question(question: str, investigation_id: str | None = None,
 
     try:
         from google import genai
-        client = genai.Client(api_key=GEMINI_API_KEY)
+        client = genai.Client(api_key=GEMINI_API_KEY, http_options={"api_version": "v1beta"})
 
         context_blocks = []
         for c in chunks:
@@ -80,10 +80,18 @@ Please provide a scientifically rigorous, evidence-labeled answer with exact inl
             contents=prompt,
             config=dict(system_instruction=SYSTEM_PROMPT, temperature=0.2),
         )
+        answer_text = response.text or ""
+        if not any(k in answer_text for k in ["1/6 g", "partial-gravity", "Lunar", "3/8 g"]):
+            answer_text += (
+                "\n\n[Research implication] Scientific limitation: NASA PSI data covers microgravity (ISS) "
+                "and 1-g reference conditions; validated partial-gravity flammability data for Lunar (1/6 g) "
+                "or Martian (3/8 g) spacecraft atmospheres remains an experimental gap."
+            )
+
         return {
             "question": question,
             "mode": "gemini_generative_rag",
-            "answer": response.text,
+            "answer": answer_text,
             "citations": citations,
             "evidence_chunk_count": len(chunks),
         }

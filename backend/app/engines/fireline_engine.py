@@ -32,6 +32,28 @@ def search_evidence_chunks(
         with conn.cursor() as cur:
             cur.execute(sql, params)
             rows = cur.fetchall()
+            if not rows:
+                stop_words = {"what", "is", "the", "for", "in", "and", "with", "this", "that", "how", "are", "from", "can", "does", "where"}
+                keywords = [w for w in re.findall(r"\w+", clean_query) if w.lower() not in stop_words and len(w) > 2]
+                if keywords:
+                    ts_query = " | ".join(keywords)
+                    fallback_sql = """
+                        SELECT c.source_id, c.investigation_id, c.page_number, c.section_title, c.content_text,
+                               s.title AS source_title, s.psi_id, s.url AS source_url,
+                               ts_rank(c.search_tsv, to_tsquery('english', %s)) AS rank
+                        FROM evidence_chunks c
+                        JOIN sources s ON c.source_id = s.id
+                        WHERE c.search_tsv @@ to_tsquery('english', %s)
+                    """
+                    fb_params = [ts_query, ts_query]
+                    if investigation_id:
+                        fallback_sql += " AND c.investigation_id = %s"
+                        fb_params.append(investigation_id)
+                    fallback_sql += " ORDER BY rank DESC LIMIT %s;"
+                    fb_params.append(limit)
+                    cur.execute(fallback_sql, fb_params)
+                    rows = cur.fetchall()
+
             return [dict(r) for r in rows]
 
 
