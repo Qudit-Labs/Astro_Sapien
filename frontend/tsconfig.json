@@ -23,5 +23,6 @@
       "@datasets/*": ["../datasets/*"]
     }
   },
-  "include": ["src", "../shared", "../datasets", "../scripts"]
+  "include": ["src", "../shared/types"],
+  "exclude": ["../shared/**/*.test.ts", "../shared/types/**/*.test.ts", "../scripts"]
 }
