@@ -7,7 +7,7 @@
 [![Voice AI CapCom](https://img.shields.io/badge/Voice%20AI-CapCom%20Bidirectional-FC3D21.svg)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 [![Aerospace UI](https://img.shields.io/badge/GUI-Mission%20Control%20HUD-38BDF8.svg)](http://localhost:5173/)
 
-**Team Astro_Sapien • NASA Space Apps / HackAthlone 2026**
+**Team Astro_Sapien • NASA Space Apps Challenge 2026**
 
 ---
 # 🚀 WATCH FIRELINE IN ACTION — PROJECT DEMO VIDEO
@@ -375,4 +375,8 @@ The complete OpenAPI 3.1 specification is maintained in [`openapi.json`](./opena
 
 ## 10. License & Attribution
 
-Developed by **Team Astro_Sapien** for NASA Space Apps / HackAthlone 2026. Microgravity combustion, detection, and suppression data sourced from the **NASA Physical Sciences Informatics (PSI)** system and the **NASA Technical Reports Server (NTRS)**.
+Developed by **Team Astro_Sapien** for NASA Space Apps Challenge 2026.
+**Local Event Location:** Islamabad
+**Team Members**: Muhammad Taha Nawab, Muhammad Zain Nadeem
+
+Microgravity combustion, detection, and suppression data sourced from the **NASA Physical Sciences Informatics (PSI)** system and the **NASA Technical Reports Server (NTRS)**.
