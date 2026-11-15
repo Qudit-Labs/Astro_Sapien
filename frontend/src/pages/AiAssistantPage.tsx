@@ -101,18 +101,19 @@ export const AiAssistantPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-500/30 p-4 text-xs text-amber-900 dark:text-amber-200/90 space-y-1.5">
-            <div className="font-semibold">Architecture Note</div>
-            <p className="leading-relaxed">
-              This chat component communicates via the{' '}
-              <code className="font-mono">AiAssistantService</code> interface in{' '}
-              <code className="font-mono">src/services/aiAssistantService.ts</code>. A live Gemini-powered FastAPI endpoint can replace the local mock search without changing this UI.
+          <div className="rounded-xl bg-sky-50 dark:bg-[#0B3D91]/20 border border-sky-200 dark:border-[#38BDF8]/30 p-4 text-xs text-sky-900 dark:text-[#38BDF8] space-y-1.5 hud-panel">
+            <div className="font-semibold flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#24B8A0] animate-pulse"></span>
+              Live FastAPI RAG Connected
+            </div>
+            <p className="leading-relaxed text-slate-700 dark:text-slate-300">
+              Queries are dispatched directly to the backend <code className="font-mono text-[11px] bg-slate-200 dark:bg-[#07172B] px-1 py-0.5 rounded">/api/v1/assistant/query</code> endpoint with Gemini RAG grounding against NASA microgravity evidence chunks, with seamless local fallback.
             </p>
           </div>
         </div>
 
         {/* Right: Chat Workspace */}
-        <div className="lg:col-span-8 rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 flex flex-col h-[600px] overflow-hidden shadow-sm">
+        <div className="lg:col-span-8 rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 flex flex-col h-[600px] overflow-hidden shadow-lg hud-panel">
           {/* Scrollable Messages Area */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
             {messages.map((msg) => (

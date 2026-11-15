@@ -41,8 +41,8 @@ export const FirelineLogo: React.FC<FirelineLogoProps> = ({ compact = false }) =
             <span className="font-bold tracking-wider text-sm text-slate-900 dark:text-[#F4F7FC]">
               FIRELINE
             </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0B3D91]/20 text-[#0B3D91] dark:bg-[#38BDF8]/15 dark:text-[#38BDF8] font-semibold">
-              v1.0
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0B3D91]/20 text-[#0B3D91] dark:bg-[#38BDF8]/15 dark:text-[#38BDF8] font-bold border border-[#38BDF8]/30">
+              v2.0
             </span>
           </div>
           <span className="block text-[10px] text-slate-500 dark:text-[#9FB1C7] tracking-wide">

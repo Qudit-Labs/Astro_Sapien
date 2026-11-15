@@ -19,7 +19,7 @@ export const ComparisonScoreCard: React.FC<ComparisonScoreCardProps> = ({
   const coveragePct = Math.round(dataCoverage * 100);
 
   return (
-    <div className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5 space-y-4">
+    <div className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5 space-y-4 hud-panel shadow-md">
       <div className="flex items-start justify-between gap-2">
         <div>
           <div className="flex items-center gap-2">

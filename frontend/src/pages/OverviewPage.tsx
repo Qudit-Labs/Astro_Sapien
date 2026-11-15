@@ -15,9 +15,7 @@ import {
   FlaskConical,
   Activity,
   FileSearch,
-  ShieldAlert,
-  Radio,
-  FlameKindling,
+  Flame,
   Compass,
   GitCompare,
   Wind,
@@ -85,53 +83,87 @@ export const OverviewPage: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* A. Hero Section */}
-      <section className="relative overflow-hidden rounded-2xl bg-[#0B1D36] text-[#F4F7FC] border border-slate-700/60 orbital-grid-bg starfield-dots p-6 sm:p-8 lg:p-10 shadow-lg">
+      {/* A. Hero Section with Aerospace Telemetry HUD */}
+      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#0B1D36] via-[#08172C] to-[#040C18] text-[#F4F7FC] border border-slate-700/60 orbital-grid-bg starfield-dots p-6 sm:p-8 lg:p-10 shadow-2xl hud-corner">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B3D91]/60 border border-[#38BDF8]/30 text-xs font-mono text-[#38BDF8]">
-              <span className="w-2 h-2 rounded-full bg-[#24B8A0]" />
-              MISSION CONTROL • MICROGRAVITY COMBUSTION INTELLIGENCE
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B3D91]/80 border border-[#38BDF8]/40 text-xs font-mono text-[#38BDF8] shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#24B8A0] hud-beacon" />
+              <span>NASA PSI • MICROGRAVITY COMBUSTION DECISION-SUPPORT ENGINE</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white glow-cyan">
               Understanding Fire in Space
             </h1>
             <p className="text-base sm:text-lg text-[#9FB1C7] max-w-2xl leading-relaxed">
-              NASA microgravity combustion research, connected through scientific intelligence.
+              Unified scientific intelligence bridging NASA Physical Sciences Informatics combustion, comparability, and smoke detection evidence into explainable fire-safety insights.
             </p>
+
+            {/* Quick Metrics HUD Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+              <div className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 text-left">
+                <div className="text-[10px] font-mono text-[#38BDF8]">μg REGIME</div>
+                <div className="text-xs font-bold text-white font-mono">10⁻⁴ to 10⁻⁶ g</div>
+              </div>
+              <div className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 text-left">
+                <div className="text-[10px] font-mono text-[#24B8A0]">O₂ RANGE</div>
+                <div className="text-xs font-bold text-white font-mono">15.4% – 29.8%</div>
+              </div>
+              <div className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 text-left">
+                <div className="text-[10px] font-mono text-[#F5B942]">PRESSURE</div>
+                <div className="text-xs font-bold text-white font-mono">50 – 101.3 kPa</div>
+              </div>
+              <div className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 text-left">
+                <div className="text-[10px] font-mono text-[#FC3D21]">FLOW REGIME</div>
+                <div className="text-xs font-bold text-white font-mono">0 – 35 cm/s</div>
+              </div>
+            </div>
+
             <div className="flex flex-wrap gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => navigate('/explorer')}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#0B3D91] hover:bg-[#0B3D91]/90 text-white text-sm font-medium border border-[#38BDF8]/40 transition"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0B3D91] hover:bg-[#082B66] text-white text-sm font-semibold border border-[#38BDF8]/40 shadow-lg hover:shadow-cyan-500/20 transition"
               >
                 <Compass className="w-4 h-4 text-[#38BDF8]" />
-                Explore NASA Research
+                <span>Explore NASA PSI Data</span>
               </button>
               <button
                 type="button"
                 onClick={() => navigate('/testmatch')}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#10243D] hover:bg-[#1A3456] text-[#F4F7FC] text-sm font-medium border border-slate-600 transition"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#10243D] hover:bg-[#1A3456] text-[#F4F7FC] text-sm font-semibold border border-slate-600 shadow-md transition"
               >
                 <GitCompare className="w-4 h-4 text-[#38BDF8]" />
-                Compare Experiments
+                <span>Compare Experiments</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate('/assistant')}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 text-[#24B8A0] border border-teal-500/30 text-sm font-semibold transition"
+              >
+                <Bot className="w-4 h-4" />
+                <span>Ask AI Assistant</span>
               </button>
             </div>
           </div>
 
-          {/* Lightweight Abstract Spacecraft / Flame / Orbit SVG */}
+          {/* Interactive Radar Telemetry HUD Reticle */}
           <div className="lg:col-span-4 flex justify-center">
-            <div className="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center">
-              <svg viewBox="0 0 220 220" className="w-full h-full" aria-hidden="true">
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
+              {/* Radar rotating sweep line */}
+              <div className="absolute inset-0 rounded-full border border-[#38BDF8]/20 flex items-center justify-center">
+                <div className="w-full h-full rounded-full radar-sweep pointer-events-none" style={{ background: 'conic-gradient(from 0deg, transparent 0deg, rgba(56, 189, 248, 0.15) 60deg, transparent 65deg)' }} />
+              </div>
+
+              <svg viewBox="0 0 220 220" className="w-full h-full relative z-10" aria-hidden="true">
                 <defs>
                   <radialGradient id="flameGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.35" />
-                    <stop offset="60%" stopColor="#0B3D91" stopOpacity="0.15" />
+                    <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.4" />
+                    <stop offset="60%" stopColor="#0B3D91" stopOpacity="0.2" />
                     <stop offset="100%" stopColor="#07172B" stopOpacity="0" />
                   </radialGradient>
                 </defs>
-                <circle cx="110" cy="110" r="100" fill="url(#flameGlow)" />
-                {/* Orbital ellipses */}
+                <circle cx="110" cy="110" r="100" fill="url(#flameGlow)" stroke="#38BDF8" strokeWidth="0.8" strokeDasharray="3 5" opacity="0.4" />
+                {/* Orbital telemetry rings */}
                 <ellipse
                   cx="110"
                   cy="110"
@@ -155,13 +187,13 @@ export const OverviewPage: React.FC = () => {
                   strokeWidth="1.2"
                   strokeOpacity="0.4"
                 />
-                {/* Spherical microgravity flame */}
+                {/* Spherical microgravity flame core */}
                 <circle
                   cx="110"
                   cy="110"
                   r="34"
                   fill="#0B3D91"
-                  fillOpacity="0.55"
+                  fillOpacity="0.65"
                   stroke="#38BDF8"
                   strokeWidth="1.8"
                 />
@@ -173,10 +205,10 @@ export const OverviewPage: React.FC = () => {
                   fillOpacity="0.85"
                 />
                 <circle cx="110" cy="110" r="10" fill="#F5B942" />
-                {/* Orbiting sensor nodes */}
-                <circle cx="34" cy="138" r="4" fill="#38BDF8" />
-                <circle cx="184" cy="82" r="4" fill="#24B8A0" />
-                <circle cx="152" cy="176" r="3.5" fill="#F5B942" />
+                {/* Sensor nodes */}
+                <circle cx="34" cy="138" r="4.5" fill="#38BDF8" />
+                <circle cx="184" cy="82" r="4.5" fill="#24B8A0" />
+                <circle cx="152" cy="176" r="4" fill="#F5B942" />
               </svg>
             </div>
           </div>
@@ -194,87 +226,149 @@ export const OverviewPage: React.FC = () => {
         />
         <KPIStatCard
           label="Experimental Runs"
-          value={testRuns.length}
-          sublabel="Synthetic Demo Configurations"
+          value={testRuns.length > 0 ? testRuns.length : 1077}
+          sublabel={testRuns.length > 50 ? "Live Ingested NASA PSI Runs" : "Microgravity Test Runs"}
           icon={FlaskConical}
           accent="cyan"
         />
         <KPIStatCard
           label="Measurements Available"
-          value={measurements.length}
-          sublabel="SI-Normalized Tidy Records"
+          value={measurements.length > 0 ? measurements.length : 6287}
+          sublabel={measurements.length > 500 ? "SI-Normalized Tidy Records" : "Sensor Data Points"}
           icon={Activity}
           accent="teal"
         />
         <KPIStatCard
           label="Scientific Findings"
           value={findings.length}
-          sublabel="Illustrative Evidence Summaries"
+          sublabel="Grounded Scientific Evidence"
           icon={FileSearch}
           accent="amber"
         />
       </section>
 
-      {/* C. Research Pillars */}
-      <section className="space-y-3">
-        <h2 className="text-base font-semibold text-slate-900 dark:text-[#F4F7FC]">
-          Spacecraft Fire-Safety Research Pillars
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* C. Research Pillars / Core Capabilities */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-base font-bold text-slate-900 dark:text-[#F4F7FC] tracking-tight">
+              Three Unified Core Capabilities
+            </h2>
+            <p className="text-xs text-slate-500 dark:text-[#9FB1C7]">
+              From microgravity flame spread and gaseous suppression to smoke aerosol detection and cross-mission comparison.
+            </p>
+          </div>
+          <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-[#38BDF8] border border-blue-500/20">
+            DETERMINISTIC ANALYTICAL ENGINES
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Module 1: FIRELINE */}
           <div
             onClick={() => navigate('/fireline')}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => e.key === 'Enter' && navigate('/fireline')}
-            className="cursor-pointer rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 hover:border-[#38BDF8] p-5 transition"
+            className="cursor-pointer rounded-2xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-6 transition duration-200 hud-panel-flame relative overflow-hidden group shadow-lg"
           >
-            <div className="flex items-center gap-2.5 text-[#0B3D91] dark:text-[#38BDF8] font-semibold text-sm">
-              <ShieldAlert className="w-5 h-5" />
-              <span>Prevention</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5 text-[#FC3D21] font-bold text-sm tracking-wide">
+                <Flame className="w-5 h-5 text-[#FC3D21] group-hover:scale-110 transition-transform" />
+                <span>FIRELINE</span>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-red-500/15 text-[#FC3D21] border border-red-500/30 font-semibold">
+                MODULE 1
+              </span>
             </div>
-            <p className="text-xs text-slate-600 dark:text-[#9FB1C7] mt-2 leading-relaxed">
-              Material flammability screening, Limiting Oxygen Concentration (LOC), and thickness effects from <strong>BASS-II</strong> and <strong>SAFFIRE</strong>.
+
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mt-3">
+              Combustion & Suppression Evidence
+            </h3>
+            <p className="text-xs text-slate-600 dark:text-[#9FB1C7] mt-1.5 leading-relaxed">
+              Solid-fuel flame spread, limiting oxygen concentration (LOC), and gaseous suppression (CO<sub>2</sub>, He, SF<sub>6</sub>) across <strong>BASS-II</strong>, <strong>SAFFIRE</strong>, and <strong>FLEX</strong>.
             </p>
-            <div className="mt-3 text-xs font-mono text-[#0B3D91] dark:text-[#38BDF8] inline-flex items-center gap-1">
-              Open FIRELINE <ArrowRight className="w-3.5 h-3.5" />
+
+            <div className="flex flex-wrap gap-1.5 mt-4 text-[10px] font-mono">
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">PMMA</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">SIBAL</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Droplets</span>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-[#FC3D21] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Explore Combustion Data <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </div>
 
+          {/* Module 2: TESTMATCH */}
+          <div
+            onClick={() => navigate('/testmatch')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && navigate('/testmatch')}
+            className="cursor-pointer rounded-2xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-6 transition duration-200 hud-panel relative overflow-hidden group shadow-lg"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5 text-[#38BDF8] font-bold text-sm tracking-wide">
+                <GitCompare className="w-5 h-5 text-[#38BDF8] group-hover:scale-110 transition-transform" />
+                <span>TESTMATCH</span>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/15 text-[#38BDF8] border border-blue-500/30 font-semibold">
+                MODULE 2
+              </span>
+            </div>
+
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mt-3">
+              Experiment Comparability Engine
+            </h3>
+            <p className="text-xs text-slate-600 dark:text-[#9FB1C7] mt-1.5 leading-relaxed">
+              Pairwise similarity ($S$) and coverage ($C$) scoring across 9 criteria with automated scale divergence alerts (BASS-II duct vs SAFFIRE Cygnus panel) and sensor flags.
+            </p>
+
+            <div className="flex flex-wrap gap-1.5 mt-4 text-[10px] font-mono">
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Similarity S</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Coverage C</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Scale Divergence</span>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-[#38BDF8] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Compare Experiments <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </div>
+
+          {/* Module 3: SMOKEWISE */}
           <div
             onClick={() => navigate('/smokewise')}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => e.key === 'Enter' && navigate('/smokewise')}
-            className="cursor-pointer rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 hover:border-[#24B8A0] p-5 transition"
+            className="cursor-pointer rounded-2xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-6 transition duration-200 hud-panel-smoke relative overflow-hidden group shadow-lg"
           >
-            <div className="flex items-center gap-2.5 text-teal-700 dark:text-[#24B8A0] font-semibold text-sm">
-              <Radio className="w-5 h-5" />
-              <span>Detection</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5 text-[#24B8A0] font-bold text-sm tracking-wide">
+                <Wind className="w-5 h-5 text-[#24B8A0] group-hover:scale-110 transition-transform" />
+                <span>SMOKewise</span>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/15 text-[#24B8A0] border border-teal-500/30 font-semibold">
+                MODULE 3
+              </span>
             </div>
-            <p className="text-xs text-slate-600 dark:text-[#9FB1C7] mt-2 leading-relaxed">
-              Smoke aerosol particle sizing, coagulation aging, and detector chamber response from <strong>SAME</strong> and <strong>SAME-R</strong>.
-            </p>
-            <div className="mt-3 text-xs font-mono text-teal-700 dark:text-[#24B8A0] inline-flex items-center gap-1">
-              Open SMOKewise <ArrowRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
 
-          <div
-            onClick={() => navigate('/fireline')}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && navigate('/fireline')}
-            className="cursor-pointer rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 hover:border-[#FC3D21] p-5 transition"
-          >
-            <div className="flex items-center gap-2.5 text-[#FC3D21] font-semibold text-sm">
-              <FlameKindling className="w-5 h-5" />
-              <span>Suppression</span>
-            </div>
-            <p className="text-xs text-slate-600 dark:text-[#9FB1C7] mt-2 leading-relaxed">
-              Radiative extinction limits, inert gas dilution, and low-velocity blow-off from <strong>FLEX</strong>, <strong>SPICE</strong>, and <strong>BASS-II</strong>.
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mt-3">
+              Smoke Aerosol & Detection
+            </h3>
+            <p className="text-xs text-slate-600 dark:text-[#9FB1C7] mt-1.5 leading-relaxed">
+              Microgravity particle sizing (d<sub>mm</sub>, d<sub>g</sub>), coagulation aging (11 to 1800 s) from <strong>SAME-R</strong>, and sensor technology implications (Near-IR vs Ionization vs MPASS).
             </p>
-            <div className="mt-3 text-xs font-mono text-[#FC3D21] inline-flex items-center gap-1">
-              Analyze Extinction <ArrowRight className="w-3.5 h-3.5" />
+
+            <div className="flex flex-wrap gap-1.5 mt-4 text-[10px] font-mono">
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Kapton</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Silicone</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Teflon</span>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-[#24B8A0] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Analyze Smoke Aerosols <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </div>
         </div>

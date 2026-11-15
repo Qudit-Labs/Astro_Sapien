@@ -83,15 +83,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={isMobile ? onCloseMobile : undefined}
               title={collapsed && !isMobile ? item.label : undefined}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-[#0B3D91] text-white shadow-sm'
+                    ? 'bg-gradient-to-r from-[#0B3D91] to-[#0F2D6B] text-white shadow-md border-l-4 border-l-[#38BDF8]'
                     : 'text-slate-700 dark:text-[#9FB1C7] hover:bg-slate-100 dark:hover:bg-[#10243D] hover:text-slate-900 dark:hover:text-[#F4F7FC]'
                 }`
               }
             >
-              <Icon className="w-4 h-4 shrink-0" />
-              {(!collapsed || isMobile) && <span className="truncate">{item.label}</span>}
+              <Icon className="w-4 h-4 shrink-0 text-[#38BDF8]" />
+              {(!collapsed || isMobile) && (
+                <span className="truncate flex-1 flex items-center justify-between">
+                  <span>{item.label}</span>
+                  {item.to === '/fireline' && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FC3D21] opacity-75" />
+                  )}
+                  {item.to === '/testmatch' && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] opacity-75" />
+                  )}
+                  {item.to === '/smokewise' && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#24B8A0] opacity-75" />
+                  )}
+                </span>
+              )}
             </NavLink>
           );
         })}
