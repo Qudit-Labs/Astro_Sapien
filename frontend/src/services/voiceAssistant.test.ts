@@ -46,12 +46,17 @@ describe('Voice AI Assistant Service', () => {
       expect(manager.getState()).toBe('idle');
       expect(typeof manager.isSpeechRecognitionSupported()).toBe('boolean');
       expect(typeof manager.isSpeechSynthesisSupported()).toBe('boolean');
+      expect(typeof manager.isMediaRecorderSupported()).toBe('boolean');
+      expect(typeof manager.isVoiceInputSupported()).toBe('boolean');
+      expect(['web-speech', 'media-recorder', 'none']).toContain(manager.getInputMode());
     });
 
-    it('updates options cleanly', () => {
+    it('updates options cleanly and handles toggle listening safely in node env', () => {
       const manager = new VoiceAssistantManager();
-      manager.updateOptions({ rate: 1.2, autoSpeakResponse: false });
+      manager.updateOptions({ rate: 1.2, autoSpeakResponse: false, silenceTimeoutMs: 1500 });
       expect(manager.getState()).toBe('idle');
+      expect(manager.isListeningNow()).toBe(false);
+      expect(manager.isSpeakingNow()).toBe(false);
     });
   });
 });

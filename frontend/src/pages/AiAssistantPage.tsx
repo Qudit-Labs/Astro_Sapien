@@ -57,21 +57,25 @@ export const AiAssistantPage: React.FC = () => {
   const [voiceTranscript, setVoiceTranscript] = useState('');
   const [voiceError, setVoiceError] = useState<string | null>(null);
   const [activeSpeakingMsgId, setActiveSpeakingMsgId] = useState<string | null>(null);
+  const [audioLevel, setAudioLevel] = useState<number>(0);
 
   const bottomRef = useRef<HTMLDivElement>(null);
+  const handleSendRef = useRef<(questionText?: string) => Promise<void>>(() => Promise.resolve());
 
-  // Initialize Voice Manager
+  // Initialize Voice Manager with auto-dispatch on complete
   const voiceManager = useMemo(() => {
     return new VoiceAssistantManager({
-      onTranscript: (transcript: string, isFinal: boolean) => {
+      onAudioLevel: (lvl: number) => {
+        setAudioLevel(lvl);
+      },
+      onTranscript: (transcript: string) => {
         setVoiceTranscript(transcript);
         setInput(transcript);
-        if (isFinal && transcript.trim().length > 3) {
-          // Final speech recognized: dispatch automatically
-          setTimeout(() => {
-            handleSend(transcript.trim());
-            setVoiceTranscript('');
-          }, 300);
+      },
+      onSpeechComplete: (finalTranscript: string) => {
+        if (finalTranscript.trim() && finalTranscript.trim().length > 1) {
+          handleSendRef.current(finalTranscript.trim());
+          setVoiceTranscript('');
         }
       },
       onStateChange: (state: VoiceState) => {
@@ -82,8 +86,9 @@ export const AiAssistantPage: React.FC = () => {
       },
       onError: (err: string) => {
         setVoiceError(err);
-        setTimeout(() => setVoiceError(null), 6000);
+        setTimeout(() => setVoiceError(null), 7000);
       },
+      silenceTimeoutMs: 2200,
     });
   }, []);
 
@@ -91,7 +96,7 @@ export const AiAssistantPage: React.FC = () => {
   useEffect(() => {
     return () => {
       voiceManager.stopSpeaking();
-      voiceManager.stopListening();
+      voiceManager.stopListening(false);
     };
   }, [voiceManager]);
 
@@ -103,7 +108,7 @@ export const AiAssistantPage: React.FC = () => {
     const query = (questionText ?? input).trim();
     if (!query || isThinking) return;
 
-    voiceManager.stopListening();
+    voiceManager.stopListening(false);
     voiceManager.stopSpeaking();
     setVoiceTranscript('');
 
@@ -147,6 +152,9 @@ export const AiAssistantPage: React.FC = () => {
     }
   };
 
+  // Keep ref up to date to prevent stale closures
+  handleSendRef.current = handleSend;
+
   const handleSpeakMessage = (msgId: string, content: string) => {
     if (activeSpeakingMsgId === msgId) {
       voiceManager.stopSpeaking();
@@ -159,7 +167,8 @@ export const AiAssistantPage: React.FC = () => {
     }
   };
 
-  const isRecognitionSupported = voiceManager.isSpeechRecognitionSupported();
+  const isVoiceSupported = voiceManager.isVoiceInputSupported();
+  const inputMode = voiceManager.getInputMode();
 
   return (
     <div className="space-y-5">
@@ -184,8 +193,13 @@ export const AiAssistantPage: React.FC = () => {
           <div className="flex items-center gap-4 w-full lg:w-auto">
             <button
               type="button"
-              disabled={!isRecognitionSupported || isThinking}
+              disabled={!isVoiceSupported || isThinking}
               onClick={() => voiceManager.toggleListening()}
+              title={
+                voiceState === 'listening'
+                  ? 'Click to finish speaking and transmit question'
+                  : 'Click to speak your question via microphone'
+              }
               aria-label={voiceState === 'listening' ? 'Stop listening' : 'Start voice transmission'}
               className={`relative p-3.5 rounded-2xl flex items-center justify-center font-semibold text-sm transition-all duration-300 shadow-lg ${
                 voiceState === 'listening'
@@ -220,7 +234,7 @@ export const AiAssistantPage: React.FC = () => {
                   }`}
                 >
                   {voiceState === 'listening'
-                    ? '● TRANSMITTING / LISTENING'
+                    ? `● TRANSMITTING / LISTENING${inputMode === 'media-recorder' ? ' (RECORDER)' : ''}`
                     : voiceState === 'speaking'
                     ? 'AUDIO OUT / SPEAKING'
                     : voiceState === 'processing'
@@ -234,7 +248,9 @@ export const AiAssistantPage: React.FC = () => {
                     &ldquo;{voiceTranscript}&rdquo;
                   </span>
                 ) : voiceState === 'listening' ? (
-                  'Speak your fire-safety question into your microphone...'
+                  'Recording voice... Speak now. Click mic again to send immediately or pause to auto-transmit.'
+                ) : voiceState === 'processing' ? (
+                  'Transcribing astronaut voice transmission with Gemini AI...'
                 ) : (
                   'Astronaut hands-free speech input with automated NASA CapCom readout.'
                 )}
@@ -244,7 +260,7 @@ export const AiAssistantPage: React.FC = () => {
 
           {/* Center: Live Waveform Visualizer */}
           <div className="w-full lg:w-48 flex justify-center">
-            <VoiceWaveformVisualizer state={voiceState} barCount={20} />
+            <VoiceWaveformVisualizer state={voiceState} audioLevel={audioLevel} barCount={20} />
           </div>
 
           {/* Right: Audio Control Action Toggles */}
@@ -448,8 +464,13 @@ export const AiAssistantPage: React.FC = () => {
             {/* Quick Mic toggle in input bar */}
             <button
               type="button"
-              disabled={!isRecognitionSupported || isThinking}
+              disabled={!isVoiceSupported || isThinking}
               onClick={() => voiceManager.toggleListening()}
+              title={
+                voiceState === 'listening'
+                  ? 'Finish speaking & transmit question'
+                  : 'Speak into microphone'
+              }
               aria-label={voiceState === 'listening' ? 'Mute microphone' : 'Activate voice speech input'}
               className={`p-2.5 rounded-lg border transition ${
                 voiceState === 'listening'

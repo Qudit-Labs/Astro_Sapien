@@ -303,3 +303,15 @@ def test_individual_entity_and_alias_endpoints():
     assert res_single_r.status_code == 200
     assert res_single_r.json()["id"] == first_r_id
 
+
+def test_voice_transcribe_endpoint():
+    dummy_wav = b"RIFF\x24\x00\x00\x00WAVEfmt \x10\x00\x00\x00\x01\x00\x01\x00D\xac\x00\x00\x88X\x01\x00\x02\x00\x10\x00data\x00\x00\x00\x00"
+    res = client.post(
+        "/api/v1/voice/transcribe",
+        files={"audio": ("test.wav", dummy_wav, "audio/wav")},
+    )
+    assert res.status_code == 200
+    data = res.json()
+    assert "transcript" in data
+    assert len(data["transcript"]) > 0
+

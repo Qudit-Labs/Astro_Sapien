@@ -19,6 +19,7 @@ from app.engines.smokevision_engine import (
 )
 from app.ai.gemini_rag import answer_research_question
 from app.ai.langchain_agent import run_langchain_sql_agent
+from app.core.config import GEMINI_API_KEY, GEMINI_MODEL
 
 
 @asynccontextmanager
@@ -714,6 +715,67 @@ def assistant_query(req: AssistantQueryRequest):
     res["is_mock_generated"] = False
     res["synthetic_disclaimer"] = "Response synthesizes peer-reviewed NASA microgravity flight research evidence."
     return res
+
+
+@app.post("/api/v1/voice/transcribe")
+async def voice_transcribe(audio: UploadFile = File(...)):
+    """Transcribes an audio recording (WAV, WebM, MP4, etc.) into text using Gemini 2.5 Flash."""
+    content = await audio.read()
+    if not content:
+        raise HTTPException(status_code=400, detail="Empty audio payload received")
+
+    # If Gemini API key is configured, transcribe with multimodal Gemini
+    if GEMINI_API_KEY:
+        try:
+            from google import genai
+            from google.genai import types
+
+            client = genai.Client(api_key=GEMINI_API_KEY, http_options={"api_version": "v1beta"})
+            mime_type = audio.content_type or "audio/webm"
+            # Normalize common mime types
+            if "webm" in mime_type:
+                mime_type = "audio/webm"
+            elif "wav" in mime_type:
+                mime_type = "audio/wav"
+            elif "mp4" in mime_type:
+                mime_type = "audio/mp4"
+            elif "ogg" in mime_type:
+                mime_type = "audio/ogg"
+
+            audio_part = types.Part.from_bytes(data=content, mime_type=mime_type)
+            prompt = (
+                "You are an aerospace speech-to-text transcriber for the NASA FIRELINE / IGNIS-G system. "
+                "Transcribe the astronaut audio recording into clean English text verbatim. "
+                "Preserve NASA terminology, acronyms (BASS-II, SAFFIRE, SAME-R, FLEX, SPICE, PMMA, LOC, microgravity) accurately. "
+                "Output ONLY the plain transcribed text without quotes, markdown, explanations, or timestamps. "
+                "If the audio contains only silence, noise, or no recognizable speech, respond with EMPTY."
+            )
+
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=[audio_part, prompt],
+            )
+            transcript = (response.text or "").strip()
+            if transcript.upper() == "EMPTY" or "EMPTY" in transcript:
+                transcript = ""
+            elif transcript.startswith('"') and transcript.endswith('"'):
+                transcript = transcript[1:-1].strip()
+
+            return {
+                "transcript": transcript,
+                "engine": "gemini-2.5-flash",
+                "bytes_received": len(content),
+            }
+        except Exception as exc:
+            print(f"[voice_transcribe] Gemini audio transcription error: {exc}")
+
+    # Fallback response if offline or key not active
+    return {
+        "transcript": "",
+        "engine": "fallback_offline",
+        "bytes_received": len(content),
+        "note": "Unable to transcribe audio without active GEMINI_API_KEY.",
+    }
 
 
 class AgentQueryRequest(BaseModel):

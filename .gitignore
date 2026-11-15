@@ -31,6 +31,7 @@ __pycache__/
 *.sqlite3
 *.zip
 video_assets/rendered_clips/
+video_assets/*.mp4
 
 # Editor directories and files
 .vscode/*

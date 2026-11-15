@@ -3,11 +3,13 @@ import { VoiceState } from '@/services/voiceAssistant';
 
 interface VoiceWaveformVisualizerProps {
   state: VoiceState;
+  audioLevel?: number;
   barCount?: number;
 }
 
 export const VoiceWaveformVisualizer: React.FC<VoiceWaveformVisualizerProps> = ({
   state,
+  audioLevel,
   barCount = 18,
 }) => {
   const [heights, setHeights] = useState<number[]>(() =>
@@ -17,6 +19,20 @@ export const VoiceWaveformVisualizer: React.FC<VoiceWaveformVisualizerProps> = (
   useEffect(() => {
     if (state !== 'listening' && state !== 'speaking') {
       setHeights(Array.from({ length: barCount }, () => 15));
+      return;
+    }
+
+    if (state === 'listening' && typeof audioLevel === 'number') {
+      // Modulate directly from real microphone audio level (0-100)
+      const normalizedLevel = Math.max(12, Math.min(100, audioLevel * 1.4));
+      setHeights(
+        Array.from({ length: barCount }, (_, i) => {
+          const centerDist = Math.abs(i - barCount / 2) / (barCount / 2);
+          const curve = 1 - centerDist * 0.55;
+          const jitter = Math.sin(Date.now() / 60 + i) * 6;
+          return Math.max(12, Math.min(95, normalizedLevel * curve + jitter));
+        })
+      );
       return;
     }
 
@@ -33,7 +49,7 @@ export const VoiceWaveformVisualizer: React.FC<VoiceWaveformVisualizerProps> = (
     }, 90);
 
     return () => clearInterval(interval);
-  }, [state, barCount]);
+  }, [state, audioLevel, barCount]);
 
   const getBarColor = () => {
     if (state === 'listening') {
