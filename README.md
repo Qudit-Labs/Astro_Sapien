@@ -12,7 +12,7 @@
 ---
 # 🚀 WATCH IGNIS-G (FIRELINE) IN ACTION — PROJECT DEMO VIDEO
 
-🎬 **See how FIRELINE transforms NASA combustion research into intelligent spacecraft fire-safety insights.**
+🎬 **See how IGNIS-G (FIRELINE) transforms NASA combustion research into intelligent spacecraft fire-safety insights.**
 
 [▶️ WATCH THE 50-SECOND PROJECT VIDEO ON YOUTUBE](https://youtu.be/ZJ2zW66XxaE?si=P6-077j6pg3WKkx-)
 
@@ -29,8 +29,8 @@ Fire safety in human spacecraft is fundamentally challenging because **combustio
 
 Over decades of Space Shuttle and International Space Station (ISS) missions, NASA has conducted groundbreaking combustion research (e.g., **BASS-II**, **SAME-R**, **SAFFIRE**, **FLEX**, **SPICE**). However, these findings are **scattered across fragmented spreadsheets, non-standardized tabular logs, calibration sheets, and disparate technical publications (NASA-TM, AIAA)**. Researchers and flight safety engineers struggle to compare results across experimental geometries, verify environmental boundary conditions, detect critical knowledge gaps, and translate historical microgravity science into actionable spacecraft safety decisions for Artemis and Mars exploration.
 
-### The Solution: FIRELINE
-**FIRELINE** is an integrated scientific intelligence engine that unifies NASA microgravity combustion research into a cohesive decision-support platform. Rather than acting as a generic summarization chatbot, FIRELINE serves as a **traceable, evidence-based scientific platform** built on real experimental data from the **NASA Physical Sciences Informatics (PSI)** repository and the **NASA Technical Reports Server (NTRS)**.
+### The Solution: IGNIS-G (FIRELINE)
+**IGNIS-G (FIRELINE)** is an integrated scientific intelligence engine that unifies NASA microgravity combustion research into a cohesive decision-support platform. Rather than acting as a generic summarization chatbot, IGNIS-G (FIRELINE) serves as a **traceable, evidence-based scientific platform** built on real experimental data from the **NASA Physical Sciences Informatics (PSI)** repository and the **NASA Technical Reports Server (NTRS)**.
 
 ```mermaid
 flowchart TD
@@ -68,7 +68,7 @@ flowchart TD
 
 ## 2. Quad-Capability Module Architecture
 
-FIRELINE integrates four core scientific capabilities solving distinct facets of spacecraft fire protection:
+IGNIS-G (FIRELINE) integrates four core scientific capabilities solving distinct facets of spacecraft fire protection:
 
 ### Module 1: FIRELINE — Evidence Intelligence & Flammability Limits
 - **Combustion & Suppression Analysis**: Investigates solid-fuel flame spread, limiting oxygen concentration (LOC) flammability thresholds, radiative quenching, and gaseous extinguishment ($\text{CO}_2$, $\text{He}$, $\text{SF}_6$).
