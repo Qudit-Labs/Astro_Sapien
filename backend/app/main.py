@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -176,6 +177,126 @@ def get_source(source_id: str):
             if not src:
                 raise HTTPException(status_code=404, detail=f"Source '{source_id}' not found")
             return dict(src)
+
+
+@app.get("/api/v1/manifest")
+def get_manifest():
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) AS c FROM investigations;")
+            inv_cnt = cur.fetchone()["c"]
+            cur.execute("SELECT COUNT(*) AS c FROM sources;")
+            src_cnt = cur.fetchone()["c"]
+            cur.execute("SELECT COUNT(*) AS c FROM test_runs;")
+            run_cnt = cur.fetchone()["c"]
+            cur.execute("SELECT COUNT(*) AS c FROM measurements;")
+            meas_cnt = cur.fetchone()["c"]
+            cur.execute("SELECT COUNT(*) AS c FROM findings;")
+            fnd_cnt = cur.fetchone()["c"]
+            cur.execute("SELECT COUNT(*) AS c FROM evidence_chunks;")
+            chk_cnt = cur.fetchone()["c"]
+    return {
+        "dataset_version": "2.0.0-nasa-live",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "data_mode": "live_psi_ingested",
+        "disclaimer": "FIRELINE scientific evidence database indexing real NASA PSI and NTRS microgravity combustion, detection, and suppression research records.",
+        "record_counts": {
+            "investigations": inv_cnt,
+            "test_runs": run_cnt,
+            "measurements": meas_cnt,
+            "findings": fnd_cnt,
+            "sources": src_cnt,
+            "evidence_chunks": chk_cnt,
+        },
+        "supported_modules": ["FIRELINE", "TESTMATCH", "SMOKEWISE"],
+        "canonical_schema_version": "2.0.0",
+    }
+
+
+@app.get("/api/v1/test-runs")
+def list_test_runs(
+    investigation_id: str | None = Query(None),
+    material: str | None = Query(None),
+    geometry: str | None = Query(None),
+    flow_regime: str | None = Query(None),
+    limit: int = Query(200, ge=1, le=1000),
+):
+    return list_tests(
+        investigation_id=investigation_id,
+        material=material,
+        geometry=geometry,
+        flow_regime=flow_regime,
+        limit=limit,
+    )
+
+
+@app.get("/api/v1/test-runs/{test_id}")
+def get_test_run_alias(test_id: str):
+    return get_test_detail(test_id)
+
+
+@app.get("/api/v1/measurements")
+def list_measurements(
+    test_run_id: str | None = Query(None),
+    parameter: str | None = Query(None),
+    limit: int = Query(500, ge=1, le=5000),
+):
+    sql = "SELECT * FROM measurements WHERE 1=1"
+    params: list = []
+    if test_run_id:
+        sql += " AND (test_run_id = %s OR LOWER(test_run_id) = LOWER(%s))"
+        params.extend([test_run_id, test_run_id])
+    if parameter:
+        sql += " AND LOWER(parameter) = LOWER(%s)"
+        params.append(parameter)
+    sql += " LIMIT %s;"
+    params.append(limit)
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, params)
+            rows = cur.fetchall()
+            return {"count": len(rows), "items": [dict(r) for r in rows]}
+
+
+@app.get("/api/v1/findings")
+def list_findings(
+    investigation_id: str | None = Query(None),
+    limit: int = Query(100, ge=1, le=500),
+):
+    sql = "SELECT * FROM findings WHERE 1=1"
+    params: list = []
+    if investigation_id:
+        sql += " AND (investigation_id = %s OR LOWER(investigation_id) = LOWER(%s))"
+        params.extend([investigation_id, investigation_id])
+    sql += " LIMIT %s;"
+    params.append(limit)
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, params)
+            rows = cur.fetchall()
+            return {"count": len(rows), "items": [dict(r) for r in rows]}
+
+
+@app.get("/api/v1/sources")
+def list_sources(
+    investigation_id: str | None = Query(None),
+    limit: int = Query(100, ge=1, le=500),
+):
+    sql = "SELECT * FROM sources WHERE 1=1"
+    params: list = []
+    if investigation_id:
+        sql += " AND (investigation_id = %s OR LOWER(investigation_id) = LOWER(%s))"
+        params.extend([investigation_id, investigation_id])
+    sql += " ORDER BY id LIMIT %s;"
+    params.append(limit)
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, params)
+            rows = cur.fetchall()
+            return {"count": len(rows), "items": [dict(r) for r in rows]}
 
 
 class FirelineAnalyzeRequest(BaseModel):

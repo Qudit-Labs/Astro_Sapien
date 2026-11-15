@@ -166,3 +166,27 @@ def test_integrated_reports_generation():
     assert "detection_and_aerosols" in data["pillars"]
     assert "cross_experiment_comparability_testmatch" in data["pillars"]
     assert len(data["provenance_manifest"]) == 5
+
+
+def test_manifest_and_entity_endpoints():
+    res_m = client.get("/api/v1/manifest")
+    assert res_m.status_code == 200
+    manifest = res_m.json()
+    assert manifest["record_counts"]["investigations"] >= 5
+    assert manifest["record_counts"]["test_runs"] >= 1000
+
+    res_runs = client.get("/api/v1/test-runs?limit=10")
+    assert res_runs.status_code == 200
+    assert len(res_runs.json()["items"]) == 10
+
+    res_meas = client.get("/api/v1/measurements?limit=10")
+    assert res_meas.status_code == 200
+    assert len(res_meas.json()["items"]) == 10
+
+    res_findings = client.get("/api/v1/findings?limit=5")
+    assert res_findings.status_code == 200
+    assert len(res_findings.json()["items"]) > 0
+
+    res_sources = client.get("/api/v1/sources?limit=5")
+    assert res_sources.status_code == 200
+    assert len(res_sources.json()["items"]) > 0

@@ -99,7 +99,10 @@ Please provide a scientifically rigorous, evidence-labeled answer with exact inl
         return {
             "question": question,
             "mode": "error_fallback",
-            "answer": f"[Unknown] An error occurred while contacting Gemini API: {exc}",
+            "answer": (
+                f"[Unknown] An error occurred while contacting Gemini API: {exc}. "
+                f"[NASA observation] Retrieved {len(chunks)} relevant NASA PSI excerpts matching this inquiry."
+            ),
             "citations": citations,
             "evidence_chunk_count": len(chunks),
         }
