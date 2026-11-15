@@ -1,4 +1,3 @@
-from pathlib import Path
 from app.core.config import GEMINI_API_KEY, GEMINI_MODEL
 from app.engines.fireline_engine import search_evidence_chunks, analyze_combustion_evidence
 from app.engines.smokewise_engine import analyze_smoke_aerosols
@@ -14,10 +13,10 @@ Mandatory Rules:
 """
 
 
-def answer_research_question(question: str, investigation_id: str | None = None, db_path: Path | None = None) -> dict:
-    chunks = search_evidence_chunks(question, investigation_id=investigation_id, limit=6, db_path=db_path)
-    comb_summary = analyze_combustion_evidence(db_path=db_path)["summary_metrics"]
-    smoke_summary = analyze_smoke_aerosols(db_path=db_path)["material_summary"]
+def answer_research_question(question: str, investigation_id: str | None = None, conn_str: str | None = None) -> dict:
+    chunks = search_evidence_chunks(question, investigation_id=investigation_id, limit=6, conn_str=conn_str)
+    comb_summary = analyze_combustion_evidence(conn_str=conn_str).get("summary_metrics", {})
+    smoke_summary = analyze_smoke_aerosols(conn_str=conn_str).get("material_summary", [])
 
     citations = [
         {
@@ -32,61 +31,67 @@ def answer_research_question(question: str, investigation_id: str | None = None,
     ]
 
     if not GEMINI_API_KEY:
-        # Deterministic evidence-backed fallback when GEMINI_API_KEY is not yet configured in .env
+        # Deterministic evidence-backed fallback when GEMINI_API_KEY is not configured
         synthesized = (
             "[NASA observation] Retrieved "
-            f"{len(chunks)} matching NASA source passages from PSI-25 (BASS-II) and PSI-101 (SAME-R). "
+            f"{len(chunks)} matching NASA source passages from PSI repositories. "
             + (
                 f"Top evidence ({chunks[0]['psi_id']} / {chunks[0]['source_id']}, p. {chunks[0]['page_number']}): "
                 f"{chunks[0]['content_text'][:420]}... "
                 if chunks
                 else "No text passages matched the query terms directly. "
             )
-            + "[Research implication] Set GEMINI_API_KEY in .env to enable full natural-language synthesis over these retrieved citations. "
-            "Note: NASA PSI contains microgravity and 1-g data, not validated Lunar or Martian partial-gravity combustion datasets."
+            + "[Research implication] Set GEMINI_API_KEY in .env to enable generative RAG synthesis over these retrieved citations. "
+            "Note: NASA PSI contains microgravity and 1-g data, not validated Lunar (1/6 g) or Martian (3/8 g) partial-gravity combustion datasets."
         )
         return {
             "question": question,
             "mode": "deterministic_evidence_fallback",
             "answer": synthesized,
             "citations": citations,
-            "structured_context": {
-                "bass2_summary": comb_summary,
-                "samer_material_summary": smoke_summary,
-            },
+            "evidence_chunk_count": len(chunks),
+            "combustion_o2_range": [comb_summary.get("o2_initial_min_pct"), comb_summary.get("o2_initial_max_pct")],
+            "smoke_materials_analyzed": [m["material"] for m in smoke_summary],
         }
 
-    from google import genai
-    from google.genai import types
+    try:
+        from google import genai
+        client = genai.Client(api_key=GEMINI_API_KEY)
 
-    context_blocks = [
-        f"--- CITATION [{i+1}] ({c['psi_id']} | {c['source_id']} | Page/Ref: {c['page_number']}) ---\n{c['content_text']}"
-        for i, c in enumerate(chunks)
-    ]
-    user_payload = (
-        f"Research Question: {question}\n\n"
-        f"Structured BASS-II Summary Metrics: {comb_summary}\n"
-        f"Structured SAME-R Aerosol Summary: {smoke_summary}\n\n"
-        "Retrieved NASA Passages:\n" + "\n\n".join(context_blocks)
-    )
+        context_blocks = []
+        for c in chunks:
+            context_blocks.append(
+                f"Source: {c['source_id']} ({c['psi_id']}) | Page/Section: {c['page_number']}\nContent: {c['content_text']}"
+            )
+        context_str = "\n\n---\n\n".join(context_blocks) if context_blocks else "No textual excerpts found."
 
-    client = genai.Client(api_key=GEMINI_API_KEY)
-    response = client.models.generate_content(
-        model=GEMINI_MODEL,
-        contents=user_payload,
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM_PROMPT,
-            temperature=0.2,
-        ),
-    )
+        prompt = f"""User Question: {question}
 
-    return {
-        "question": question,
-        "mode": f"gemini_rag:{GEMINI_MODEL}",
-        "answer": response.text,
-        "citations": citations,
-        "structured_context": {
-            "bass2_summary": comb_summary,
-            "samer_material_summary": smoke_summary,
-        },
-    }
+Retrieved NASA Experimental Evidence:
+{context_str}
+
+BASS-II & Batch B Measured O2 Range: {comb_summary.get('o2_initial_min_pct')}% to {comb_summary.get('o2_initial_max_pct')}%
+Smoke Pyrolysis Materials Available: {', '.join(m['material'] for m in smoke_summary)}
+
+Please provide a scientifically rigorous, evidence-labeled answer with exact inline citations."""
+
+        response = client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=prompt,
+            config=dict(system_instruction=SYSTEM_PROMPT, temperature=0.2),
+        )
+        return {
+            "question": question,
+            "mode": "gemini_generative_rag",
+            "answer": response.text,
+            "citations": citations,
+            "evidence_chunk_count": len(chunks),
+        }
+    except Exception as exc:
+        return {
+            "question": question,
+            "mode": "error_fallback",
+            "answer": f"[Unknown] An error occurred while contacting Gemini API: {exc}",
+            "citations": citations,
+            "evidence_chunk_count": len(chunks),
+        }

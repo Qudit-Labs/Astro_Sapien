@@ -16,7 +16,14 @@ PROCESSED_DIR = DATA_DIR / "processed"
 MANIFESTS_DIR = DATA_DIR / "manifests"
 
 DATABASE_URL = os.getenv("DATABASE_URL", "")
-FIRELINE_DB_PATH = Path(os.getenv("FIRELINE_DB_PATH", str(DATA_DIR / "fireline.db")))
+
+env_db = os.getenv("FIRELINE_DB_PATH")
+if env_db:
+    p = Path(env_db)
+    FIRELINE_DB_PATH = p if p.is_absolute() else (BASE_DIR / p)
+else:
+    FIRELINE_DB_PATH = DATA_DIR / "fireline.db"
+
 DB_PATH = FIRELINE_DB_PATH
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
