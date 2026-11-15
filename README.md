@@ -213,12 +213,19 @@ The complete OpenAPI 3.1 specification is available in [`openapi.json`](./openap
 | Method | Route | Description |
 | :--- | :--- | :--- |
 | `GET` | `/health` | Live database health and table counts |
+| `GET` | `/api/v1/manifest` | Database manifest, active modules, record counts & provenance notice |
 | `GET` | `/api/v1/investigations` | List all 5 investigations with run counts |
 | `GET` | `/api/v1/investigations/{id}` | Detailed investigation metadata, sources & findings |
-| `GET` | `/api/v1/tests` | Query runs filtered by investigation, material, geometry, flow |
+| `GET` | `/api/v1/tests` / `/api/v1/test-runs` | Query runs filtered by investigation, material, geometry, flow |
 | `GET` | `/api/v1/tests/{test_id}` | Test run details with measurements and provenance |
+| `GET` | `/api/v1/measurements` | Query measurement records by run ID, parameter code, and limit |
+| `GET` | `/api/v1/findings` | Curated scientific findings categorized by pillar and module |
+| `GET` | `/api/v1/sources` | Complete authoritative source catalogue with DOI and URL links |
 | `GET` | `/api/v1/sources/{source_id}` | Source metadata, report citation, and document details |
+| `GET` | `/api/v1/evidence-chunks` | Ingested PDF/report evidence chunks with page numbers and sections |
 | `GET` | `/api/v1/evidence/search` | Ranked full-text search across indexed evidence chunks |
+| `GET` | `/api/v1/comparisons` | Baseline cross-experiment comparability evaluations |
+| `GET` | `/api/v1/reports` | Default integrated scientific research reports |
 | `POST` | `/api/v1/fireline/analyze` | Combustion evidence analysis, extinction modes, and O2 limits |
 | `POST` | `/api/v1/testmatch/compare` | Deterministic pairwise comparability ($S$, $C$) & warnings |
 | `POST` | `/api/v1/smokewise/analyze` | Smoke aerosol size distribution and detector implications |
@@ -229,11 +236,12 @@ The complete OpenAPI 3.1 specification is available in [`openapi.json`](./openap
 
 ## Quality Assurance & Verification
 
-- **Automated Backend Tests (`pytest -v`)**: 10/10 passed across all 5 investigations, FTS search, TESTMATCH comparisons, SMOKewise aggregations, and Gemini RAG grounding.
+- **Automated Backend Tests (`pytest -v`)**: 11/11 passed across all 5 investigations, FTS search, TESTMATCH comparisons, SMOKewise aggregations, entity endpoints, and Gemini RAG grounding.
 - **Frontend Type Safety**: `npm run typecheck` passed (0 TypeScript errors).
-- **Frontend Unit Tests**: `npm test` passed (18/18 tests).
-- **Data Integrity**: `npm run validate:data` passed across all canonical JSON schemas.
-- **Scientific Integrity**: All AI responses tagged with categorical certainty, inline citations, and partial-gravity boundary warnings.
+- **Frontend Production Build**: `npm run build` passed with Vite bundle splitting.
+- **Frontend Unit Tests**: `npm test` passed across data providers and TESTMATCH scoring engine.
+- **Data Integrity**: Unit and parameter checks aligned with NASA PSI standards.
+- **Scientific Integrity**: All AI responses tagged with categorical certainty (`[NASA observation]`, `[Calculated result]`, `[AI interpretation]`, `[Research implication]`, `[Unknown]`), inline citations, and partial-gravity boundary warnings.
 
 ---
 
