@@ -7,7 +7,7 @@
 [![Voice AI CapCom](https://img.shields.io/badge/Voice%20AI-CapCom%20Bidirectional-FC3D21.svg)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 [![Aerospace UI](https://img.shields.io/badge/GUI-Mission%20Control%20HUD-38BDF8.svg)](http://localhost:5173/)
 [![Simulation Lab](https://img.shields.io/badge/Simulation%20Lab-Sandbox%20%26%20Challenges-F5B942.svg)](http://localhost:5173/simulation)
-[![Research Paper](https://img.shields.io/badge/Research%20Paper-Resolving%20Hallucination%20on%20NASA%20Data-9333EA.svg)](#3--academic-research-paper-resolving-hallucination-on-nasa-data)
+[![Technical Whitepaper](https://img.shields.io/badge/Technical%20Whitepaper-Resolving%20Hallucination%20on%20NASA%20Data%20(Preprint)-9333EA.svg)](#3--technical-whitepaper--research-preprint-resolving-hallucination-on-nasa-data)
 
 **Team Astro_Sapien • NASA Space Apps Challenge 2026**
 
@@ -210,11 +210,13 @@ Interactive masterclasses with step-by-step navigation, governing equations, cor
 
 ---
 
-## 3. 📄 Academic Research Paper: "Resolving Hallucination on NASA Data"
+## 3. 📄 Technical Whitepaper / Research Preprint: "Resolving Hallucination on NASA Data"
 
+> **Document Status**: Unpublished Project Technical Paper / Research Preprint (NASA Space Apps Challenge 2026)  
 > **Paper Title**: *Resolving Hallucination on NASA Data: A Layered Epistemic-Grounding Architecture for Microgravity Combustion Decision Support*  
 > **Authors**: Team Astro_Sapien • NASA International Space Apps Challenge • November 2026  
-> **Full Manuscript PDF**: [`Resolving_Hallucination_on_NASA_Data.pdf`](./Resolving_Hallucination_on_NASA_Data.pdf)
+> **Full Manuscript PDF**: [`Resolving_Hallucination_on_NASA_Data.pdf`](./Resolving_Hallucination_on_NASA_Data.pdf)  
+> **Note**: This research manuscript is an unpublished working paper and technical whitepaper prepared by Team Astro_Sapien detailing the anti-hallucination and epistemic-grounding methodologies built into IGNIS-G (FIRELINE). It has not been published in an academic journal.
 
 Language models deployed as research assistants over specialized scientific archives frequently fabricate citations, invent non-existent sensor values, and silently carry findings across mismatched gravity regimes. In spacecraft fire safety—where experimental regimes are narrow and sensor coverage is sparse—such hallucinations can directly compromise critical life-support and vehicle design decisions.
 
@@ -507,15 +509,15 @@ Developed by **Team Astro_Sapien** for NASA Space Apps Challenge 2026.
 
 Microgravity combustion, detection, and suppression data sourced from the **NASA Physical Sciences Informatics (PSI)** system and the **NASA Technical Reports Server (NTRS)**.
 
-### Academic Citation
+### Technical Report Citation
 
-If you use or cite this architecture, please reference our research paper:
+If you reference this architecture or technical report, please cite as an unpublished preprint:
 
 ```bibtex
-@article{astro_sapien2026resolving,
+@unpublished{astro_sapien2026resolving,
   title={Resolving Hallucination on NASA Data: A Layered Epistemic-Grounding Architecture for Microgravity Combustion Decision Support},
   author={{Team Astro\_Sapien}},
-  journal={NASA International Space Apps Challenge},
+  note={Unpublished Project Technical Whitepaper / Preprint, NASA International Space Apps Challenge},
   year={2026},
   url={https://github.com/Qudit-Labs/Astro_Sapien}
 }
