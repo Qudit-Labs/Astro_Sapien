@@ -11,10 +11,10 @@ interface KPIStatCardProps {
 
 const ACCENT_MAP = {
   blue: 'bg-[#0B3D91]/15 text-[#0B3D91] dark:bg-[#0B3D91]/30 dark:text-[#38BDF8] border-[#0B3D91]/30',
-  cyan: 'bg-sky-500/15 text-sky-600 dark:text-[#38BDF8] border-sky-500/30',
-  teal: 'bg-teal-500/15 text-teal-600 dark:text-[#24B8A0] border-teal-500/30',
-  amber: 'bg-amber-500/15 text-amber-600 dark:text-[#F5B942] border-amber-500/30',
-  red: 'bg-red-500/15 text-red-600 dark:text-[#FC3D21] border-red-500/30',
+  cyan: 'bg-sky-500/15 text-sky-700 dark:text-[#38BDF8] border-sky-500/30',
+  teal: 'bg-teal-500/15 text-teal-700 dark:text-[#24B8A0] border-teal-500/30',
+  amber: 'bg-amber-500/15 text-amber-700 dark:text-[#F5B942] border-amber-500/30',
+  red: 'bg-red-500/15 text-red-700 dark:text-[#FC3D21] border-red-500/30',
 };
 
 const BORDER_ACCENT_MAP = {

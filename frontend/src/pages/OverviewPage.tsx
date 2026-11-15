@@ -23,6 +23,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { useResearchData } from '@/context/ResearchDataContext';
+import { useTheme } from '@/context/ThemeContext';
 import { KPIStatCard } from '@/components/common/KPIStatCard';
 import { ChartCard } from '@/components/common/ChartCard';
 import { EvidenceBadge } from '@/components/common/EvidenceBadge';
@@ -31,6 +32,8 @@ import { DataStatusBadge } from '@/components/common/DataStatusBadge';
 
 export const OverviewPage: React.FC = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const {
     investigations,
     testRuns,
@@ -85,37 +88,37 @@ export const OverviewPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* A. Hero Section with Aerospace Telemetry HUD */}
-      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#0B1D36] via-[#08172C] to-[#040C18] text-[#F4F7FC] border border-slate-700/60 orbital-grid-bg starfield-dots p-6 sm:p-8 lg:p-10 shadow-2xl hud-corner">
+      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 via-sky-50/70 to-blue-100/50 dark:from-[#0B1D36] dark:via-[#08172C] dark:to-[#040C18] text-slate-800 dark:text-[#F4F7FC] border border-slate-200/90 dark:border-slate-700/60 orbital-grid-bg starfield-dots p-6 sm:p-8 lg:p-10 shadow-xl dark:shadow-2xl hud-corner">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B3D91]/80 border border-[#38BDF8]/40 text-xs font-mono text-[#38BDF8] shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#24B8A0] hud-beacon" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B3D91]/10 dark:bg-[#0B3D91]/80 border border-[#0B3D91]/25 dark:border-[#38BDF8]/40 text-xs font-mono text-[#0B3D91] dark:text-[#38BDF8] font-semibold dark:font-normal shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-teal-500 dark:bg-[#24B8A0] hud-beacon" />
               <span>NASA PSI • MICROGRAVITY COMBUSTION DECISION-SUPPORT ENGINE</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white glow-cyan">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-white dark:glow-cyan">
               Understanding Fire in Space
             </h1>
-            <p className="text-base sm:text-lg text-[#9FB1C7] max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-[#9FB1C7] max-w-2xl leading-relaxed">
               Unified scientific intelligence bridging NASA Physical Sciences Informatics combustion, comparability, and smoke detection evidence into explainable fire-safety insights.
             </p>
 
             {/* Quick Metrics HUD Strip */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-              <div className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 text-left">
-                <div className="text-[10px] font-mono text-[#38BDF8]">μg REGIME</div>
-                <div className="text-xs font-bold text-white font-mono">10⁻⁴ to 10⁻⁶ g</div>
+              <div className="px-3 py-2 rounded-lg bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-700/60 shadow-sm text-left backdrop-blur-sm">
+                <div className="text-[10px] font-mono font-semibold text-sky-700 dark:text-[#38BDF8]">μg REGIME</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-white font-mono">10⁻⁴ to 10⁻⁶ g</div>
               </div>
-              <div className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 text-left">
-                <div className="text-[10px] font-mono text-[#24B8A0]">O₂ RANGE</div>
-                <div className="text-xs font-bold text-white font-mono">15.4% – 29.8%</div>
+              <div className="px-3 py-2 rounded-lg bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-700/60 shadow-sm text-left backdrop-blur-sm">
+                <div className="text-[10px] font-mono font-semibold text-teal-700 dark:text-[#24B8A0]">O₂ RANGE</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-white font-mono">15.4% – 29.8%</div>
               </div>
-              <div className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 text-left">
-                <div className="text-[10px] font-mono text-[#F5B942]">PRESSURE</div>
-                <div className="text-xs font-bold text-white font-mono">50 – 101.3 kPa</div>
+              <div className="px-3 py-2 rounded-lg bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-700/60 shadow-sm text-left backdrop-blur-sm">
+                <div className="text-[10px] font-mono font-semibold text-amber-700 dark:text-[#F5B942]">PRESSURE</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-white font-mono">50 – 101.3 kPa</div>
               </div>
-              <div className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700/60 text-left">
-                <div className="text-[10px] font-mono text-[#FC3D21]">FLOW REGIME</div>
-                <div className="text-xs font-bold text-white font-mono">0 – 35 cm/s</div>
+              <div className="px-3 py-2 rounded-lg bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-700/60 shadow-sm text-left backdrop-blur-sm">
+                <div className="text-[10px] font-mono font-semibold text-red-700 dark:text-[#FC3D21]">FLOW REGIME</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-white font-mono">0 – 35 cm/s</div>
               </div>
             </div>
 
@@ -123,23 +126,23 @@ export const OverviewPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigate('/explorer')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0B3D91] hover:bg-[#082B66] text-white text-sm font-semibold border border-[#38BDF8]/40 shadow-lg hover:shadow-cyan-500/20 transition"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0B3D91] hover:bg-[#082B66] text-white text-sm font-semibold border border-[#0B3D91] dark:border-[#38BDF8]/40 shadow-md hover:shadow-lg transition"
               >
-                <Compass className="w-4 h-4 text-[#38BDF8]" />
+                <Compass className="w-4 h-4 text-sky-300 dark:text-[#38BDF8]" />
                 <span>Explore NASA PSI Data</span>
               </button>
               <button
                 type="button"
                 onClick={() => navigate('/testmatch')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#10243D] hover:bg-[#1A3456] text-[#F4F7FC] text-sm font-semibold border border-slate-600 shadow-md transition"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white dark:bg-[#10243D] hover:bg-slate-100 dark:hover:bg-[#1A3456] text-slate-800 dark:text-[#F4F7FC] text-sm font-semibold border border-slate-300 dark:border-slate-600 shadow-sm transition"
               >
-                <GitCompare className="w-4 h-4 text-[#38BDF8]" />
+                <GitCompare className="w-4 h-4 text-sky-700 dark:text-[#38BDF8]" />
                 <span>Compare Experiments</span>
               </button>
               <button
                 type="button"
                 onClick={() => navigate('/assistant')}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 text-[#24B8A0] border border-teal-500/30 text-sm font-semibold transition"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-50 dark:bg-teal-500/10 hover:bg-teal-100/80 dark:hover:bg-teal-500/20 text-teal-800 dark:text-[#24B8A0] border border-teal-300 dark:border-teal-500/30 text-sm font-semibold transition"
               >
                 <Bot className="w-4 h-4" />
                 <span>Ask AI Assistant</span>
@@ -151,19 +154,35 @@ export const OverviewPage: React.FC = () => {
           <div className="lg:col-span-4 flex justify-center">
             <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
               {/* Radar rotating sweep line */}
-              <div className="absolute inset-0 rounded-full border border-[#38BDF8]/20 flex items-center justify-center">
-                <div className="w-full h-full rounded-full radar-sweep pointer-events-none" style={{ background: 'conic-gradient(from 0deg, transparent 0deg, rgba(56, 189, 248, 0.15) 60deg, transparent 65deg)' }} />
+              <div className="absolute inset-0 rounded-full border border-sky-500/30 dark:border-[#38BDF8]/20 flex items-center justify-center">
+                <div
+                  className="w-full h-full rounded-full radar-sweep pointer-events-none"
+                  style={{
+                    background: isDark
+                      ? 'conic-gradient(from 0deg, transparent 0deg, rgba(56, 189, 248, 0.15) 60deg, transparent 65deg)'
+                      : 'conic-gradient(from 0deg, transparent 0deg, rgba(11, 61, 145, 0.12) 60deg, transparent 65deg)',
+                  }}
+                />
               </div>
 
               <svg viewBox="0 0 220 220" className="w-full h-full relative z-10" aria-hidden="true">
                 <defs>
                   <radialGradient id="flameGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.4" />
-                    <stop offset="60%" stopColor="#0B3D91" stopOpacity="0.2" />
-                    <stop offset="100%" stopColor="#07172B" stopOpacity="0" />
+                    <stop offset="0%" stopColor={isDark ? '#38BDF8' : '#0B3D91'} stopOpacity={isDark ? '0.4' : '0.25'} />
+                    <stop offset="60%" stopColor={isDark ? '#0B3D91' : '#38BDF8'} stopOpacity={isDark ? '0.2' : '0.1'} />
+                    <stop offset="100%" stopColor={isDark ? '#07172B' : '#F0F9FF'} stopOpacity="0" />
                   </radialGradient>
                 </defs>
-                <circle cx="110" cy="110" r="100" fill="url(#flameGlow)" stroke="#38BDF8" strokeWidth="0.8" strokeDasharray="3 5" opacity="0.4" />
+                <circle
+                  cx="110"
+                  cy="110"
+                  r="100"
+                  fill="url(#flameGlow)"
+                  stroke={isDark ? '#38BDF8' : '#0B3D91'}
+                  strokeWidth="0.8"
+                  strokeDasharray="3 5"
+                  opacity={isDark ? 0.4 : 0.25}
+                />
                 {/* Orbital telemetry rings */}
                 <ellipse
                   cx="110"
@@ -172,9 +191,9 @@ export const OverviewPage: React.FC = () => {
                   ry="32"
                   transform="rotate(-22 110 110)"
                   fill="none"
-                  stroke="#38BDF8"
+                  stroke={isDark ? '#38BDF8' : '#0B3D91'}
                   strokeWidth="1.2"
-                  strokeOpacity="0.45"
+                  strokeOpacity={isDark ? 0.45 : 0.35}
                   strokeDasharray="4 4"
                 />
                 <ellipse
@@ -184,18 +203,18 @@ export const OverviewPage: React.FC = () => {
                   ry="28"
                   transform="rotate(28 110 110)"
                   fill="none"
-                  stroke="#24B8A0"
+                  stroke={isDark ? '#24B8A0' : '#0D9488'}
                   strokeWidth="1.2"
-                  strokeOpacity="0.4"
+                  strokeOpacity={isDark ? 0.4 : 0.35}
                 />
                 {/* Spherical microgravity flame core */}
                 <circle
                   cx="110"
                   cy="110"
                   r="34"
-                  fill="#0B3D91"
-                  fillOpacity="0.65"
-                  stroke="#38BDF8"
+                  fill={isDark ? '#0B3D91' : '#1E40AF'}
+                  fillOpacity={isDark ? 0.65 : 0.75}
+                  stroke={isDark ? '#38BDF8' : '#60A5FA'}
                   strokeWidth="1.8"
                 />
                 <circle
@@ -207,9 +226,9 @@ export const OverviewPage: React.FC = () => {
                 />
                 <circle cx="110" cy="110" r="10" fill="#F5B942" />
                 {/* Sensor nodes */}
-                <circle cx="34" cy="138" r="4.5" fill="#38BDF8" />
-                <circle cx="184" cy="82" r="4.5" fill="#24B8A0" />
-                <circle cx="152" cy="176" r="4" fill="#F5B942" />
+                <circle cx="34" cy="138" r="4.5" fill={isDark ? '#38BDF8' : '#0284C7'} />
+                <circle cx="184" cy="82" r="4.5" fill={isDark ? '#24B8A0' : '#0D9488'} />
+                <circle cx="152" cy="176" r="4" fill={isDark ? '#F5B942' : '#D97706'} />
               </svg>
             </div>
           </div>
@@ -291,9 +310,9 @@ export const OverviewPage: React.FC = () => {
             </p>
 
             <div className="flex flex-wrap gap-1.5 mt-4 text-[10px] font-mono">
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">PMMA</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">SIBAL</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Droplets</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">PMMA</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">SIBAL</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">Droplets</span>
             </div>
 
             <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-[#FC3D21] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
@@ -327,9 +346,9 @@ export const OverviewPage: React.FC = () => {
             </p>
 
             <div className="flex flex-wrap gap-1.5 mt-4 text-[10px] font-mono">
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Similarity S</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Coverage C</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Scale Divergence</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">Similarity S</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">Coverage C</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">Scale Divergence</span>
             </div>
 
             <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-sky-700 dark:text-[#38BDF8] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
@@ -363,9 +382,9 @@ export const OverviewPage: React.FC = () => {
             </p>
 
             <div className="flex flex-wrap gap-1.5 mt-4 text-[10px] font-mono">
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Kapton</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Silicone</span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] text-slate-700 dark:text-slate-300">Teflon</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">Kapton</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">Silicone</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-[#07172B] border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 font-medium">Teflon</span>
             </div>
 
             <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-mono text-teal-700 dark:text-[#24B8A0] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
@@ -384,19 +403,21 @@ export const OverviewPage: React.FC = () => {
         >
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={experimentsByInvData} margin={{ top: 10, right: 10, left: -20, bottom: 25 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(159,177,199,0.15)" />
+              <CartesianGrid strokeDasharray="3 3" stroke={isDark ? 'rgba(159,177,199,0.15)' : 'rgba(148,163,184,0.25)'} />
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 10, fill: '#9FB1C7' }}
+                tick={{ fontSize: 10, fill: isDark ? '#9FB1C7' : '#475569' }}
                 angle={-25}
                 textAnchor="end"
               />
-              <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#9FB1C7' }} />
+              <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: isDark ? '#9FB1C7' : '#475569' }} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#07172B',
-                  borderColor: '#1A3456',
-                  color: '#F4F7FC',
+                  backgroundColor: isDark ? '#07172B' : '#FFFFFF',
+                  borderColor: isDark ? '#1A3456' : '#CBD5E1',
+                  color: isDark ? '#F4F7FC' : '#0F172A',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   fontSize: '12px',
                 }}
               />
@@ -413,10 +434,10 @@ export const OverviewPage: React.FC = () => {
                     key={`cell-${idx}`}
                     fill={
                       entry.pillar === 'detection'
-                        ? '#24B8A0'
+                        ? (isDark ? '#24B8A0' : '#0D9488')
                         : entry.pillar === 'suppression'
-                        ? '#FC3D21'
-                        : '#38BDF8'
+                        ? (isDark ? '#FC3D21' : '#DC2626')
+                        : (isDark ? '#38BDF8' : '#0284C7')
                     }
                   />
                 ))}
@@ -436,26 +457,28 @@ export const OverviewPage: React.FC = () => {
               layout="vertical"
               margin={{ top: 5, right: 15, left: 20, bottom: 5 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(159,177,199,0.15)" />
-              <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11, fill: '#9FB1C7' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={isDark ? 'rgba(159,177,199,0.15)' : 'rgba(148,163,184,0.25)'} />
+              <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11, fill: isDark ? '#9FB1C7' : '#475569' }} />
               <YAxis
                 dataKey="category"
                 type="category"
                 width={115}
-                tick={{ fontSize: 10, fill: '#9FB1C7' }}
+                tick={{ fontSize: 10, fill: isDark ? '#9FB1C7' : '#475569' }}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#07172B',
-                  borderColor: '#1A3456',
-                  color: '#F4F7FC',
+                  backgroundColor: isDark ? '#07172B' : '#FFFFFF',
+                  borderColor: isDark ? '#1A3456' : '#CBD5E1',
+                  color: isDark ? '#F4F7FC' : '#0F172A',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   fontSize: '12px',
                 }}
               />
               <Bar
                 dataKey="count"
                 name="Investigations"
-                fill="#0B3D91"
+                fill={isDark ? '#0B3D91' : '#1D4ED8'}
                 radius={[0, 4, 4, 0]}
                 isAnimationActive={true}
                 animationDuration={800}
@@ -476,26 +499,28 @@ export const OverviewPage: React.FC = () => {
               layout="vertical"
               margin={{ top: 5, right: 15, left: 20, bottom: 5 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(159,177,199,0.15)" />
-              <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11, fill: '#9FB1C7' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={isDark ? 'rgba(159,177,199,0.15)' : 'rgba(148,163,184,0.25)'} />
+              <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11, fill: isDark ? '#9FB1C7' : '#475569' }} />
               <YAxis
                 dataKey="category"
                 type="category"
                 width={115}
-                tick={{ fontSize: 10, fill: '#9FB1C7' }}
+                tick={{ fontSize: 10, fill: isDark ? '#9FB1C7' : '#475569' }}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#07172B',
-                  borderColor: '#1A3456',
-                  color: '#F4F7FC',
+                  backgroundColor: isDark ? '#07172B' : '#FFFFFF',
+                  borderColor: isDark ? '#1A3456' : '#CBD5E1',
+                  color: isDark ? '#F4F7FC' : '#0F172A',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   fontSize: '12px',
                 }}
               />
               <Bar
                 dataKey="count"
                 name="Measurements"
-                fill="#24B8A0"
+                fill={isDark ? '#24B8A0' : '#0D9488'}
                 radius={[0, 4, 4, 0]}
                 isAnimationActive={true}
                 animationDuration={800}
@@ -556,7 +581,7 @@ export const OverviewPage: React.FC = () => {
       </section>
 
       {/* F. Quick Actions */}
-      <section className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5">
+      <section className="rounded-xl bg-white dark:bg-[#10243D] border border-slate-200 dark:border-slate-700/60 p-5 shadow-sm">
         <h2 className="text-sm font-semibold text-slate-900 dark:text-[#F4F7FC] mb-3">
           Quick Analytical Workflows
         </h2>
@@ -564,9 +589,11 @@ export const OverviewPage: React.FC = () => {
           <button
             type="button"
             onClick={() => navigate('/explorer')}
-            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-[#38BDF8] text-left transition"
+            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50/90 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-[#0B3D91]/40 dark:hover:border-[#38BDF8]/40 hover:bg-sky-50/60 dark:hover:bg-[#0A2242]/60 text-left transition shadow-sm"
           >
-            <Compass className="w-5 h-5 text-[#38BDF8] shrink-0" />
+            <div className="p-2 rounded-lg bg-sky-500/10 dark:bg-sky-500/15 text-[#0B3D91] dark:text-[#38BDF8] shrink-0">
+              <Compass className="w-5 h-5" />
+            </div>
             <div>
               <div className="text-xs font-semibold text-slate-900 dark:text-[#F4F7FC]">
                 Explore NASA Research
@@ -580,9 +607,11 @@ export const OverviewPage: React.FC = () => {
           <button
             type="button"
             onClick={() => navigate('/testmatch')}
-            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-[#38BDF8] text-left transition"
+            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50/90 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-[#0B3D91]/40 dark:hover:border-[#38BDF8]/40 hover:bg-sky-50/60 dark:hover:bg-[#0A2242]/60 text-left transition shadow-sm"
           >
-            <GitCompare className="w-5 h-5 text-[#38BDF8] shrink-0" />
+            <div className="p-2 rounded-lg bg-blue-500/10 dark:bg-blue-500/15 text-[#0B3D91] dark:text-[#38BDF8] shrink-0">
+              <GitCompare className="w-5 h-5" />
+            </div>
             <div>
               <div className="text-xs font-semibold text-slate-900 dark:text-[#F4F7FC]">
                 Compare Experiments
@@ -596,9 +625,11 @@ export const OverviewPage: React.FC = () => {
           <button
             type="button"
             onClick={() => navigate('/smokewise')}
-            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-[#24B8A0] text-left transition"
+            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50/90 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-teal-500/40 dark:hover:border-[#24B8A0]/40 hover:bg-teal-50/60 dark:hover:bg-[#0A2A2E]/60 text-left transition shadow-sm"
           >
-            <Wind className="w-5 h-5 text-[#24B8A0] shrink-0" />
+            <div className="p-2 rounded-lg bg-teal-500/10 dark:bg-teal-500/15 text-teal-700 dark:text-[#24B8A0] shrink-0">
+              <Wind className="w-5 h-5" />
+            </div>
             <div>
               <div className="text-xs font-semibold text-slate-900 dark:text-[#F4F7FC]">
                 Analyze Smoke Behaviour
@@ -612,9 +643,11 @@ export const OverviewPage: React.FC = () => {
           <button
             type="button"
             onClick={() => navigate('/assistant')}
-            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-[#F5B942] text-left transition"
+            className="flex items-center gap-3 p-3 rounded-lg bg-slate-50/90 dark:bg-[#07172B] border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 dark:hover:border-[#F5B942]/40 hover:bg-amber-50/60 dark:hover:bg-[#2A2210]/60 text-left transition shadow-sm"
           >
-            <Bot className="w-5 h-5 text-[#F5B942] shrink-0" />
+            <div className="p-2 rounded-lg bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-[#F5B942] shrink-0">
+              <Bot className="w-5 h-5" />
+            </div>
             <div>
               <div className="text-xs font-semibold text-slate-900 dark:text-[#F4F7FC]">
                 Ask AI Research Assistant
