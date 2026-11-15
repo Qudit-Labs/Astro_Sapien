@@ -58,21 +58,27 @@ flowchart TD
 
 ---
 
-## 2. Tri-Capability Module Architecture
+## 2. Quad-Capability Module Architecture
 
-FIRELINE integrates three core scientific capabilities solving distinct facets of spacecraft fire protection:
+FIRELINE integrates four core scientific capabilities solving distinct facets of spacecraft fire protection:
 
 ### Module 1: FIRELINE — Evidence Intelligence & Flammability Limits
 - **Combustion & Suppression Analysis**: Investigates solid-fuel flame spread, limiting oxygen concentration (LOC) flammability thresholds, radiative quenching, and gaseous extinguishment ($\text{CO}_2$, $\text{He}$, $\text{SF}_6$).
 - **Integrated Investigations**: Aggregates records from `BASS-II` (solid PMMA/fabrics), `SAFFIRE` (large-scale vehicle fire tests), and `FLEX` (liquid droplet burning).
 - **Ranked Evidence Retrieval**: Full-text search across 662 ingested technical report chunks (`ts_rank` / `websearch_to_tsquery`) with exact inline page and row citations.
 
-### Module 2: TESTMATCH — Flight-vs-Ground Regime Comparability
+### Module 2: TESTMATCH — Flight-vs-Ground Regime Comparability & Combustion Simulation
 - **Mathematical Comparability Framework**: Evaluates pairwise experiment comparability using deterministic weighted similarity:
   $$S = 100 \times \frac{\sum w_i m_i s_i}{\sum w_i m_i}$$
   and data parameter coverage:
   $$C = 100 \times \frac{\sum w_i m_i}{\sum w_i}$$
   across 9 experimental parameters: gravity regime, material, geometry, flow regime, scale dimension, $\text{O}_2\%$, airflow ($\text{cm/s}$), pressure ($\text{kPa}$), and thickness ($\text{mm}$).
+- **Interactive 2D Canvas Combustion Simulation (`CombustionChamberCanvas`)**:
+  - Physics-driven real-time canvas simulating microgravity vs Earth 1g flame geometries.
+  - Toggles between spherical microgravity flame structure (diffusion-dominated, soot shell formation) and buoyant Earth tear-drop plumes.
+  - Interactive parameter modulation: airflow velocity slider ($0\text{--}25\,\text{cm/s}$), oxygen concentration ($15\text{--}30\%\,\text{O}_2$), and ambient pressure.
+  - Dynamic vector fields rendering convective airflow streamlines and thermal dissipation gradients.
+  - **Dual-Burn Split-Screen Comparison**: Synchronized side-by-side combustion chambers enabling simultaneous flight-versus-ground visual verification.
 - **Automated Scientific Warning Guards**:
   - **Scale Divergence Alert (`BASS-II` vs. `SAFFIRE`)**: Proactively flags that small glovebox ducts ($1\text{--}2\text{ cm}$) exhibit up to an order-of-magnitude difference in radiative preheating and concurrent flame spread compared to full Cygnus spacecraft panels ($0.4\text{ m} \times 0.94\text{ m}$).
   - **Cross-Domain Separation**: Prevents inappropriate comparisons between non-interchangeable domains (solid flame spread vs. liquid droplet extinction vs. smoke aerosol pyrolysis).
@@ -87,16 +93,36 @@ FIRELINE integrates three core scientific capabilities solving distinct facets o
   - **Two-Moment MPASS Prototype**: Combines number concentration (0th/1st moment) with optical mass (2nd/3rd moment), cutting response variance by $>2\times$ and discriminating true smoke from background dust.
 - **Scientific Segregation**: Flaming soot point records (`SPICE`) are strictly segregated from pyrolysis smoke records (`SAME-R`).
 
-### Module 4: SMOKEVISION — Smoke Plume Kinematics & Accumulation Intelligence
+### Module 4: SMOKEVISION — Smoke Plume Kinematics, Accumulation & Real-Time Surveillance Engine
 - **Smoke-Region Segmentation & Cloud Boundary Detection**: Extracts continuous closed plume contours, convex hulls, and perimeter node coordinates against microgravity chamber backgrounds.
 - **Plume Expansion Kinematics**: Computes temporal expansion rate $dA/dt$ ($\text{cm}^2/\text{s}$), centroid drift velocity $\vec{v}_c$, and radial dispersion symmetry.
-- **Calibrated Smoke Density Estimation**: Enforces the physics principle that *image brightness $\neq$ smoke concentration*. Evaluates transmittance $T = I / I_0 = \exp(-\tau)$ and computes optical depth $\tau = k_{ext} \cdot L \cdot C_s$ using material-specific mass extinction coefficients ($k_{ext}$).
-- **Microscopy Particle Detection (TEM / SEM)**: Automated sizing of captured microgravity smoke particles from SAME-R thermophoretic grids. Computes count mean diameter (CMD), mass mean diameter ($d_{mm}$), lognormal geometric mean ($d_g$), and particle size distribution (PSD) histograms.
-- **Smoke Dispersion & Flow Vector Fields**: Dense optical flow gradient vectors visualizing laminar advection vs. turbulent eddy shedding.
-- **Smoke Accumulation Mapping (Temporal Dwell Tensor)**: Integrates smoke masks across time:
-  $$A(x, y) = \frac{1}{T} \sum_{t=1}^T M(x, y, t) \cdot \tau(x, y, t)$$
-  identifying hazardous stagnation and recirculation pockets in spacecraft cabins to recommend optimal smoke detector placement coordinates.
-- **Cross-Experiment Benchmarking**: Synchronized side-by-side comparison across SAME-R (quiescent & duct), BASS-II (glovebox flow), and SAFFIRE (large vehicle).
+- **Calibrated Smoke Density Estimation (Beer-Lambert Optics)**:
+  - Enforces the physical principle: **Image brightness is not smoke concentration** (forward scattering alters perceived brightness).
+  - Evaluates transmittance $T = I / I_0 = \exp(-\tau)$ and computes optical depth:
+    $$\tau(x, y, t) = -\ln\left(\frac{I(x, y, t)}{I_0(x, y)}\right) = k_{ext} \cdot L \cdot C_s(x, y, t)$$
+    referencing pre-ignition baseline frames ($I_0$) with material-specific mass extinction coefficients ($k_{ext}$).
+- **Transmission Electron Microscopy (TEM / SEM) Sizing Engine**:
+  - Automated particle morphology analysis on NASA SAME-R thermophoretic soot grids.
+  - Extracts Count Mean Diameter (CMD), Mass Mean Diameter ($d_{mm}$), lognormal geometric mean ($d_g$), and geometric standard deviation ($\sigma_g$).
+  - Particle Size Distribution (PSD) histograms classifying primary spherules vs fractal chain agglomerates.
+- **Dense Optical Flow & Dispersion Vector Fields**: Quiver arrow overlays showing ventilation-driven convective transport versus quiescent diffusion.
+- **★ Smoke Accumulation Mapping (Temporal Dwell Tensor)**:
+  - Integrates smoke masks across time:
+    $$A(x, y) = \frac{1}{T} \sum_{t=1}^T M(x, y, t) \cdot \tau(x, y, t)$$
+  - Detects recirculating eddies and air stagnation pockets where microgravity traps smoke without buoyant dispersal.
+  - Outputs **Stagnation Severity Scores (0–100)** and generates actionable **Spacecraft Smoke Detector Placement Advisories** for ISS, Orion, and Lunar Gateway cabins.
+- **Real-Time Video Surveillance & Ingestion Engine**:
+  - Ingests video streams (`.mp4`, `.webm`, `.avi`, `.mov`) from laboratory cameras, drop towers, and spacecraft cabin feeds.
+  - **Dynamic Baseline Lock ($I_0$)**: Automatically extracts ambient background reference from pre-ignition frames.
+  - **Autonomous Flight Safety Threat Classifier**:
+    - `CLEAR`: Nominal cabin environment.
+    - `ADVISORY: SMOLDERING TRACE`: Early slow-growth pyrolysis ($dA/dt < 4\,\text{cm}^2/\text{s}$).
+    - `WARNING: ACTIVE PLUME GROWTH`: Propagating flame wake ($dA/dt > 4\,\text{cm}^2/\text{s}$).
+    - `CRITICAL FIRE / ACCUMULATION`: Severe expansion ($dA/dt > 12\,\text{cm}^2/\text{s}$) or heavy ventilation recirculation ($>65\%$).
+  - **Flight Controller CapCom Event Log**: Live chronological console logging detection milestones with millisecond precision.
+  - **Dual-Mode Video Player**: Seamlessly toggles between **CV Augmented Inspection (Zero-codec canvas player)** and native HTML5 `<video>`.
+  - **Pre-Staged NASA Demo Video**: Bundled with microgravity smoke footage for instant 1-click execution.
+- **Cross-Experiment Benchmarking**: Synchronized side-by-side comparison across SAME-R Run 101 ($0\text{ cm/s}$ quiescent), SAME-R Run 104 ($2\text{ cm/s}$ duct), BASS-II Run 25 ($5\text{ cm/s}$ glovebox flow), and SAFFIRE-I ($20\text{ cm/s}$ Cygnus vehicle).
 
 ---
 
@@ -138,8 +164,10 @@ FIRELINE integrates three core scientific capabilities solving distinct facets o
 ## 4. Mission-Control Aerospace GUI (v2.0)
 
 The user interface delivers a mission-control intelligence console designed for aerospace researchers:
-- **Orbital Telemetry HUD Ticker**: Positioned directly beneath the header, streaming live mission counts (**8 Investigations**, **18 Test Runs**, **162 Core Points**), active gravity regime (`ISS LEO μg`), and partial-gravity guardrail alerts.
-- **Grouped Flight Navigation Rail**: Sectioned into `MISSION CONTROL`, `TRI-CAPABILITY SUITE [μg]`, `INTELLIGENCE & SYNTHESIS`, and `SECURITY & ACCESS`, featuring active laser indicators, module badges (`M1`, `M2`, `M3`, `LIVE RAG`, `ID PASS`), and smooth collapse-to-rail toggle.
+- **Orbital Telemetry HUD Ticker**: Positioned directly beneath the header, streaming live mission telemetry, quad-engine statuses (`ENGINES: FLAME • MATCH • SMOKE • VISION`), active gravity regime (`ISS LEO μg`), and partial-gravity guardrail alerts.
+- **Grouped Flight Navigation Rail**: Sectioned into `MISSION CONTROL`, `QUAD-CAPABILITY SUITE [μg]`, `INTELLIGENCE & SYNTHESIS`, and `SECURITY & ACCESS`, featuring active laser indicators, module badges (`M1`, `M2`, `M3`, `M4`, `LIVE RAG`, `ID PASS`), and smooth collapse-to-rail toggle.
+- **Real-Time Video Surveillance HUD (`/smokevision`)**: Live video playback synchronized with OpenCV computer vision inference, displaying live boundary contours, centroid crosshair reticles, optical depth heatmaps, CapCom chronological event logs, and spatial accumulation dead-zone overlays.
+- **Dual-Burn 2D Combustion Chamber Canvas (`/testmatch`)**: Real-time canvas rendering spherical microgravity vs buoyant Earth flame dynamics, thermal gradients, and airflow vectors in a synchronized side-by-side split screen.
 - **Interactive Holographic Researcher Pass (`/auth`)**: Live digital badge preview rendering dynamic researcher initials, institutional affiliation (NASA GRC, Ames, ESA, JAXA, MIT, Stanford, DLR), clearance tier, token identifier, and security barcode in real time.
 - **Dark Glassmorphic HUD Panels**: High-contrast dark space backgrounds (`#0B1D36` / `#10243D`) with hover lifts, animated glow borders (`hud-panel-flame`, `hud-panel-smoke`), and radar sweeps.
 
@@ -171,26 +199,32 @@ Astro_Sapien/
 │   │   │   └── langchain_agent.py # LangChain Conversational SQL Agent over Supabase
 │   │   ├── core/config.py         # Database and Gemini environment settings
 │   │   ├── database/              # Supabase PostgreSQL schema, indexes & connection
-│   │   ├── engines/               # Three deterministic analytical engines
+│   │   ├── engines/               # Four deterministic analytical engines
 │   │   │   ├── fireline_engine.py # Combustion & suppression evidence analysis + FTS
 │   │   │   ├── testmatch_engine.py# Deterministic comparability formula & scale divergence rules
-│   │   │   └── smokewise_engine.py# Smoke aerosol particle aging & detector implications
+│   │   │   ├── smokewise_engine.py# Smoke aerosol particle aging & detector implications
+│   │   │   └── smokevision_engine.py# OpenCV/NumPy microgravity plume CV & accumulation mapping
 │   │   ├── ingestion/             # Multi-investigation parsers (BASS-II, SAME-R, SAFFIRE, FLEX, SPICE)
-│   │   └── main.py                # FastAPI REST API surface with CORS
+│   │   └── main.py                # FastAPI REST API surface with CORS & video ingestion
 │   ├── data/                      # Raw and processed NASA records
-│   ├── tests/test_backend.py      # Automated 13-test suite (100% pass rate)
+│   ├── tests/
+│   │   ├── test_backend.py        # Automated test suite (100% pass rate)
+│   │   └── test_smokevision.py    # SMOKEVISION CV, video & accumulation test suite
 │   ├── pytest.ini                 # Pytest configuration
-│   └── requirements.txt           # Python dependencies (LangChain, SQLAlchemy, FastAPI)
+│   └── requirements.txt           # Python dependencies (OpenCV, SciPy, LangChain, FastAPI)
 │
 ├── frontend/                      # React 18 + TypeScript + Vite frontend
+│   ├── public/
+│   │   ├── demo_microgravity_smoke.mp4  # Pre-staged NASA-style microgravity smoke video
+│   │   └── demo_microgravity_smoke.webm # High-compatibility WebM video
 │   ├── src/
 │   │   ├── components/            # Reusable aerospace HUD UI library
-│   │   │   ├── common/            # VoiceWaveformVisualizer, ComparisonScoreCard, KPIStatCard, ChartCard
+│   │   │   ├── common/            # CombustionChamberCanvas, VoiceWaveformVisualizer, KPIStatCard
 │   │   │   └── layout/            # AppShell (Telemetry Ticker), Sidebar (Laser Rail), Header
 │   │   ├── context/               # AuthContext (JWT & profiles), ResearchDataContext
 │   │   ├── data/                  # ApiResearchDataProvider & MockResearchDataProvider
-│   │   ├── pages/                 # Overview, Explorer, FIRELINE, TESTMATCH, SMOKewise, Assistant, Auth
-│   │   └── services/              # voiceAssistant.ts, aiAssistantService.ts, testMatchEngine.ts
+│   │   ├── pages/                 # Overview, Explorer, FIRELINE, TESTMATCH, SMOKewise, SMOKEVISION, Assistant, Auth
+│   │   └── services/              # smokeVisionService.ts, voiceAssistant.ts, aiAssistantService.ts
 │   ├── package.json               # Frontend dependencies & scripts
 │   ├── vite.config.ts             # Vite bundle splitting & path aliases
 │   ├── tailwind.config.js         # Aerospace theme configuration
@@ -306,6 +340,12 @@ The complete OpenAPI 3.1 specification is maintained in [`openapi.json`](./opena
 | `POST` | `/api/v1/fireline/analyze` | Combustion evidence analysis, extinction modes, and O2 limits |
 | `POST` | `/api/v1/testmatch/compare` | Deterministic pairwise comparability ($S$, $C$) & warnings |
 | `POST` | `/api/v1/smokewise/analyze` | Smoke aerosol size distribution and detector implications |
+| `GET` | `/api/v1/smokevision/presets` | Available microgravity experiment sequences (SAME-R, BASS-II, SAFFIRE) |
+| `GET` | `/api/v1/smokevision/sequence` | Multi-frame plume kinematic sequences, flow vectors, and accumulation heatmaps |
+| `GET` | `/api/v1/smokevision/microscopy` | Transmission Electron Microscopy (TEM) particle morphology and PSD histograms |
+| `GET` | `/api/v1/smokevision/compare` | Cross-experiment microgravity smoke dynamics comparison matrix |
+| `POST` | `/api/v1/smokevision/analyze-video` | Ingest video file (.mp4, .webm) and return real-time surveillance analytics |
+| `GET` | `/api/v1/smokevision/demo-video-analysis` | 1-click execution on pre-staged NASA-style microgravity smoke video |
 | `POST` | `/api/v1/assistant/query` | Grounded Gemini RAG research query synthesizer |
 | `POST` | `/api/v1/agent/query` | **LangChain Conversational SQL Agent over Supabase PostgreSQL** |
 | `POST` | `/api/v1/auth/signup` | Register new researcher profile with organization and role |
@@ -317,11 +357,11 @@ The complete OpenAPI 3.1 specification is maintained in [`openapi.json`](./opena
 
 ## 9. Quality Assurance & Scientific Integrity
 
-- **Automated Backend Tests (`pytest -v`)**: 13/13 passed across all investigations, FTS search, TESTMATCH comparisons, SMOKewise aggregations, authentication endpoints, Gemini RAG, and LangChain SQL agent.
+- **Automated Backend Tests (`pytest -v`)**: 18/18 passed across all investigations, FTS search, TESTMATCH comparisons, SMOKewise aggregations, SMOKEVISION plume kinematics, TEM particle sizing, video surveillance ingestion, authentication endpoints, Gemini RAG, and LangChain SQL agent.
 - **Automated Frontend Tests (`vitest`)**: 16/16 passed across data providers, TESTMATCH scoring engine, and Voice AI speech normalization.
 - **TypeScript Type Safety**: `npm run typecheck` passed (0 TypeScript errors with strict typing).
 - **Zero-Imputation Policy**: Missing experimental parameters are strictly preserved as `null` or `not_available` to prevent false equivalence conclusions.
-- **Scientific Honesty**: Explicit partial-gravity notices and domain separation rules enforce that microgravity glovebox or Cygnus results are never conflated with Lunar ($1/6\text{ g}$) or Martian ($3/8\text{ g}$) environments without documented caveats.
+- **Scientific Honesty**: Explicit partial-gravity notices, physical calibration guards ($\tau = -\ln(I/I_0)$), and domain separation rules enforce that microgravity glovebox or Cygnus results are never conflated with Lunar ($1/6\text{ g}$) or Martian ($3/8\text{ g}$) environments without documented caveats.
 
 ---
 
